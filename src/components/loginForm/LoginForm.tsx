@@ -2,12 +2,18 @@
 
 import Image from 'next/image';
 import IconGoogle from '../../assets/iconGoogle.svg';
-import { signIn, useSession, signOut } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
+import { FormEvent, useState } from 'react';
 
 export default function LoginForm() {
-  const { data: session } = useSession();
+  const [email, setEmail] = useState<string>();
 
-  console.log(session);
+  const onSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    console.log(email);
+    signIn('credentials');
+  };
+
   return (
     <div className="relative group">
       <div className=" absolute w-[450px] transition-colors h-[390px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[195px]  blur-sm "></div>
@@ -17,12 +23,12 @@ export default function LoginForm() {
             E-COM.NEXT ADMIN
           </p>
         </div>
-        {/* <p className="font-sans font-light  text-mainBlue  text-2xl mb-6">
-          {' '}
-          E-MAIL{' '}
-        </p> */}
-        <form className="w-full flex flex-col items-center justify-center">
+        <form
+          onSubmit={onSubmit}
+          className="w-full flex flex-col items-center justify-center"
+        >
           <input
+            onChange={(e) => setEmail(e.target.value)}
             className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt placeholder:opacity-50 placeholder:text-xs text-white font-sans text-xs"
             placeholder="E-mail"
             type="email"
@@ -51,7 +57,6 @@ export default function LoginForm() {
               login com google
             </p>
           </div>
-          <h1 onClick={() => signOut()}>sair</h1>
         </form>
       </div>
     </div>
