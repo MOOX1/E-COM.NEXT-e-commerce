@@ -3,21 +3,26 @@
 import Image from 'next/image';
 import IconGoogle from '../../assets/iconGoogle.svg';
 import { signIn } from 'next-auth/react';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useRef } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 export default function LoginForm() {
-  const [email, setEmail] = useState<string>();
+  const inputRefEmail = useRef<HTMLInputElement | null>(null);
+  const inputRefPassword = useRef<HTMLInputElement | null>(null);
+  const error = useSearchParams().get('error');
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(email);
-    signIn('credentials');
+    signIn('credentials', {
+      email: inputRefEmail?.current?.value,
+      password: inputRefPassword?.current?.value
+    });
   };
 
   return (
     <div className="relative group">
-      <div className=" absolute w-[450px] transition-colors h-[390px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[195px]  blur-sm "></div>
-      <div className="bg-[#202023] relative w-[450px] h-[390px] duration-100 z-10  rounded-3xl flex flex-col  p-14">
+      <div className=" absolute w-[450px] transition-colors h-[430px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[215px]  blur-sm "></div>
+      <div className="bg-[#202023] relative w-[450px] h-[430px] duration-100 z-10  rounded-3xl flex flex-col  p-14">
         <div className="mb-11">
           <p className="font-alt text-mainBlue w-full text-center text-3xl">
             E-COM.NEXT ADMIN
@@ -27,11 +32,23 @@ export default function LoginForm() {
           onSubmit={onSubmit}
           className="w-full flex flex-col items-center justify-center"
         >
+          {error && (
+            <span className="text-red-600 flex font-sans text-sm flex-col -mt-10 items-center justify-center">
+              {/* <Ban height={20} width={20} /> */}
+              Seu acesso foi negado
+            </span>
+          )}
           <input
-            onChange={(e) => setEmail(e.target.value)}
-            className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt placeholder:opacity-50 placeholder:text-xs text-white font-sans text-xs"
+            ref={inputRefEmail}
+            className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
             placeholder="E-mail"
             type="email"
+          />
+          <input
+            ref={inputRefPassword}
+            className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
+            placeholder="Password"
+            type="password"
           />
 
           <button
@@ -44,7 +61,7 @@ export default function LoginForm() {
 
           <div className="flex flex-col items-center justify-center w-full">
             <div className="h-[1px] w-full border-b-[1px] border-mainBlue mt-6 font-sans"></div>
-            <p className="text-center w-min text-mainBlue px-4 -mt-[14px] bg-[#202023]">
+            <p className="text-center w-min text-mainBlue font-sans px-4 -mt-[14px] bg-[#202023]">
               ou
             </p>
           </div>

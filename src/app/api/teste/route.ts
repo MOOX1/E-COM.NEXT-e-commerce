@@ -8,9 +8,5 @@ export async function GET(req: NextRequest) {
 
   const isAuthenticated = cookies().getAll();
 
-  // console.log(isAuthenticated);
-  // Signed in
-  // console.log('JSON Web Token', JSON.stringify(token, null, 2));
-
   return NextResponse.json({});
 }

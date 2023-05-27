@@ -1,36 +1,36 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import NextAuth from 'next-auth';
+import NextAuth, { User } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import type { NextAuthOptions } from 'next-auth';
-import type { User, Awaitable } from 'next-auth';
-import { signIn } from 'next-auth/react';
+
+type ProviderType = 'google' | 'credentials';
 
 export const authOption: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       name: 'Credentials',
-      credentials: {},
+      credentials: {
+        email: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'password', type: 'text', placeholder: 'jsmith' }
+      },
       async authorize(credentials, req) {
-        // Add logic here to look up the user from the credentials supplied
-        const user = { id: '1', name: 'J Smith', email: 'jsmith@example.com' };
+        const emailsAuthorized = ['vitormeneses87@gmail.com'];
+        // requisição do banco buscando dados e nivel de acesso
+        const user = {
+          id: '1',
+          name: 'J Smith',
+          email: credentials?.email as string,
+          levelAccess: 'admin'
+        };
 
-        console.log(credentials);
-        console.log(req);
-
-        if (user) {
-          // Any object returned will be saved in `user` property of the JWT
+        if (
+          emailsAuthorized.includes(credentials?.email as string) &&
+          credentials?.password === '123456'
+        ) {
           return user;
-        } else {
-          // If you return null then an error will be displayed advising the user to check their details.
-          return null;
-
-          // You can also Reject this callback with an Error thus the user will be sent to the error page with the error message as a query parameter
         }
-
-        return user;
-
-        // Return null if user data could not be retrieved
+        return null;
       }
     }),
     GoogleProvider({
@@ -42,18 +42,34 @@ export const authOption: NextAuthOptions = {
     maxAge: 60 * 60 * 8 // 8 hours
   },
   session: {
+    strategy: 'jwt',
     maxAge: 60 * 60 * 8 // 8 hours
   },
   pages: {
-    signIn: '/login'
+    signIn: '/signin',
+    error: '/signin'
   },
   callbacks: {
-    // async signIn({ user, account, profile, email, credentials }) {
-    //   console.log(credentials);
-    //   console.log(email);
-    //   console.log(user);
-    //   return;
-    // },
+    async signIn({ user, account, profile, email, credentials }) {
+      const emailsAuthorized = ['vitormeneses87@gmail.com'];
+      const Provider = account?.provider as ProviderType;
+
+      const providers = {
+        google: emailsAuthorized.includes(user?.email as string),
+        credentials: emailsAuthorized.includes(credentials?.email as string)
+      }[Provider];
+
+      return providers;
+    },
+    session({ session, token, user }) {
+      return session; // The return type will match the one returned in `useSession()`
+    },
+    async jwt({ token, user, account, profile }) {
+      if (user?.levelAccess) {
+        token.levelAccess = user.levelAccess;
+      }
+      return token;
+    }
   }
 };
 
