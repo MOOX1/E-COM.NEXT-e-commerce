@@ -5,17 +5,38 @@ import IconGoogle from '../../assets/iconGoogle.svg';
 import { signIn } from 'next-auth/react';
 import { FormEvent, useRef } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().email('Informe um email válido'),
+  password: z.string().min(6, 'Informe uma senha válida')
+});
+
+type FormDataProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
-  const inputRefEmail = useRef<HTMLInputElement | null>(null);
-  const inputRefPassword = useRef<HTMLInputElement | null>(null);
-  const error = useSearchParams().get('error');
+  const {
+    handleSubmit,
+    register,
+    formState: { errors }
+  } = useForm<FormDataProps>({
+    mode: 'onSubmit',
+    criteriaMode: 'firstError',
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: '',
+      password: ''
+    }
+  });
 
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const errorParams = useSearchParams().get('error');
+
+  const onSubmit = (data: FormDataProps) => {
     signIn('credentials', {
-      email: inputRefEmail?.current?.value,
-      password: inputRefPassword?.current?.value
+      email: data.email,
+      password: data.password
     });
   };
 
@@ -29,31 +50,36 @@ export default function LoginForm() {
           </p>
         </div>
         <form
-          onSubmit={onSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center justify-center"
         >
-          {error && (
+          {errorParams && (
             <span className="text-red-600 flex font-sans text-sm flex-col -mt-10 items-center justify-center">
-              {/* <Ban height={20} width={20} /> */}
               Seu acesso foi negado
             </span>
           )}
           <input
-            ref={inputRefEmail}
+            {...register('email')}
             className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
+            aria-label="E-mail"
             placeholder="E-mail"
             type="email"
           />
+          {errors.email && <p>{errors.email.message}</p>}
           <input
-            ref={inputRefPassword}
+            {...register('password')}
+            // ref={inputRefPassword}
             className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
+            aria-label="Password"
             placeholder="Password"
             type="password"
           />
+          {errors.password && <p>{errors.password.message}</p>}
 
           <button
             type="submit"
             className="bg-mainBlue text-black rounded transition-colors hover:bg-blue-200 p-1 min-w-[200px] w-min font-sans mb-2"
+            aria-label="buttom-submit"
           >
             {' '}
             Login{' '}
@@ -67,6 +93,7 @@ export default function LoginForm() {
           </div>
           <div
             onClick={() => signIn('google')}
+            aria-label="buttom-google"
             className="min-w-[230px] p-1 cursor-pointer h-auto bg-mainBlue rounded-3xl mt-7 flex items-center"
           >
             <Image src={IconGoogle} width={40} height={41} alt="" />
