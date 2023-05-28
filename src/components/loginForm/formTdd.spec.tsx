@@ -18,7 +18,7 @@ jest.mock('next/image', () => ({
 
 describe('<LoginForm />', () => {
   it('should render default correctly', () => {
-    const view = render(<LoginForm />);
+    render(<LoginForm />);
 
     const inputeEmail = screen.getByLabelText(/E-mail/i);
     const inputPassword = screen.getByLabelText(/Password/i);
@@ -31,7 +31,7 @@ describe('<LoginForm />', () => {
     expect(buttomGoogle).toBeInTheDocument();
   }),
     it('submit with data not corrected', async () => {
-      const view = render(<LoginForm />);
+      render(<LoginForm />);
       const buttonSubmite = screen.getByLabelText(/buttom-submit/i);
 
       act(() => {
@@ -45,7 +45,7 @@ describe('<LoginForm />', () => {
     });
 
   it('submit with data corrected', async () => {
-    const view = render(<LoginForm />);
+    render(<LoginForm />);
     const inputeEmail = screen.getByLabelText(/E-mail/i);
     const inputPassword = screen.getByLabelText(/Password/i);
 

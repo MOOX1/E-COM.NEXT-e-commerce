@@ -41,9 +41,9 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="relative group">
-      <div className=" absolute w-[450px] transition-colors h-[430px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[215px]  blur-sm "></div>
-      <div className="bg-[#202023] relative w-[450px] h-[430px] duration-100 z-10  rounded-3xl flex flex-col  p-14">
+    <div className="relative group -ml-[300px]">
+      <div className=" absolute w-[450px] transition-colors h-[500px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[250px]  blur-sm "></div>
+      <div className="bg-strongBlue items-center justify-center relative w-[450px] h-[500px] duration-100 z-10  rounded-3xl flex flex-col  p-14">
         <div className="mb-11">
           <p className="font-alt text-mainBlue w-full text-center text-3xl">
             E-COM.NEXT ADMIN
@@ -60,21 +60,31 @@ export default function LoginForm() {
           )}
           <input
             {...register('email')}
-            className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
+            className="focus-visible:outline-0  bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs mb-5"
             aria-label="E-mail"
             placeholder="E-mail"
             type="email"
           />
-          {errors.email && <p>{errors.email.message}</p>}
+          {errors.email && (
+            <p className="text-red-500 w-full -mt-4 text-left text-xs py-1 font-sans">
+              {errors.email.message}
+            </p>
+          )}
           <input
             {...register('password')}
             // ref={inputRefPassword}
-            className="focus-visible:outline-0 mb-5 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs"
+            className={
+              'focus-visible:outline-0 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs mb-5'
+            }
             aria-label="Password"
             placeholder="Password"
             type="password"
           />
-          {errors.password && <p>{errors.password.message}</p>}
+          {errors.password && (
+            <p className="text-red-500 w-full -mt-4  mb-2 text-left text-xs py-1 font-sans">
+              {errors.password.message}
+            </p>
+          )}
 
           <button
             type="submit"
@@ -87,7 +97,7 @@ export default function LoginForm() {
 
           <div className="flex flex-col items-center justify-center w-full">
             <div className="h-[1px] w-full border-b-[1px] border-mainBlue mt-6 font-sans"></div>
-            <p className="text-center w-min text-mainBlue font-sans px-4 -mt-[14px] bg-[#202023]">
+            <p className="text-center w-min text-mainBlue font-sans px-4 -mt-[14px] bg-strongBlue">
               ou
             </p>
           </div>

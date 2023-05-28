@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import NextAuth, { User } from 'next-auth';
+import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import type { NextAuthOptions } from 'next-auth';
+import { FindAdmin } from '@/lib/controllers/AdminsController';
 
 type ProviderType = 'google' | 'credentials';
 
@@ -16,7 +16,9 @@ export const authOption: NextAuthOptions = {
       },
       async authorize(credentials, req) {
         const emailsAuthorized = ['vitormeneses87@gmail.com'];
-        // requisição do banco buscando dados e nivel de acesso
+
+        const admin = await FindAdmin(credentials?.email as string);
+
         const user = {
           id: '1',
           name: 'J Smith',
@@ -62,7 +64,7 @@ export const authOption: NextAuthOptions = {
       return providers;
     },
     session({ session, token, user }) {
-      return session; // The return type will match the one returned in `useSession()`
+      return session;
     },
     async jwt({ token, user, account, profile }) {
       if (user?.levelAccess) {
