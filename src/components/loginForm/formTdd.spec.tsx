@@ -5,8 +5,7 @@ import LoginForm from './LoginForm';
 import { userEvent, waitFor } from '@storybook/testing-library';
 
 jest.mock('next/navigation', () => ({
-  __esModule: true,
-  useSearchParams: jest.fn(() => ({ get: jest.fn() }))
+  useRouter: jest.fn()
 }));
 
 jest.mock('next/image', () => ({

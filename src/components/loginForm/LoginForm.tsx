@@ -3,8 +3,8 @@
 import Image from 'next/image';
 import IconGoogle from '../../assets/iconGoogle.svg';
 import { signIn } from 'next-auth/react';
-import { FormEvent, useRef } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -16,6 +16,8 @@ const schema = z.object({
 type FormDataProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
+  const [errorParams, setErrorParams] = useState<string | undefined>(undefined);
+  const router = useRouter();
   const {
     handleSubmit,
     register,
@@ -29,11 +31,14 @@ export default function LoginForm() {
     }
   });
 
-  const errorParams = useSearchParams().get('error');
-
   const onSubmit = (data: FormDataProps) => {
+    setErrorParams(undefined);
     signIn('email', {
-      email: data.email
+      email: data.email,
+      redirect: false
+    }).then((data) => {
+      if (data?.error) setErrorParams(data.error);
+      if (!data?.error) router.push(data?.url as string);
     });
   };
 
@@ -51,7 +56,7 @@ export default function LoginForm() {
           className="w-full flex flex-col items-center justify-center"
         >
           {errorParams && (
-            <span className="text-red-600 flex font-sans text-sm flex-col -mt-10 items-center justify-center">
+            <span className="text-red-600 flex font-sans text-sm flex-col -mt-6 pb-6 items-center justify-center">
               Seu acesso foi negado
             </span>
           )}
