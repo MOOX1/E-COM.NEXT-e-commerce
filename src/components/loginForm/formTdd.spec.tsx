@@ -21,12 +21,10 @@ describe('<LoginForm />', () => {
     render(<LoginForm />);
 
     const inputeEmail = screen.getByLabelText(/E-mail/i);
-    const inputPassword = screen.getByLabelText(/Password/i);
     const buttonSubmite = screen.getByLabelText(/buttom-submit/i);
     const buttomGoogle = screen.getByLabelText(/buttom-google/i);
 
     expect(inputeEmail).toBeInTheDocument();
-    expect(inputPassword).toBeInTheDocument();
     expect(buttonSubmite).toBeInTheDocument();
     expect(buttomGoogle).toBeInTheDocument();
   }),
@@ -40,18 +38,15 @@ describe('<LoginForm />', () => {
 
       await waitFor(() => {
         expect(screen.getByText('Informe um email válido')).toBeVisible();
-        expect(screen.getByText('Informe uma senha válida')).toBeVisible();
       });
     });
 
   it('submit with data corrected', async () => {
     render(<LoginForm />);
     const inputeEmail = screen.getByLabelText(/E-mail/i);
-    const inputPassword = screen.getByLabelText(/Password/i);
 
     act(() => {
       userEvent.type(inputeEmail, 'vitormeneses87@gmail.com');
-      userEvent.type(inputPassword, '123456');
     });
 
     await waitFor(() => {

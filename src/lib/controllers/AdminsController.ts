@@ -5,6 +5,7 @@ export const FindAdmin = async (email: string) => {
   await database.connect();
   const admin = await Admins.findOne({ email: email });
 
-  database.disconnect();
+  console.log(admin, 'aqui');
+
   return admin;
 };

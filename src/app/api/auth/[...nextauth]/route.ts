@@ -1,39 +1,32 @@
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import CredentialsProvider from 'next-auth/providers/credentials';
 import type { NextAuthOptions } from 'next-auth';
-import { FindAdmin } from '@/lib/controllers/AdminsController';
-
-type ProviderType = 'google' | 'credentials';
+import EmailProvider from 'next-auth/providers/email';
+import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
+import clientPromise from '@/lib/mongoOnlyAdpter';
+import database from '@/lib/database/mongodb';
+import Admins from '@/lib/Schemas/adminsSchema';
+interface DataOfDatabase {
+  _id: string;
+  email: string;
+  levelAccess: string;
+}
 
 export const authOption: NextAuthOptions = {
+  adapter: MongoDBAdapter(clientPromise, {
+    databaseName: 'e-commerce'
+  }),
   providers: [
-    CredentialsProvider({
-      name: 'Credentials',
-      credentials: {
-        email: { label: 'Username', type: 'text', placeholder: 'jsmith' },
-        password: { label: 'password', type: 'text', placeholder: 'jsmith' }
-      },
-      async authorize(credentials, req) {
-        const emailsAuthorized = ['vitormeneses87@gmail.com'];
-
-        const admin = await FindAdmin(credentials?.email as string);
-
-        const user = {
-          id: '1',
-          name: 'J Smith',
-          email: credentials?.email as string,
-          levelAccess: 'admin'
-        };
-
-        if (
-          emailsAuthorized.includes(credentials?.email as string) &&
-          credentials?.password === '123456'
-        ) {
-          return user;
+    EmailProvider({
+      server: {
+        host: process.env.EMAIL_SERVER_HOST,
+        port: process.env.EMAIL_SERVER_PORT,
+        auth: {
+          user: process.env.EMAIL_SERVER_USER,
+          pass: process.env.EMAIL_SERVER_PASSWORD
         }
-        return null;
-      }
+      },
+      from: process.env.EMAIL_FROM
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
@@ -53,17 +46,40 @@ export const authOption: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
-      const emailsAuthorized = ['vitormeneses87@gmail.com'];
-      const Provider = account?.provider as ProviderType;
+      try {
+        const emailUser =
+          account && account?.provider == 'email'
+            ? account.providerAccountId
+            : profile?.email;
 
-      const providers = {
-        google: emailsAuthorized.includes(user?.email as string),
-        credentials: emailsAuthorized.includes(credentials?.email as string)
-      }[Provider];
+        await database.connect();
+        const admin = await Admins.findOne({ email: emailUser });
 
-      return providers;
+        if (admin !== null) {
+          const data: DataOfDatabase = {
+            _id: admin._doc._id.toString(),
+            email: admin._doc.email,
+            levelAccess: admin._doc.levelAccess
+          };
+
+          user.id = data._id;
+          user.levelAccess = data.levelAccess;
+
+          return data as unknown as boolean;
+        }
+        return undefined as unknown as boolean;
+      } catch (error) {
+        console.log(error);
+      }
+      return undefined as unknown as boolean;
     },
     session({ session, token, user }) {
+      if (user) {
+        session.user.levelAccess = user.levelAccess;
+      } else {
+        session.user.levelAccess = token.levelAccess;
+      }
+
       return session;
     },
     async jwt({ token, user, account, profile }) {

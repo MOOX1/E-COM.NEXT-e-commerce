@@ -10,8 +10,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 
 const schema = z.object({
-  email: z.string().email('Informe um email válido'),
-  password: z.string().min(6, 'Informe uma senha válida')
+  email: z.string().email('Informe um email válido')
 });
 
 type FormDataProps = z.infer<typeof schema>;
@@ -26,17 +25,15 @@ export default function LoginForm() {
     criteriaMode: 'firstError',
     resolver: zodResolver(schema),
     defaultValues: {
-      email: '',
-      password: ''
+      email: ''
     }
   });
 
   const errorParams = useSearchParams().get('error');
 
   const onSubmit = (data: FormDataProps) => {
-    signIn('credentials', {
-      email: data.email,
-      password: data.password
+    signIn('email', {
+      email: data.email
     });
   };
 
@@ -68,21 +65,6 @@ export default function LoginForm() {
           {errors.email && (
             <p className="text-red-500 w-full -mt-4 text-left text-xs py-1 font-sans">
               {errors.email.message}
-            </p>
-          )}
-          <input
-            {...register('password')}
-            // ref={inputRefPassword}
-            className={
-              'focus-visible:outline-0 bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs mb-5'
-            }
-            aria-label="Password"
-            placeholder="Password"
-            type="password"
-          />
-          {errors.password && (
-            <p className="text-red-500 w-full -mt-4  mb-2 text-left text-xs py-1 font-sans">
-              {errors.password.message}
             </p>
           )}
 
