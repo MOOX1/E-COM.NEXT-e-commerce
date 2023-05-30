@@ -45,11 +45,11 @@ export default function LoginForm() {
         router.push(data?.url as string);
         cookies.remove('error-rate-limit');
       }
+      if (error_rate_limit?.length) {
+        return setErrorParams(error_rate_limit);
+      }
       if (data?.error) {
         setErrorParams(data?.error);
-      }
-      if (error_rate_limit?.length) {
-        setErrorParams(error_rate_limit);
       }
     });
   };

@@ -20,9 +20,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 
   if (
     req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
-    req.nextUrl.pathname.startsWith('/api/auth/signin/email')
+    req.nextUrl.pathname.startsWith('/api/auth/signin/google')
   ) {
     const id = req.ip ?? 'anonymous';
+
     const limit = await ratelimit.limit(id ?? 'anonymous');
     event.waitUntil(limit.pending);
 
