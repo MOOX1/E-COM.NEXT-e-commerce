@@ -66,6 +66,8 @@ export const authOption: NextAuthOptions = {
           user.id = data._id;
           user.levelAccess = data.levelAccess;
 
+          if (account?.provider == 'google') return true;
+
           return data as unknown as boolean;
         }
         return undefined as unknown as boolean;

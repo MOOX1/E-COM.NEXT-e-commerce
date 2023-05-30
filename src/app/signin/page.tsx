@@ -1,12 +1,12 @@
 import Image from 'next/image';
 import Logo from '../../assets/logo.png';
 import LoginForm from '@/components/loginForm/LoginForm';
-import { getServerSession } from 'next-auth';
-import { authOption } from '../api/auth/[...nextauth]/route';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import ButtonSession from '@/components/buttonSession/ButtonSession';
 
 export default async function Signin() {
-  const session = await getServerSession(authOption);
+  const session = cookies().has('next-auth.session-token');
 
   if (session) redirect('/');
 

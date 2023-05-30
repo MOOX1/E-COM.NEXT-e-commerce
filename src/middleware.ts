@@ -17,19 +17,28 @@ const ratelimit = new Ratelimit({
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const token = await getToken({ req });
+
+  // if (
+  //   req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
+  //   req.nextUrl.pathname.startsWith('/api/auth/signin/email')
+  // ) {
+  //   const id = req.ip ?? 'anonymous';
+  //   const { limit, pending, success } = await ratelimit.limit(
+  //     id ?? 'anonymous'
+  //   );
+  //   event.waitUntil(pending);
+
+  //   console.log(success);
+  //   if (!success) {
+  //     return NextResponse.json({ messa: 'excedeu o limite de tentativas' });
+  //   }
+  // }
+
+  if (req.nextUrl.pathname.startsWith('/api/auth/session')) {
+    return NextResponse.next();
+  }
+
   if (req.nextUrl.pathname.startsWith('/api/auth')) {
-    const id = req.ip ?? 'anonymous';
-    const { limit, pending, success } = await ratelimit.limit(
-      id ?? 'anonymous'
-    );
-
-    console.log(success);
-    if (!success) {
-      return NextResponse.json({ messa: 'excedeu o limite de tentativas' });
-    }
-
-    event.waitUntil(pending);
-
     return NextResponse.next({});
   }
 

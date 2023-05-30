@@ -2,9 +2,7 @@ import './globals.css';
 import { Quicksand, Poppins } from 'next/font/google';
 import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/layout/Layout';
-
-import { authOption } from './api/auth/[...nextauth]/route';
-import { getServerSession } from 'next-auth';
+import { cookies } from 'next/headers';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -26,20 +24,16 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const session = await getServerSession(authOption);
+  const session = cookies().has('next-auth.session-token');
 
   return (
     <html lang="pt_BR">
       <body
         className={`${poppins.variable} ${quicksand.variable} bg-bodyColor text-white h-auto  overflow-hidden`}
       >
-        {session ? (
-          <Layout>
-            <SessionProvider>{children}</SessionProvider>
-          </Layout>
-        ) : (
-          children
-        )}
+        <SessionProvider>
+          {session ? <Layout>{children}</Layout> : children}
+        </SessionProvider>
       </body>
     </html>
   );

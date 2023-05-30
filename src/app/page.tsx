@@ -1,12 +1,11 @@
-import { getServerSession } from 'next-auth';
-import { authOption } from './api/auth/[...nextauth]/route';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import ButtonSignOut from '@/components/buttonSignOut/buttonSignOut';
 import Link from 'next/link';
 import React from 'react';
 
 export default async function Home() {
-  const session = await getServerSession(authOption);
+  const session = cookies().has('next-auth.session-token');
 
   if (!session) redirect('/signin');
   return (
