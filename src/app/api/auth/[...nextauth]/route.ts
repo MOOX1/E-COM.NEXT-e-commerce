@@ -2,20 +2,21 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import type { NextAuthOptions } from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
-import { MongoDBAdapter } from '@next-auth/mongodb-adapter';
-import clientPromise from '@/lib/mongoOnlyAdpter';
+
 import database from '@/lib/database/mongodb';
 import Admins from '@/lib/Schemas/adminsSchema';
+
+import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
+import { Redis } from '@upstash/redis';
 interface DataOfDatabase {
   _id: string;
   email: string;
   levelAccess: string;
 }
+const redis = Redis.fromEnv();
 
 export const authOption: NextAuthOptions = {
-  adapter: MongoDBAdapter(clientPromise, {
-    databaseName: 'e-commerce'
-  }),
+  adapter: UpstashRedisAdapter(redis),
   providers: [
     EmailProvider({
       server: {
