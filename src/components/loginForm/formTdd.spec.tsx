@@ -52,9 +52,6 @@ describe('<LoginForm />', () => {
       expect(
         screen.queryByText('Informe um email válido')
       ).not.toBeInTheDocument();
-      expect(
-        screen.queryByText('Informe uma senha válida')
-      ).not.toBeInTheDocument();
     });
   });
 });

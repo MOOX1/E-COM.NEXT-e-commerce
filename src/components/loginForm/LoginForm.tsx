@@ -8,6 +8,8 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
+import cookies from 'js-cookie';
+import { useEffect } from 'react';
 
 const schema = z.object({
   email: z.string().email('Informe um email válido')
@@ -30,15 +32,25 @@ export default function LoginForm() {
       email: ''
     }
   });
+  const error_rate_limit: string | undefined = cookies.get('error-rate-limit');
 
   const onSubmit = (data: FormDataProps) => {
     setErrorParams(undefined);
+    cookies.remove('error-rate-limit');
     signIn('email', {
       email: data.email,
       redirect: false
     }).then((data) => {
-      if (data?.error) setErrorParams(data.error);
-      if (!data?.error) router.push(data?.url as string);
+      if (!data?.error) {
+        router.push(data?.url as string);
+        cookies.remove('error-rate-limit');
+      }
+      if (data?.error) {
+        setErrorParams(data?.error);
+      }
+      if (error_rate_limit?.length) {
+        setErrorParams(error_rate_limit);
+      }
     });
   };
 
@@ -56,8 +68,10 @@ export default function LoginForm() {
           className="w-full flex flex-col items-center justify-center"
         >
           {errorParams && (
-            <span className="text-red-600 flex font-sans text-sm flex-col -mt-6 pb-6 items-center justify-center">
-              Seu acesso foi negado
+            <span className="text-red-600 flex text-center px-2 font-sans text-sm flex-col -mt-6 pb-6 items-center justify-center">
+              {errorParams == 'AccessDenied'
+                ? 'Seu acesso foi negado'
+                : errorParams}
             </span>
           )}
           <input
@@ -89,7 +103,10 @@ export default function LoginForm() {
             </p>
           </div>
           <div
-            onClick={() => signIn('google')}
+            onClick={() => {
+              setErrorParams(undefined);
+              signIn('google');
+            }}
             aria-label="buttom-google"
             className="min-w-[230px] p-1 cursor-pointer h-auto bg-mainBlue rounded-3xl mt-7 flex items-center"
           >

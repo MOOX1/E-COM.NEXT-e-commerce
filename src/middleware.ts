@@ -1,5 +1,5 @@
 import { NextResponse, NextFetchEvent } from 'next/server';
-import type { NextRequest } from 'next/server';
+import { NextRequest } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
 import { Ratelimit } from '@upstash/ratelimit';
@@ -18,21 +18,25 @@ const ratelimit = new Ratelimit({
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const token = await getToken({ req });
 
-  // if (
-  //   req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
-  //   req.nextUrl.pathname.startsWith('/api/auth/signin/email')
-  // ) {
-  //   const id = req.ip ?? 'anonymous';
-  //   const { limit, pending, success } = await ratelimit.limit(
-  //     id ?? 'anonymous'
-  //   );
-  //   event.waitUntil(pending);
+  if (
+    req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
+    req.nextUrl.pathname.startsWith('/api/auth/signin/email')
+  ) {
+    const id = req.ip ?? 'anonymous';
+    const limit = await ratelimit.limit(id ?? 'anonymous');
+    event.waitUntil(limit.pending);
 
-  //   console.log(success);
-  //   if (!success) {
-  //     return NextResponse.json({ messa: 'excedeu o limite de tentativas' });
-  //   }
-  // }
+    if (!limit.success) {
+      const response = NextResponse.next();
+      response.cookies.set(
+        'error-rate-limit',
+        'Excedeu a quantidade de tentativas, tente em 1 minuto'
+      );
+      return response;
+    }
+
+    return NextResponse.next({});
+  }
 
   if (req.nextUrl.pathname.startsWith('/api/auth/session')) {
     return NextResponse.next();

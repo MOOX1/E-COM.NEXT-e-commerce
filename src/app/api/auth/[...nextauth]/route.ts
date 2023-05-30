@@ -8,6 +8,7 @@ import Admins from '@/lib/Schemas/adminsSchema';
 
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
+import { cookies } from 'next/headers';
 interface DataOfDatabase {
   _id: string;
   email: string;
@@ -48,6 +49,9 @@ export const authOption: NextAuthOptions = {
   callbacks: {
     async signIn({ user, account, profile, email, credentials }) {
       try {
+        const RateLimit = cookies().get('error-rate-limit');
+        if (RateLimit) return false;
+
         const emailUser =
           account && account?.provider == 'email'
             ? account.providerAccountId
