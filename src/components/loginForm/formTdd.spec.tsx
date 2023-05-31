@@ -5,7 +5,10 @@ import LoginForm from './LoginForm';
 import { userEvent, waitFor } from '@storybook/testing-library';
 
 jest.mock('next/navigation', () => ({
-  useRouter: jest.fn()
+  useRouter: jest.fn(),
+  useSearchParams: jest.fn().mockReturnValue({
+    get: jest.fn().mockReturnValue('Seu erro mockado aqui')
+  })
 }));
 
 export const loadAnimation = jest.fn();
