@@ -3,13 +3,14 @@
 import Image from 'next/image';
 import IconGoogle from '../../assets/iconGoogle.svg';
 import { signIn } from 'next-auth/react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import cookies from 'js-cookie';
-import { useEffect } from 'react';
+import Load from '../load/Load';
+import { useSearchParams } from 'next/navigation';
 
 const schema = z.object({
   email: z.string().email('Informe um email válido')
@@ -18,8 +19,17 @@ const schema = z.object({
 type FormDataProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
-  const [errorParams, setErrorParams] = useState<string | undefined>(undefined);
+  const [error, setError] = useState<string | undefined>();
+  const [isLoading, setIsLoading] = useState<boolean>();
   const router = useRouter();
+  const error_rate_limit: string | undefined = cookies.get('error-rate-limit');
+  const errorParams = useSearchParams().get('error');
+
+  useEffect(() => {
+    if (!errorParams) return;
+    setError(errorParams);
+  }, [errorParams]);
+
   const {
     handleSubmit,
     register,
@@ -32,24 +42,25 @@ export default function LoginForm() {
       email: ''
     }
   });
-  const error_rate_limit: string | undefined = cookies.get('error-rate-limit');
 
   const onSubmit = (data: FormDataProps) => {
-    setErrorParams(undefined);
+    setIsLoading(true);
+    setError(undefined);
     cookies.remove('error-rate-limit');
     signIn('email', {
       email: data.email,
       redirect: false
     }).then((data) => {
+      setIsLoading(false);
       if (!data?.error) {
         router.push(data?.url as string);
         cookies.remove('error-rate-limit');
       }
       if (error_rate_limit?.length) {
-        return setErrorParams(error_rate_limit);
+        return setError(error_rate_limit);
       }
       if (data?.error) {
-        setErrorParams(data?.error);
+        setError(data?.error);
       }
     });
   };
@@ -67,13 +78,12 @@ export default function LoginForm() {
           onSubmit={handleSubmit(onSubmit)}
           className="w-full flex flex-col items-center justify-center"
         >
-          {errorParams && (
+          {error && (
             <span className="text-red-600 flex text-center px-2 font-sans text-sm flex-col -mt-6 pb-6 items-center justify-center">
-              {errorParams == 'AccessDenied'
-                ? 'Seu acesso foi negado'
-                : errorParams}
+              {error == 'AccessDenied' ? 'Seu acesso foi negado' : error}
             </span>
           )}
+          {isLoading && <Load />}
           <input
             {...register('email')}
             className="focus-visible:outline-0  bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs mb-5"
@@ -104,8 +114,8 @@ export default function LoginForm() {
           </div>
           <div
             onClick={() => {
-              setErrorParams(undefined);
-              signIn('google');
+              setError(undefined);
+              signIn('google', { redirect: false, callbackUrl: '/signin' });
             }}
             aria-label="buttom-google"
             className="min-w-[230px] p-1 cursor-pointer h-auto bg-mainBlue rounded-3xl mt-7 flex items-center"

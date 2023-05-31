@@ -1,13 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Layout as LayoutAntd, Menu, Button } from 'antd';
+import { Layout as LayoutAntd, Button } from 'antd';
 import { DoorOpenIcon } from 'lucide-react';
 
-const { Header, Content, Sider } = LayoutAntd;
+const { Content, Sider } = LayoutAntd;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
     <LayoutAntd>

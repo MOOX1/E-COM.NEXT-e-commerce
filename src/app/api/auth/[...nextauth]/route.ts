@@ -16,7 +16,7 @@ interface DataOfDatabase {
 }
 const redis = Redis.fromEnv();
 
-export const authOption: NextAuthOptions = {
+const authOption: NextAuthOptions = {
   adapter: UpstashRedisAdapter(redis),
   providers: [
     EmailProvider({
@@ -47,7 +47,7 @@ export const authOption: NextAuthOptions = {
     error: '/signin'
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn({ user, account, profile }) {
       try {
         const RateLimit = cookies().get('error-rate-limit');
         if (RateLimit) return false;
@@ -89,7 +89,7 @@ export const authOption: NextAuthOptions = {
 
       return session;
     },
-    async jwt({ token, user, account, profile }) {
+    async jwt({ token, user }) {
       if (user?.levelAccess) {
         token.levelAccess = user.levelAccess;
       }

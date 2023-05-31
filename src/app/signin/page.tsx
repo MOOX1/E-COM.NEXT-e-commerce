@@ -3,7 +3,6 @@ import Logo from '../../assets/logo.png';
 import LoginForm from '@/components/loginForm/LoginForm';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
-import ButtonSession from '@/components/buttonSession/ButtonSession';
 
 export default async function Signin() {
   const session = cookies().has('next-auth.session-token');

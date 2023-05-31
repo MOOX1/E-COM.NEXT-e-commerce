@@ -8,6 +8,15 @@ jest.mock('next/navigation', () => ({
   useRouter: jest.fn()
 }));
 
+export const loadAnimation = jest.fn();
+
+jest.mock('lottie-web', () => ({
+  __esModule: true,
+  default: {
+    loadAnimation: jest.fn()
+  }
+}));
+
 jest.mock('next/image', () => ({
   __esModule: true,
   default: jest
