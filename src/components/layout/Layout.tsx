@@ -7,6 +7,7 @@ import { DoorOpenIcon } from 'lucide-react';
 const { Header, Content, Sider } = LayoutAntd;
 
 export default function Layout({ children }: { children: React.ReactNode }) {
+
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
     <LayoutAntd>
