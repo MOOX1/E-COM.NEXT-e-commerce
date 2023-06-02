@@ -16,25 +16,25 @@ interface SidebarProps {
 const menuItems: MenuItemProps[] = [
   {
     label: 'Dashboard',
-    Icon: <LayoutPanelLeft className="text-white w-7 h-auto" />,
+    Icon: <LayoutPanelLeft className="text-white w-6 h-auto" />,
     pathname: '/',
     isActive: true
   },
   {
     label: 'Overview',
-    Icon: <BarChart4 className="text-white w-7 h-auto" />,
+    Icon: <BarChart4 className="text-white w-6 h-auto" />,
     pathname: '/overview',
     isActive: false
   },
   {
     label: 'Produtos',
-    Icon: <ShoppingBag className="text-white w-7 h-auto" />,
+    Icon: <ShoppingBag className="text-white w-6 h-auto" />,
     pathname: '/produtos',
     isActive: false
   },
   {
     label: 'Colaboradores',
-    Icon: <Users className="text-white w-7 h-auto" />,
+    Icon: <Users className="text-white w-6 h-auto" />,
     pathname: '/colaboradores',
     isActive: false
   }
@@ -42,7 +42,7 @@ const menuItems: MenuItemProps[] = [
 
 function Sidebar({ buttonOpen, colapssed }: SidebarProps) {
   return (
-    <div className="bg-strongBlue w-full h-screen py-14 overflow-hidden">
+    <nav className="bg-strongBlue w-full h-screen py-14 overflow-hidden">
       <Profile colapssed={colapssed} />
       <MenuItem colapssed={colapssed} menuItems={menuItems} />
       <div className="flex justify-center">{buttonOpen}</div>
@@ -65,7 +65,7 @@ function Sidebar({ buttonOpen, colapssed }: SidebarProps) {
           />
         )}
       </div>
-    </div>
+    </nav>
   );
 }
 

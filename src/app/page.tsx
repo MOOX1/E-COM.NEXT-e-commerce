@@ -3,6 +3,12 @@ import { redirect } from 'next/navigation';
 import ButtonSignOut from '@/components/buttonSignOut/buttonSignOut';
 import Link from 'next/link';
 import React from 'react';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'DashBoard',
+  description: '...'
+};
 
 export default async function Home() {
   const session = cookies().has('next-auth.session-token');

@@ -24,9 +24,9 @@ function Layout({ children }: { children: React.ReactNode }) {
               type="text"
               icon={
                 collapsed ? (
-                  <ChevronRight className="text-white" />
+                  <ChevronRight className="text-white w-6 h-auto" />
                 ) : (
-                  <ChevronLeft className="text-white" />
+                  <ChevronLeft className="text-white w-6 h-auto" />
                 )
               }
               onClick={() => setCollapsed(!collapsed)}

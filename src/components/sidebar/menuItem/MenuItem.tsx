@@ -24,7 +24,7 @@ function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
     });
     menuItems = newMenuItems;
 
-    positionSelected = `${3.8 * newItemActive}rem`;
+    positionSelected = `${3.5 * newItemActive}rem`;
   };
 
   data();
@@ -61,7 +61,7 @@ function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
                 <p
                   className={
                     (colapssed ? ' !duration-100 opacity-0 absolute w-0' : '') +
-                    ' text-lg font-normal text-mainBlue font-alt flex items-center ' +
+                    ' text-base font-normal text-mainBlue font-alt flex items-center ' +
                     (item.isActive ? ' !font-semibold ' : '')
                   }
                 >
