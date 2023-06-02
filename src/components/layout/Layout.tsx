@@ -1,42 +1,47 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import { Layout as LayoutAntd, Button } from 'antd';
-import { DoorOpenIcon } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Sidebar from '../sidebar/Sidebar';
 
 const { Content, Sider } = LayoutAntd;
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+function Layout({ children }: { children: React.ReactNode }) {
   const [collapsed, setCollapsed] = useState<boolean>(true);
   return (
     <LayoutAntd>
       <Sider
-        className="sticky left-0 h-screen top-0 bottom-0 overflow-hidden"
+        width={280}
+        className="sticky left-0 h-screen top-0 bottom-0 overflow-hidden duration-500"
         trigger={null}
-        collapsible
         collapsed={collapsed}
       >
-        <div className="h-full w-full bg-strongBlue sticky left-0">
-          {' '}
-          <div className="bg-strongBlue w-full h-full">
+        <Sidebar
+          colapssed={collapsed}
+          buttonOpen={
             <Button
               type="text"
-              icon={<DoorOpenIcon className="text-white" />}
+              icon={
+                collapsed ? (
+                  <ChevronRight className="text-white" />
+                ) : (
+                  <ChevronLeft className="text-white" />
+                )
+              }
               onClick={() => setCollapsed(!collapsed)}
-              style={{
-                fontSize: '16px',
-                width: 64,
-                height: 64
-              }}
+              className="hover:bg-mediaBlue/10 h-16 w-16 text-base"
             />
-          </div>
-        </div>
+          }
+        />
       </Sider>
       <LayoutAntd>
-        <Content className=" bg-bodyColor font-sans p-5 h-screen overflow-auto">
+        <Content className=" bg-content text-black font-sans p-5 h-screen overflow-auto">
           {children}
         </Content>
       </LayoutAntd>
     </LayoutAntd>
   );
 }
+
+export default memo(Layout);

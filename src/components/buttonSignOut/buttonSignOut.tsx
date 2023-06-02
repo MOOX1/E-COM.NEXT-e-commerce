@@ -2,6 +2,7 @@
 
 import { signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { LogOut } from 'lucide-react';
 
 export default function ButtonSignOut() {
   const router = useRouter();
@@ -13,5 +14,12 @@ export default function ButtonSignOut() {
     });
   };
 
-  return <h1 onClick={handleSigninAuth}> sair</h1>;
+  return (
+    <div
+      onClick={handleSigninAuth}
+      className="cursor-pointer hover:bg-mediaBlue/10 p-2 rounded-full transition-colors"
+    >
+      <LogOut className="text-mainBlue " />
+    </div>
+  );
 }

@@ -18,7 +18,8 @@ module.exports = {
         mediaBlue: '#6E8EDB',
         strongBlue: '#010217',
         mainGray: '#1E1E1E',
-        bodyColor: '#141416'
+        bodyColor: '#141416',
+        content: '#CBCBCB'
       },
       fontFamily: {
         sans: 'var(--font-poppins)',

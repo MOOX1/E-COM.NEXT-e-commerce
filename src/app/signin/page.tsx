@@ -16,7 +16,7 @@ export default async function Signin() {
           <Image src={Logo} alt="logo" />
         </div>
       </div>
-      <div className="bg-[#141416] w-[20%] m-0 flex items-center ">
+      <div className="bg-bodyColor w-[20%] m-0 flex items-center ">
         <LoginForm />
       </div>
     </div>
