@@ -14,6 +14,11 @@ interface DataOfDatabase {
   email: string;
   levelAccess: string;
 }
+
+export const config = {
+  runtime: 'edge'
+};
+
 const redis = Redis.fromEnv();
 
 const authOption: NextAuthOptions = {
