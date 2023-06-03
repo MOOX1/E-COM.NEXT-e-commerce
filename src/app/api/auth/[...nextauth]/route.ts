@@ -15,9 +15,7 @@ interface DataOfDatabase {
   levelAccess: string;
 }
 
-export const config = {
-  runtime: 'edge'
-};
+export const runtime = 'edge';
 
 const redis = Redis.fromEnv();
 
