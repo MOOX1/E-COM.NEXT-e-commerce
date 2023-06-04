@@ -25,7 +25,6 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = cookies().has('next-auth.session-token');
-
   return (
     <html lang="pt_BR">
       <body
