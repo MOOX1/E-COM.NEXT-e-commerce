@@ -16,9 +16,7 @@ const ratelimit = new Ratelimit({
 
 // This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
-  const session = req.cookies.has('next-auth.session-token');
-  const sessionProd = req.cookies.has('__Secure-next-auth.session-token');
-
+  const token = await getToken({ req });
   // Rete limit
   if (
     req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
@@ -48,7 +46,14 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   }
 
-  if (!session) {
+  if (req.nextUrl.pathname.startsWith('/signin')) {
+    if (token) return NextResponse.redirect(new URL('/', req.url));
+    return NextResponse.next();
+  }
+
+  console.log(token);
+
+  if (!token) {
     return NextResponse.redirect(new URL('/signin', req.url));
   }
 
@@ -57,5 +62,5 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/api/:path*', '/']
+  matcher: ['/api/:path*', '/', '/signin']
 };
