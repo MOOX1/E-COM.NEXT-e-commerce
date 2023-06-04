@@ -11,10 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-  const session = cookies().has('next-auth.session-token');
-  const sessionProd = cookies().has('__Secure-next-auth.session-token');
-
-  if (!session && sessionProd) redirect('/signin');
   return (
     <div className=" flex flex-col gap-5 bg-conetnt">
       <h1>home</h1>
