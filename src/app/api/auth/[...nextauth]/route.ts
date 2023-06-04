@@ -18,6 +18,7 @@ interface DataOfDatabase {
 // export const runtime = 'edge';
 
 const redis = Redis.fromEnv();
+database.connect();
 
 const authOption: NextAuthOptions = {
   adapter: UpstashRedisAdapter(redis),
@@ -60,7 +61,6 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        await database.connect();
         const admin = await Admins.findOne({ email: emailUser });
 
         if (admin !== null) {
