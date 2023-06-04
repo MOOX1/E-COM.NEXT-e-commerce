@@ -3,6 +3,7 @@ import { Quicksand, Poppins } from 'next/font/google';
 import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/layout/Layout';
 import { cookies } from 'next/headers';
+import { Analytics } from '@vercel/analytics/react';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -33,6 +34,7 @@ export default async function RootLayout({
       >
         <SessionProvider>
           {session || sessionProd ? <Layout>{children}</Layout> : children}
+          <Analytics />
         </SessionProvider>
       </body>
     </html>
