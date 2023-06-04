@@ -1,5 +1,3 @@
-import { cookies } from 'next/headers';
-import { redirect } from 'next/navigation';
 import ButtonSignOut from '@/components/buttonSignOut/buttonSignOut';
 import Link from 'next/link';
 import React from 'react';

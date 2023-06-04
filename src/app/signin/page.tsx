@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import Logo from '../../assets/logo.png';
 import LoginForm from '@/components/loginForm/LoginForm';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'E.COM-NEXT',
+  description: '...'
+};
 
 export default async function Signin() {
   return (
