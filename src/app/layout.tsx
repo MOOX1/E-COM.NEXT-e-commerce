@@ -33,7 +33,8 @@ export default async function RootLayout({
         className={`${poppins.variable} ${quicksand.variable} bg-bodyColor text-white h-auto  overflow-hidden`}
       >
         <SessionProvider>
-          {session || sessionProd ? <Layout>{children}</Layout> : children}
+          {/* {session || sessionProd ? <Layout>{children}</Layout> : children} */}
+          {children}
         </SessionProvider>
       </body>
     </html>
