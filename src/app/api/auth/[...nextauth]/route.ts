@@ -51,38 +51,38 @@ const authOption: NextAuthOptions = {
     error: '/signin'
   },
   callbacks: {
-    async signIn({ user, account, profile }) {
-      try {
-        const RateLimit = cookies().get('error-rate-limit');
-        if (RateLimit) return false;
+    // async signIn({ user, account, profile }) {
+    //   try {
+    //     const RateLimit = cookies().get('error-rate-limit');
+    //     if (RateLimit) return false;
 
-        const emailUser =
-          account && account?.provider == 'email'
-            ? account.providerAccountId
-            : profile?.email;
+    //     const emailUser =
+    //       account && account?.provider == 'email'
+    //         ? account.providerAccountId
+    //         : profile?.email;
 
-        const admin = await Admins.findOne({ email: emailUser });
+    //     const admin = await Admins.findOne({ email: emailUser });
 
-        if (admin !== null) {
-          const data: DataOfDatabase = {
-            _id: admin._doc._id.toString(),
-            email: admin._doc.email,
-            levelAccess: admin._doc.levelAccess
-          };
+    //     if (admin !== null) {
+    //       const data: DataOfDatabase = {
+    //         _id: admin._doc._id.toString(),
+    //         email: admin._doc.email,
+    //         levelAccess: admin._doc.levelAccess
+    //       };
 
-          user.id = data._id;
-          user.levelAccess = data.levelAccess;
+    //       user.id = data._id;
+    //       user.levelAccess = data.levelAccess;
 
-          if (account?.provider == 'google') return true;
+    //       if (account?.provider == 'google') return true;
 
-          return data as unknown as boolean;
-        }
-        return undefined as unknown as boolean;
-      } catch (error) {
-        console.log(error);
-      }
-      return undefined as unknown as boolean;
-    },
+    //       return data as unknown as boolean;
+    //     }
+    //     return undefined as unknown as boolean;
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    //   return undefined as unknown as boolean;
+    // },
     session({ session, token, user }) {
       if (user) {
         session.user.levelAccess = user.levelAccess;
