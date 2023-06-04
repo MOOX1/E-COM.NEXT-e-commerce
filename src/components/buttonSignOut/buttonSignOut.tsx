@@ -6,7 +6,6 @@ import { LogOut } from 'lucide-react';
 
 export default function ButtonSignOut() {
   const router = useRouter();
-
   const handleSigninAuth = () => {
     signOut({ redirect: false }).then(() => {
       router.replace('/signin');
