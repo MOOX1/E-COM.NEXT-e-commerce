@@ -17,8 +17,8 @@ interface DataOfDatabase {
 
 // export const runtime = 'edge';
 
+database.connect();
 const redis = Redis.fromEnv();
-const db = database.connect();
 
 const authOption: NextAuthOptions = {
   adapter: UpstashRedisAdapter(redis),
@@ -61,23 +61,23 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        // const admin = await Admins.findOne({ email: emailUser });
+        const admin = await Admins.findOne({ email: emailUser });
 
-        // if (admin !== null) {
-        //   const data: DataOfDatabase = {
-        //     _id: admin._doc._id.toString(),
-        //     email: admin._doc.email,
-        //     levelAccess: admin._doc.levelAccess
-        //   };
+        if (admin !== null) {
+          const data: DataOfDatabase = {
+            _id: admin._doc._id.toString(),
+            email: admin._doc.email,
+            levelAccess: admin._doc.levelAccess
+          };
 
-        //   user.id = data._id;
-        //   user.levelAccess = data.levelAccess;
+          user.id = data._id;
+          user.levelAccess = data.levelAccess;
 
-        //   if (account?.provider == 'google') return true;
+          if (account?.provider == 'google') return true;
 
-        //   return data as unknown as boolean;
-        // }
-        return {} as unknown as boolean;
+          return data as unknown as boolean;
+        }
+        return undefined as unknown as boolean;
       } catch (error) {
         console.log(error);
       }
