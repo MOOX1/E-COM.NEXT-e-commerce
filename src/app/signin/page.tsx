@@ -6,8 +6,9 @@ import { redirect } from 'next/navigation';
 
 export default async function Signin() {
   const session = cookies().has('next-auth.session-token');
+  const sessionProd = cookies().has('__Secure-next-auth.session-token');
 
-  if (session) redirect('/');
+  if (session || sessionProd) redirect('/');
 
   return (
     <div className="h-screen w-screen flex">

@@ -25,6 +25,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = cookies().has('next-auth.session-token');
+  const sessionProd = cookies().has('__Secure-next-auth.session-token');
 
   return (
     <html lang="pt_BR">
@@ -32,7 +33,7 @@ export default async function RootLayout({
         className={`${poppins.variable} ${quicksand.variable} bg-bodyColor text-white h-auto  overflow-hidden`}
       >
         <SessionProvider>
-          {session ? <Layout>{children}</Layout> : children}
+          {session || sessionProd ? <Layout>{children}</Layout> : children}
         </SessionProvider>
       </body>
     </html>
