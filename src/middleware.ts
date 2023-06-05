@@ -51,8 +51,6 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next();
   }
 
-  console.log(token);
-
   if (!token) {
     return NextResponse.redirect(new URL('/signin', req.url));
   }

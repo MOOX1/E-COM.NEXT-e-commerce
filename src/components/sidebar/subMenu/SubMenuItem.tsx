@@ -7,7 +7,6 @@ interface SubMenuProps {
 }
 
 export default function SubmenuItem({ SubMenuItems }: SubMenuProps) {
-  console.log(SubMenuItems);
   return (
     <div
       className={
