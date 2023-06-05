@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: '...'
 };
 
-export const runtime = 'edge';
-
 export default async function Home() {
   return (
     <div className=" flex flex-col gap-5 bg-conetnt">

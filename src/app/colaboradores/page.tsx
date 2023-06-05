@@ -7,8 +7,6 @@ export const metadata: Metadata = {
   description: '...'
 };
 
-export const runtime = 'edge';
-
 export default function Colaboradores() {
   return (
     <div className="flex gap-3 w-full h-full">

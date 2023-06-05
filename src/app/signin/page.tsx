@@ -8,8 +8,6 @@ export const metadata: Metadata = {
   description: '...'
 };
 
-export const runtime = 'edge';
-
 export default async function Signin() {
   return (
     <div className="h-screen w-screen flex">
