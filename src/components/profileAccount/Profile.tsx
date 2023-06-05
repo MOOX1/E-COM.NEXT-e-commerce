@@ -20,15 +20,18 @@ export default function Profile() {
           width={96}
           height={96}
           alt=""
+          className="rounded-full"
         />
       </div>
       <div className="font-alt text-white text-center flex justify-center items-center flex-col gap-1">
-        <p className="font-semibold font-alt text-lg uppercase">Admin Super</p>
+        <p className="font-semibold font-alt text-lg uppercase">
+          {data?.user?.levelAccess}
+        </p>
         <p className="px-2 py-1 bg-mainBlue font-semibold w-min whitespace-nowrap rounded text-base">
-          Vitor Meneses
+          {data?.user?.name}
         </p>
         <p className="text-mainBlue underline text-base opacity-80">
-          emailexemplo@gmail.com
+          {data?.user?.email}
         </p>
       </div>
     </div>

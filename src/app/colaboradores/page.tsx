@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
-import Profile from './profile/Profile';
-import LogChanges from './logChanges/LogChanges';
+import Profile from '../../components/profileAccount/Profile';
+import LogChanges from '../../components/logChanges/LogChanges';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
