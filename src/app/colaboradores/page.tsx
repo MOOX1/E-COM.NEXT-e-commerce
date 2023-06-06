@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Profile from '../../components/profileAccount/Profile';
 import LogChanges from '../../components/logChanges/LogChanges';
+import Table from '@/components/table/Table';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
@@ -15,10 +16,12 @@ export default function Colaboradores() {
           <LogChanges />
           <Profile />
         </div>
-        <div className="w-full bg-strongBlue rounded-lg h-1/6"></div>
-        <div className="w-full bg-strongBlue rounded-lg h-2/5"></div>
+        <div className="w-full bg-strongBlue rounded-lg h-1/6  shadow-main"></div>
+        <div className="w-full bg-strongBlue rounded-lg h-2/5  shadow-main"></div>
       </div>
-      <div className="w-4/12 h-full bg-strongBlue rounded-lg shadow-black border-mainBlue border-[1px]"></div>
+      <div className="w-4/12 h-full bg-strongBlue rounded-lg   shadow-main ">
+        <Table />
+      </div>
     </div>
   );
 }

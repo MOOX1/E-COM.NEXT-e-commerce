@@ -24,6 +24,9 @@ module.exports = {
       fontFamily: {
         sans: 'var(--font-poppins)',
         alt: 'var(--font-quicksand)'
+      },
+      boxShadow: {
+        main: '0px 4px 8px rgba(0, 0, 0, 0.6)'
       }
     }
   },

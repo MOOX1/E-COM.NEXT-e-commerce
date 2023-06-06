@@ -36,7 +36,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         />
       </Sider>
       <LayoutAntd>
-        <Content className=" bg-content text-black font-sans p-5 h-screen overflow-auto">
+        <Content className=" bg-bodyColor text-black font-sans p-5 h-screen overflow-auto">
           {children}
         </Content>
       </LayoutAntd>
