@@ -40,7 +40,7 @@ export default function Table() {
         </div>
 
         <div className="flex w-full">
-          {tableFake.data.map((itemData) => (
+          {tableFake.data.map((itemData, index) => (
             <div
               key={itemData?.id}
               className={
@@ -52,7 +52,7 @@ export default function Table() {
                   return <div key={itemData[index]}>{itemData[item]}</div>;
                 }
                 return (
-                  <div key={itemData[index]}>
+                  <div key={itemData[0]}>
                     <p className={'text-white'}>{itemData[item]}</p>
                   </div>
                 );
