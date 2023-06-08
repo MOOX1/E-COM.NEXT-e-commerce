@@ -23,11 +23,14 @@ const list = {
 const LogChanges = async () => {
   let logs: Logs[] = [];
   try {
-    const response = await fetch(`http://localhost:3000/api/logs`, {
-      next: {
-        revalidate: 0
+    const response = await fetch(
+      `https://e-com-next-e-commerce.vercel.app/api/logs`,
+      {
+        next: {
+          revalidate: 0
+        }
       }
-    });
+    );
     logs = await response.json();
   } catch (error) {
     console.log(error);
