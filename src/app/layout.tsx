@@ -30,10 +30,7 @@ export default async function RootLayout({
 }) {
   const session = cookies().has('next-auth.session-token');
   const sessionProd = cookies().has('__Secure-next-auth.session-token');
-  console.log('red');
 
-  if (!session) redirect('/signin');
-  // if (process.env.NODE_ENV == 'production' && !sessionProd) redirect('/signin');
   return (
     <html lang="pt_BR">
       <body
