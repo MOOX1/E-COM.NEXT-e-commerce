@@ -1,8 +1,8 @@
-import { TopForButtom } from '@/components/motion/animations';
 import { Logs } from '../types';
 import Div from '@/components/motion/Div';
+import { memo } from 'react';
 
-export default function List(item: Logs) {
+const List = (item: Logs) => {
   const colorBorder = {
     add: 'border-green-400',
     edit: 'border-yellow-400',
@@ -41,4 +41,6 @@ export default function List(item: Logs) {
       </p>
     </Div>
   );
-}
+};
+
+export default memo(List);

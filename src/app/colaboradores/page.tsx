@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Profile from '../../components/profileAccount/Profile';
-import { LogChanges } from '../../components/logChanges/LogChanges';
+import LogChanges from '../../components/logChanges/LogChanges';
 import Table from '@/components/table/Table';
 import Div from '@/components/motion/Div';
 import React, { Suspense } from 'react';

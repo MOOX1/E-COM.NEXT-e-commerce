@@ -4,6 +4,9 @@ import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/layout/Layout';
 import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/react';
+import { NextRequest } from 'next/server';
+import { Url } from 'url';
+import { redirect } from 'next/navigation';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -27,6 +30,10 @@ export default async function RootLayout({
 }) {
   const session = cookies().has('next-auth.session-token');
   const sessionProd = cookies().has('__Secure-next-auth.session-token');
+  console.log('red');
+
+  if (!session) redirect('/signin');
+  // if (process.env.NODE_ENV == 'production' && !sessionProd) redirect('/signin');
   return (
     <html lang="pt_BR">
       <body

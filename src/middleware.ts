@@ -1,6 +1,5 @@
 import { NextResponse, NextFetchEvent } from 'next/server';
 import { NextRequest } from 'next/server';
-import { getToken } from 'next-auth/jwt';
 
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
@@ -14,9 +13,7 @@ const ratelimit = new Ratelimit({
   analytics: true
 });
 
-// This function can be marked `async` if using `await` inside
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
-  const token = await getToken({ req });
   // Rete limit
   if (
     req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
@@ -39,26 +36,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.next({});
   }
 
-  if (
-    req.nextUrl.pathname.startsWith('/api/auth/session') ||
-    req.nextUrl.pathname.startsWith('/api/auth')
-  ) {
-    return NextResponse.next();
-  }
-
-  if (req.nextUrl.pathname.startsWith('/signin')) {
-    if (token) return NextResponse.redirect(new URL('/', req.url));
-    return NextResponse.next();
-  }
-
-  if (!token) {
-    return NextResponse.redirect(new URL('/signin', req.url));
-  }
-
   return NextResponse.next();
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/api/:path*', '/', '/signin']
+  matcher: ['/api/auth/signin/google', '/api/auth/signin/google']
 };

@@ -20,14 +20,18 @@ const list = {
   }
 };
 
-export async function LogChanges() {
-  const response = await fetch(`http://localhost:3000/api/logs`, {
-    next: {
-      revalidate: 60
-    }
-  });
-
-  const logs: Logs[] = await response.json();
+const LogChanges = async () => {
+  let logs: Logs[] = [];
+  try {
+    const response = await fetch(`http://localhost:3000/api/logs`, {
+      next: {
+        revalidate: 0
+      }
+    });
+    logs = await response.json();
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <div className="w-2/4 h-full relative bg-strongBlue rounded-lg shadow-main">
@@ -58,4 +62,6 @@ export async function LogChanges() {
       </Link>
     </div>
   );
-}
+};
+
+export default LogChanges;
