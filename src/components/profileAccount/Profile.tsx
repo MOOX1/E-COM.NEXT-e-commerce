@@ -4,7 +4,7 @@ import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 
 export default function Profile() {
-  const { data, status } = useSession();
+  const { data } = useSession();
 
   return (
     <div className="flex flex-col gap-4 h-full w-2/4 text-center justify-center items-center relative shadow-main bg-strongBlue p-3 rounded-lg">

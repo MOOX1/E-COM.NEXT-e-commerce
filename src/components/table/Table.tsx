@@ -1,66 +1,108 @@
-import { User } from 'next-auth';
-import React, { ReactNode } from 'react';
+import React from 'react';
+import Div from '../motion/Div';
+import Image from 'next/image';
+import { User } from 'lucide-react';
+import { TableProps } from './types';
+import { memo } from 'react';
 
-interface Data {
-  title?: string;
-  value?: string | ReactNode;
-  key: string;
-}
-
-interface TableProps {
-  colums: string[];
-  data: any[];
-}
-
-const tableFake: TableProps = {
-  colums: ['image', 'name', 'acesso'],
-  data: [
-    {
-      image: (
-        <p className={'h-9 w-9 bg-white relative rounded-full border-2 '}></p>
-      ),
-      name: 'Vitor Meneses',
-      acesso: 'admin super'
+const list = {
+  visible: {
+    opacity: 1,
+    transition: {
+      when: 'beforeChildren',
+      staggerChildren: 0.3
     }
-  ]
+  },
+  hidden: {
+    opacity: 0,
+    transition: {
+      when: 'afterChildren'
+    }
+  }
 };
 
-export default function Table() {
+const item1 = {
+  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y: -50 }
+};
+
+const Table = ({ colums, data }: TableProps) => {
   return (
     <div className="w-full">
       <div className="w-full">
         <div className="text-white flex justify-between px-5 w-full font-alt border-b-[1px] border-mainBlue/10">
-          {tableFake.colums.map((item) => {
+          {colums?.map((item) => {
+            if (item == 'image') {
+              return (
+                <div key={item}>
+                  <p className={` w-full text-mainBlue/80 py-2 text-center `}>
+                    Usuário
+                  </p>
+                </div>
+              );
+            }
             return (
-              <div key={item}>
-                <p className=" text-mainBlue/80 py-2  text-center">{item}</p>
+              <div style={{ width: `${100 / colums.length}%` }} key={item}>
+                <p className={` w-full text-mainBlue/80 py-2 text-center `}>
+                  {item}
+                </p>
               </div>
             );
           })}
         </div>
 
-        <div className="flex w-full">
-          {tableFake.data.map((itemData, index) => (
-            <div
+        <Div initial="hidden" animate="visible" variants={list}>
+          {data?.map((itemData) => (
+            <Div
+              variants={item1}
               key={itemData?.id}
               className={
                 'py-2 flex w-full  gap-2 items-center justify-between px-5 cursor-pointer border-b-[1px] transition-colors border-mainBlue/10 hover:bg-mediaBlue/10'
               }
             >
-              {tableFake.colums.map((item, index) => {
+              {colums?.map((item) => {
                 if (item == 'image') {
-                  return <div key={itemData[index]}>{itemData[item]}</div>;
+                  return (
+                    <>
+                      {itemData[item] && (
+                        <Image
+                          src={itemData[item]}
+                          width={36}
+                          height={36}
+                          alt="image user"
+                        />
+                      )}
+                      {!itemData[item] && (
+                        <div
+                          className={
+                            'h-9 w-9 bg-white relative rounded-full border-2 flex justify-center items-center '
+                          }
+                        >
+                          <User className="w-6 h-6 text-mainBlue" />
+                        </div>
+                      )}
+                    </>
+                  );
                 }
                 return (
-                  <div key={itemData[0]}>
-                    <p className={'text-white'}>{itemData[item]}</p>
+                  <div
+                    style={{ width: `${100 / colums.length}%` }}
+                    key={itemData[0]}
+                  >
+                    <p
+                      className={`text-white overflow-hidden whitespace-nowrap text-center w-full text-ellipsis`}
+                    >
+                      {itemData[item]}
+                    </p>
                   </div>
                 );
               })}
-            </div>
+            </Div>
           ))}
-        </div>
+        </Div>
       </div>
     </div>
   );
-}
+};
+
+export default memo(Table);

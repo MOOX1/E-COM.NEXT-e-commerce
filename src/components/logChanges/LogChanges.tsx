@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { Logs } from './types';
 import List from './list/List';
 import Div from '../motion/Div';
+import { Fetch } from '@/services/fetch';
 
 const list = {
   visible: {
@@ -23,9 +24,9 @@ const list = {
 const LogChanges = async () => {
   let logs: Logs[] = [];
   try {
-    const response = await fetch(`http://localhost:3000/api/logs`, {
+    const response = await Fetch(`/api/logs`, {
       next: {
-        revalidate: 0
+        revalidate: 60
       }
     });
     logs = await response.json();

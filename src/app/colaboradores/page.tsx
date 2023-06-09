@@ -4,19 +4,35 @@ import LogChanges from '../../components/logChanges/LogChanges';
 import Table from '@/components/table/Table';
 import Div from '@/components/motion/Div';
 import React, { Suspense } from 'react';
+import { Input } from 'antd';
 import {
   TopForButtom,
   RigthForLeft,
   ButtomForTop
 } from '@/components/motion/animations';
 import Loading from '../loading';
+import { Fetch } from '@/services/fetch';
+import { TableProps } from '@/components/table/types';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
   description: '...'
 };
 
-export default async function Colaboradores() {
+const Colaboradores = async () => {
+  let admins: TableProps = { colums: [], data: [] };
+  try {
+    const response = await Fetch(`/api/all-admins`, {
+      next: {
+        revalidate: 60
+      }
+    });
+
+    admins = await response.json();
+  } catch (error) {
+    console.log(error);
+  }
+
   return (
     <div className="flex gap-3 w-full h-full overflow-hidden">
       <div className="w-2/3 h-full flex flex-col gap-3 overflow-hidden">
@@ -64,8 +80,27 @@ export default async function Colaboradores() {
         transition={RigthForLeft.transition}
         className="w-4/12 h-full bg-strongBlue rounded-lg   shadow-main "
       >
-        <Table />
+        <Suspense
+          fallback={
+            <div className="flex w-full h-full items-center justify-center">
+              <Loading />
+            </div>
+          }
+        >
+          <div className="w-full flex justify-center items-center p-2 border-mainBlue/10 border-b">
+            <input
+              type="text"
+              className="bg-mainBlue/10 w-3/4 text-sm border-mainBlue/50 rounded-3xl border focus-visible:outline-none text-white px-2 py-1"
+            />
+          </div>
+          <Table
+            colums={admins && admins.colums}
+            data={admins && admins?.data}
+          />
+        </Suspense>
       </Div>
     </div>
   );
-}
+};
+
+export default Colaboradores;
