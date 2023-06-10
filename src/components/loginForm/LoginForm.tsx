@@ -5,12 +5,13 @@ import IconGoogle from '../../assets/iconGoogle.svg';
 import { signIn } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { UseFormReturn, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import cookies from 'js-cookie';
 import Load from '../load/Load';
 import { useSearchParams } from 'next/navigation';
+import Input from '../input/Input';
 
 const schema = z.object({
   email: z.string().email('Informe um email válido')
@@ -44,6 +45,7 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: FormDataProps) => {
+    console.log(data);
     setIsLoading(true);
     setError(undefined);
     cookies.remove('error-rate-limit');
@@ -84,10 +86,11 @@ export default function LoginForm() {
             </span>
           )}
           {isLoading && <Load />}
-          <input
-            {...register('email')}
-            className="focus-visible:outline-0  bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs mb-5"
-            aria-label="E-mail"
+          <Input
+            useFormRegister={
+              register('email') as unknown as UseFormReturn['register']
+            }
+            ariaLabel="E-mail"
             placeholder="E-mail"
             type="email"
           />
