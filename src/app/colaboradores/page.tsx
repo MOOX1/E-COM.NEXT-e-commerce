@@ -1,18 +1,17 @@
 import { Metadata } from 'next';
-import Profile from '../../components/profileAccount/Profile';
-import LogChanges from '../../components/logChanges/LogChanges';
-import Table from '@/components/table/Table';
-import Div from '@/components/motion/Div';
 import React, { Suspense } from 'react';
 
+import Profile from '../../components/profileAccount/Profile';
+import LogChanges from '../../components/logChanges/LogChanges';
+import Div from '@/components/motion/Div';
+import Load from '@/components/load/Load';
 import {
   TopForBottom,
   RightForLeft,
   BottomForTop
 } from '@/components/motion/animations';
-import Loading from '../loading';
-import { Fetch } from '@/services/fetch';
-import { TableProps } from '@/components/table/types';
+
+import Collaborators from '@/components/collaborators/Collaborators';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
@@ -20,19 +19,6 @@ export const metadata: Metadata = {
 };
 
 const Colaboradores = async () => {
-  let admins: TableProps = { columns: [], data: [] };
-  try {
-    const response = await Fetch(`/api/all-admins`, {
-      next: {
-        revalidate: 60
-      }
-    });
-
-    admins = await response.json();
-  } catch (error) {
-    console.log(error);
-  }
-
   return (
     <div className="flex gap-3 w-full h-full overflow-hidden">
       <div className="w-2/3 h-full flex flex-col gap-3 overflow-hidden">
@@ -42,22 +28,13 @@ const Colaboradores = async () => {
           transition={TopForBottom.transition}
           className="w-full rounded-lg h-1/2 flex flex-row-reverse gap-3"
         >
-          <Suspense
-            fallback={
-              <div className="w-2/4 h-full relative flex justify-center items-center bg-strongBlue rounded-lg shadow-main">
-                <Loading />
-              </div>
-            }
-          >
-            <LogChanges />
-          </Suspense>
-          <Suspense
-            fallback={
-              <div className="flex w-full h-full items-center justify-center">
-                <Loading />
-              </div>
-            }
-          >
+          <div className="w-2/4 h-full relative bg-strongBlue rounded-lg shadow-main">
+            <Suspense fallback={<Load />}>
+              <LogChanges />
+            </Suspense>
+          </div>
+
+          <Suspense fallback={<Load />}>
             <Profile />
           </Suspense>
         </Div>
@@ -80,23 +57,8 @@ const Colaboradores = async () => {
         transition={RightForLeft.transition}
         className="w-4/12 h-full bg-strongBlue rounded-lg   shadow-main "
       >
-        <Suspense
-          fallback={
-            <div className="flex w-full h-full items-center justify-center">
-              <Loading />
-            </div>
-          }
-        >
-          <div className="w-full flex justify-center items-center p-2 border-mainBlue/10 border-b">
-            <input
-              type="text"
-              className="bg-mainBlue/10 w-3/4 text-sm border-mainBlue/50 rounded-3xl border focus-visible:outline-none text-white px-2 py-1"
-            />
-          </div>
-          <Table
-            columns={admins && admins.columns}
-            data={admins && admins?.data}
-          />
+        <Suspense fallback={<Load />}>
+          <Collaborators />
         </Suspense>
       </Div>
     </div>

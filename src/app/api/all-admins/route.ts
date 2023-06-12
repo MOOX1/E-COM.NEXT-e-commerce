@@ -10,7 +10,13 @@ export async function GET(req: NextRequest): Promise<TableProps | undefined> {
       data: [
         {
           image: null,
-          name: 'Vitor Meneses',
+          name: 'Melissa Morais',
+          acesso: 'admin super',
+          email: 'Melissa@gmail.com'
+        },
+        {
+          image: null,
+          name: 'Pedro Augusto',
           acesso: 'admin super',
           email: 'vitormeneses87@gmail.com'
         },
@@ -22,13 +28,7 @@ export async function GET(req: NextRequest): Promise<TableProps | undefined> {
         },
         {
           image: null,
-          name: 'Vitor Meneses',
-          acesso: 'admin super',
-          email: 'vitormeneses87@gmail.com'
-        },
-        {
-          image: null,
-          name: 'Vitor Meneses',
+          name: 'Gilmara Meneses',
           acesso: 'admin super',
           email: 'vitormeneses87@gmail.com'
         }
