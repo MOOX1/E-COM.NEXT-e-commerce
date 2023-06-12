@@ -1,4 +1,4 @@
 export interface TableProps {
-  colums: string[];
+  columns: string[];
   data: any[];
 }

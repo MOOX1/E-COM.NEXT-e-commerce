@@ -6,7 +6,7 @@ export const runtime = 'edge';
 export async function GET(req: NextRequest): Promise<TableProps | undefined> {
   try {
     const data = {
-      colums: ['image', 'name', 'email', 'acesso'],
+      columns: ['image', 'name', 'email', 'acesso'],
       data: [
         {
           image: null,

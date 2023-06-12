@@ -51,7 +51,7 @@ const LogChanges = async () => {
           return <List key={item.autor.id} {...item} />;
         })}
       </Div>
-      ;
+
       <Link
         href={'#'}
         className=" text-mainBlue/80 absolute flex right-4 top-1 gap-2 hover:bg-mainBlue/10 transition-colors rounded-full p-2 items-center"

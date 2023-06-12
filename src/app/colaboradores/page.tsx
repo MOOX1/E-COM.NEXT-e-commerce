@@ -4,11 +4,11 @@ import LogChanges from '../../components/logChanges/LogChanges';
 import Table from '@/components/table/Table';
 import Div from '@/components/motion/Div';
 import React, { Suspense } from 'react';
-import { Input } from 'antd';
+
 import {
-  TopForButtom,
-  RigthForLeft,
-  ButtomForTop
+  TopForBottom,
+  RightForLeft,
+  BottomForTop
 } from '@/components/motion/animations';
 import Loading from '../loading';
 import { Fetch } from '@/services/fetch';
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
 };
 
 const Colaboradores = async () => {
-  let admins: TableProps = { colums: [], data: [] };
+  let admins: TableProps = { columns: [], data: [] };
   try {
     const response = await Fetch(`/api/all-admins`, {
       next: {
@@ -37,9 +37,9 @@ const Colaboradores = async () => {
     <div className="flex gap-3 w-full h-full overflow-hidden">
       <div className="w-2/3 h-full flex flex-col gap-3 overflow-hidden">
         <Div
-          initial={TopForButtom.initial}
-          animate={TopForButtom.animate}
-          transition={TopForButtom.transition}
+          initial={TopForBottom.initial}
+          animate={TopForBottom.animate}
+          transition={TopForBottom.transition}
           className="w-full rounded-lg h-1/2 flex flex-row-reverse gap-3"
         >
           <Suspense
@@ -62,22 +62,22 @@ const Colaboradores = async () => {
           </Suspense>
         </Div>
         <Div
-          animate={ButtomForTop.animate}
-          initial={ButtomForTop.initial}
-          transition={ButtomForTop.transition}
+          animate={BottomForTop.animate}
+          initial={BottomForTop.initial}
+          transition={BottomForTop.transition}
           className="w-full bg-strongBlue rounded-lg h-1/6  shadow-main"
         ></Div>
         <Div
-          animate={ButtomForTop.animate}
-          initial={ButtomForTop.initial}
-          transition={{ ...ButtomForTop.transition, delay: 0.1 }}
+          animate={BottomForTop.animate}
+          initial={BottomForTop.initial}
+          transition={{ ...BottomForTop.transition, delay: 0.1 }}
           className="w-full bg-strongBlue rounded-lg h-2/5  shadow-main"
         ></Div>
       </div>
       <Div
-        initial={RigthForLeft.initial}
-        animate={RigthForLeft.animate}
-        transition={RigthForLeft.transition}
+        initial={RightForLeft.initial}
+        animate={RightForLeft.animate}
+        transition={RightForLeft.transition}
         className="w-4/12 h-full bg-strongBlue rounded-lg   shadow-main "
       >
         <Suspense
@@ -94,7 +94,7 @@ const Colaboradores = async () => {
             />
           </div>
           <Table
-            colums={admins && admins.colums}
+            columns={admins && admins.columns}
             data={admins && admins?.data}
           />
         </Suspense>

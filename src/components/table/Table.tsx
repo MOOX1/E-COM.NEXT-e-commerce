@@ -26,12 +26,12 @@ const item1 = {
   hidden: { opacity: 0, y: -50 }
 };
 
-const Table = ({ colums, data }: TableProps) => {
+const Table = ({ columns: columns, data }: TableProps) => {
   return (
     <div className="w-full">
       <div className="w-full">
         <div className="text-white flex justify-between px-5 w-full font-alt border-b-[1px] border-mainBlue/10">
-          {colums?.map((item) => {
+          {columns?.map((item) => {
             if (item == 'image') {
               return (
                 <div key={item}>
@@ -42,7 +42,7 @@ const Table = ({ colums, data }: TableProps) => {
               );
             }
             return (
-              <div style={{ width: `${100 / colums.length}%` }} key={item}>
+              <div style={{ width: `${100 / columns.length}%` }} key={item}>
                 <p className={` w-full text-mainBlue/80 py-2 text-center `}>
                   {item}
                 </p>
@@ -60,7 +60,7 @@ const Table = ({ colums, data }: TableProps) => {
                 'py-2 flex w-full  gap-2 items-center justify-between px-5 cursor-pointer border-b-[1px] transition-colors border-mainBlue/10 hover:bg-mediaBlue/10'
               }
             >
-              {colums?.map((item) => {
+              {columns?.map((item) => {
                 if (item == 'image') {
                   return (
                     <>
@@ -86,7 +86,7 @@ const Table = ({ colums, data }: TableProps) => {
                 }
                 return (
                   <div
-                    style={{ width: `${100 / colums.length}%` }}
+                    style={{ width: `${100 / columns.length}%` }}
                     key={itemData[0]}
                   >
                     <p
