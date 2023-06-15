@@ -1,7 +1,5 @@
 import Image from 'next/image';
-import IconGoogle from '../../../assets/IconGoogle.svg';
-import { signIn } from 'next-auth/react';
-import { SetStateAction } from 'react';
+import IconGoogle from '@/assets/IconGoogle.svg';
 
 interface ButtonGoogleProps {
   onClick: () => void;
