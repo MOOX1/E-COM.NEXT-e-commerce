@@ -24,7 +24,6 @@ const list = {
 };
 
 const LogChanges = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
   let logs: Logs[] = [];
   try {
     const response = await Fetch(`/api/logs`, {

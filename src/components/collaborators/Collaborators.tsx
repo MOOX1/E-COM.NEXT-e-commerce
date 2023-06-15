@@ -5,8 +5,6 @@ import ListCollaborators from './ListCollaborators/ListCollaborators';
 import { Fetch } from '@/services/fetch';
 
 export default async function Collaborators() {
-  await new Promise((resolve) => setTimeout(resolve, 5000));
-
   let admins: TableProps = { columns: [], data: [] };
   try {
     const response = await Fetch(`/api/all-admins`, {

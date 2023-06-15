@@ -12,6 +12,7 @@ import {
 } from '@/components/motion/animations';
 
 import Collaborators from '@/components/collaborators/Collaborators';
+import AddCollaborators from '@/components/collaborators/addCollaborators/AddCollaborators';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
@@ -43,7 +44,11 @@ const Colaboradores = async () => {
           initial={BottomForTop.initial}
           transition={BottomForTop.transition}
           className="w-full bg-strongBlue rounded-lg h-1/6  shadow-main"
-        ></Div>
+        >
+          <Suspense fallback={<Load />}>
+            <AddCollaborators />
+          </Suspense>
+        </Div>
         <Div
           animate={BottomForTop.animate}
           initial={BottomForTop.initial}

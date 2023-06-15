@@ -15,7 +15,7 @@ export default function Button({
     <button
       type={type}
       className={
-        'bg-mainBlue text-black rounded transition-colors hover:bg-blue-200 p-1 min-w-[200px] w-min font-sans mb-2 ' +
+        'bg-mainBlue text-black rounded transition-colors hover:bg-blue-200 p-1  w-full font-sans mb-2 ' +
         className
       }
       aria-label={ariaLabel}

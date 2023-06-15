@@ -17,7 +17,7 @@ export default function Load() {
 
   return (
     <div className="flex w-full h-full items-center justify-center">
-      <div ref={containerRef} className="h-auto w-20 -mt-10"></div>;
+      <div ref={containerRef} className="h-auto w-20 -mt-10"></div>
     </div>
   );
 }

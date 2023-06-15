@@ -45,7 +45,6 @@ export default function LoginForm() {
   });
 
   const onSubmit = (data: FormDataProps) => {
-    console.log(data);
     setIsLoading(true);
     setError(undefined);
     cookies.remove('error-rate-limit');
@@ -94,21 +93,25 @@ export default function LoginForm() {
             </span>
           )}
           {isLoading && <Load />}
-          <Input
-            useFormRegister={
-              register('email') as unknown as UseFormReturn['register']
-            }
-            ariaLabel="E-mail"
-            placeholder="E-mail"
-            type="email"
-          />
+          <div className="mb-5 w-full">
+            <Input
+              useFormRegister={
+                register('email') as unknown as UseFormReturn['register']
+              }
+              ariaLabel="E-mail"
+              placeholder="E-mail"
+              type="email"
+            />
+          </div>
           {errors.email && (
             <p className="text-red-500 w-full -mt-4 text-left text-xs py-1 font-sans">
               {errors.email.message}
             </p>
           )}
 
-          <Button label="Login" type="submit" ariaLabel="button-submit" />
+          <div className="w-3/6">
+            <Button label="Login" type="submit" ariaLabel="button-submit" />
+          </div>
 
           <div className="flex flex-col items-center justify-center w-full">
             <div className="h-[1px] w-full border-b-[1px] border-mainBlue mt-6 font-sans"></div>
