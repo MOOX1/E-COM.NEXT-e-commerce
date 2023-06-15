@@ -4,9 +4,6 @@ import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/layout/Layout';
 import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/react';
-import { NextRequest } from 'next/server';
-import { Url } from 'url';
-import { redirect } from 'next/navigation';
 
 const poppins = Poppins({
   subsets: ['latin'],

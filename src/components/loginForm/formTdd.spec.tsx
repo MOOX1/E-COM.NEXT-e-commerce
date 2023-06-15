@@ -31,20 +31,20 @@ describe('<LoginForm />', () => {
   it('should render default correctly', () => {
     render(<LoginForm />);
 
-    const inputeEmail = screen.getByLabelText(/E-mail/i);
-    const buttonSubmite = screen.getByLabelText(/buttom-submit/i);
-    const buttomGoogle = screen.getByLabelText(/buttom-google/i);
+    const inputEmail = screen.getByLabelText(/E-mail/i);
+    const buttonSubmit = screen.getByLabelText(/button-submit/i);
+    const buttonGoogle = screen.getByLabelText(/buttom-google/i);
 
-    expect(inputeEmail).toBeInTheDocument();
-    expect(buttonSubmite).toBeInTheDocument();
-    expect(buttomGoogle).toBeInTheDocument();
+    expect(inputEmail).toBeInTheDocument();
+    expect(buttonSubmit).toBeInTheDocument();
+    expect(buttonGoogle).toBeInTheDocument();
   }),
     it('submit with data not corrected', async () => {
       render(<LoginForm />);
-      const buttonSubmite = screen.getByLabelText(/buttom-submit/i);
+      const buttonSubmit = screen.getByLabelText(/button-submit/i);
 
       act(() => {
-        userEvent.click(buttonSubmite);
+        userEvent.click(buttonSubmit);
       });
 
       await waitFor(() => {
@@ -54,10 +54,10 @@ describe('<LoginForm />', () => {
 
   it('submit with data corrected', async () => {
     render(<LoginForm />);
-    const inputeEmail = screen.getByLabelText(/E-mail/i);
+    const inputEmail = screen.getByLabelText(/E-mail/i);
 
     act(() => {
-      userEvent.type(inputeEmail, 'vitormeneses87@gmail.com');
+      userEvent.type(inputEmail, 'vitormeneses87@gmail.com');
     });
 
     await waitFor(() => {

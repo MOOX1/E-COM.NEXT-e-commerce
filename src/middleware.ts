@@ -63,7 +63,7 @@ export const config = {
     '/api/auth/signin/email',
     '/',
     '/signin',
-    '/api/auth/signin/email',
+    '/api/auth/signin/google',
     '/colaboradores'
   ]
 };

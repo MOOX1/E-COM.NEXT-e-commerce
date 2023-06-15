@@ -15,5 +15,9 @@ export default function Load() {
     });
   }, []);
 
-  return <div ref={containerRef} className="h-auto w-20 -mt-10"></div>;
+  return (
+    <div className="flex w-full h-full items-center justify-center">
+      <div ref={containerRef} className="h-auto w-20 -mt-10"></div>
+    </div>
+  );
 }

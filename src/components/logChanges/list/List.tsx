@@ -1,6 +1,8 @@
 import { Logs } from '../types';
 import Div from '@/components/motion/Div';
 import { memo } from 'react';
+import Image from 'next/image';
+import { User } from 'lucide-react';
 
 const List = (item: Logs) => {
   const colorBorder = {
@@ -20,11 +22,19 @@ const List = (item: Logs) => {
       key={item.autor.id}
       className="py-2 flex  gap-2 items-center justify-between px-5 cursor-pointer border-b-[1px] transition-colors border-mainBlue/10 hover:bg-mediaBlue/10"
     >
-      <div
-        className={
-          'h-9 w-9 bg-white relative rounded-full border-2 ' + colorBorder
-        }
-      ></div>
+      {item.autor.image && (
+        <Image src={item.autor.image} width={36} height={36} alt="image user" />
+      )}
+      {!item.autor.image && (
+        <div
+          className={
+            'h-9 w-9 bg-white relative rounded-full border-2 flex justify-center items-center ' +
+            colorBorder
+          }
+        >
+          <User className="w-6 h-6 text-mainBlue" />
+        </div>
+      )}
       <div className="w-3/5">
         <p className="text-mainBlue/80"> {item.titulo} </p>
         <p className=" whitespace-nowrap overflow-hidden text-sm text-white text-ellipsis">
