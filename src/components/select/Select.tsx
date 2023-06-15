@@ -32,9 +32,9 @@ const CustomSelect = () => {
       >
         <div className="absolute right-0 duration-100">
           {!isOptionsOpen ? (
-            <ChevronDown className="text-white" />
+            <ChevronDown className="text-white w-5 h-auto" />
           ) : (
-            <ChevronUp className="text-white" />
+            <ChevronUp className="text-white w-5 h-auto" />
           )}
         </div>
         <span

@@ -17,7 +17,7 @@ const list = {
   hidden: {
     opacity: 0,
     transition: {
-      when: 'afterChildren'
+      when: 'beforeChildren'
     }
   }
 };

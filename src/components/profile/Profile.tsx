@@ -9,7 +9,7 @@ interface ProfileProps {
 export default function Profile({ colapssed }: ProfileProps) {
   return (
     <div className=" flex justify-center gap-2 items-center pb-5">
-      <div className="h-12 w-12 bg-mediaBlue p-[1px] hover:animate-spin rounded-full flex items-center justify-center">
+      <div className="h-12 w-12 bg-mediaBlue p-[1px] rounded-full flex items-center justify-center">
         <Image src={Icon} alt="logo" />
         {/* <User2 className="h-5 w-5 text-black" /> */}
       </div>

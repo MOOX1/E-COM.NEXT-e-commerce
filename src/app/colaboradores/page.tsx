@@ -13,6 +13,7 @@ import {
 
 import Collaborators from '@/components/collaborators/Collaborators';
 import AddCollaborators from '@/components/collaborators/addCollaborators/AddCollaborators';
+import LevelAccess from '@/components/levelAccess/LevelAccess';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
@@ -54,7 +55,9 @@ const Colaboradores = async () => {
           initial={BottomForTop.initial}
           transition={{ ...BottomForTop.transition, delay: 0.1 }}
           className="w-full bg-strongBlue rounded-lg h-2/5  shadow-main"
-        ></Div>
+        >
+          <LevelAccess />
+        </Div>
       </div>
       <Div
         initial={RightForLeft.initial}
