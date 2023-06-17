@@ -18,8 +18,6 @@ export default async function Collaborators() {
     console.log(error);
   }
 
-  console.log(admins);
-
   return (
     <>
       <Suspense fallback={<Load />}>

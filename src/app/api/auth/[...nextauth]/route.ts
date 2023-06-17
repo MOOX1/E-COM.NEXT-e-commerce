@@ -9,6 +9,7 @@ import Admins from '@/lib/Schemas/adminsSchema';
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
 import { cookies } from 'next/headers';
+import { FindAdmin, updateAdmin } from '@/lib/controllers/AdminsController';
 interface DataOfDatabase {
   _id: string;
   email: string;
@@ -18,8 +19,9 @@ interface DataOfDatabase {
 database.connect();
 const redis = Redis.fromEnv();
 
-const authOption: NextAuthOptions = {
+export const authOption: NextAuthOptions = {
   adapter: UpstashRedisAdapter(redis),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     EmailProvider({
       server: {
@@ -59,7 +61,11 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        const admin = await Admins.findOne({ email: emailUser });
+        const admin = await FindAdmin(emailUser as string);
+
+        console.log(account);
+        console.log(profile);
+        console.log(user);
 
         if (admin !== null) {
           const data: DataOfDatabase = {
@@ -70,6 +76,10 @@ const authOption: NextAuthOptions = {
 
           user.id = data._id;
           user.levelAccess = data.levelAccess;
+
+          if (!admin?.image) {
+            await updateAdmin(user.id, user.name ?? '', user.image ?? '');
+          }
 
           if (account?.provider == 'google') return true;
 

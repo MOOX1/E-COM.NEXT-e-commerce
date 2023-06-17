@@ -26,12 +26,12 @@ const Table = ({ columns, data }: TableProps) => {
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="text-white flex justify-between px-5 w-full font-alt border-b-[1px] border-mainBlue/10">
+        <div className="flex w-full justify-between border-b-[1px] border-mainBlue/10 px-5 font-alt text-white">
           {columns?.map((item) => {
             if (item == 'image') {
               return (
                 <div key={item}>
-                  <p className={` w-full text-mainBlue/80 py-2 text-center `}>
+                  <p className={` w-full py-2 text-center text-mainBlue/80 `}>
                     Usuário
                   </p>
                 </div>
@@ -39,7 +39,7 @@ const Table = ({ columns, data }: TableProps) => {
             }
             return (
               <div style={{ width: `${100 / columns.length}%` }} key={item}>
-                <p className={` w-full text-mainBlue/80 py-2 text-center `}>
+                <p className={` w-full py-2 text-center text-mainBlue/80 `}>
                   {item}
                 </p>
               </div>

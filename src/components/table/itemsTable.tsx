@@ -17,11 +17,12 @@ export default function ItemsTable({ columns, data }: TableProps) {
           key={itemData?.id}
           exit={item1.hidden}
           className={
-            'py-2 flex w-full  gap-2 items-center justify-between px-5 cursor-pointer border-b-[1px] transition-colors border-mainBlue/10 hover:bg-mediaBlue/10'
+            'flex w-full cursor-pointer  items-center justify-between gap-2 border-b-[1px] border-mainBlue/10 px-5 py-2 transition-colors hover:bg-mediaBlue/10'
           }
         >
           {columns?.map((item) => {
             if (item == 'image') {
+              console.log(itemData[item]);
               return (
                 <>
                   {itemData[item] && (
@@ -35,10 +36,10 @@ export default function ItemsTable({ columns, data }: TableProps) {
                   {!itemData[item] && (
                     <div
                       className={
-                        'h-9 w-9 bg-white relative rounded-full border-2 flex justify-center items-center '
+                        'relative flex h-9 w-9 items-center justify-center rounded-full border-2 bg-white '
                       }
                     >
-                      <User className="w-6 h-6 text-mainBlue" />
+                      <User className="h-6 w-6 text-mainBlue" />
                     </div>
                   )}
                 </>
@@ -50,7 +51,7 @@ export default function ItemsTable({ columns, data }: TableProps) {
                 key={itemData[0]}
               >
                 <p
-                  className={`text-white overflow-hidden whitespace-nowrap text-center w-full text-ellipsis`}
+                  className={`w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-white`}
                 >
                   {itemData[item]}
                 </p>

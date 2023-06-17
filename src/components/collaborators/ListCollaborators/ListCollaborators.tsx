@@ -27,7 +27,7 @@ export default function ListCollaborators({ admins, onChange }: Collaborators) {
 
   return (
     <>
-      <div className="w-full px-14 flex justify-center items-center p-2 border-mainBlue/10 border-b">
+      <div className="flex w-full items-center justify-center border-b border-mainBlue/10 p-2 px-14">
         <Input
           type="text"
           styleOffButton="secund"

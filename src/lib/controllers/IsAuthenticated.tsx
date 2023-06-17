@@ -1,23 +1,28 @@
-// import { cookies, headers } from 'next/headers';
-// import { getServerSession as originalGetServerSession } from 'next-auth';
-// import { authOption } from '@/app/api/auth/[...nextauth]/route';
+import { headers } from 'next/headers';
+import { Session } from 'next-auth';
 
-// export const getServerSession = async () => {
-//   const req = {
-//     headers: Object.fromEntries(headers() as Headers),
-//     cookies: Object.fromEntries(
-//       cookies()
-//         .getAll()
-//         .map((c) => [c.name, c.value])
-//     )
-//   };
-//   const res = { getHeader() {}, setCookie() {}, setHeader() {} };
-//   const authOptions = authOption;
+interface GetServerSession {
+  authenticated: boolean;
+  access?: string;
+}
 
-//   const session = await originalGetServerSession(
-//     req as any,
-//     res as any,
-//     authOptions
-//   );
-//   return session;
-// };
+export const getServerSession = async (): Promise<GetServerSession> => {
+  const response = await fetch('http://localhost:3000/api/auth/session', {
+    headers: {
+      cookie: headers().get('cookies') ?? ''
+    }
+  });
+
+  const session: Session = await response.json();
+
+  if (!session) {
+    return {
+      authenticated: false
+    };
+  }
+
+  return {
+    authenticated: true,
+    access: session.user.levelAccess
+  };
+};
