@@ -1,40 +1,30 @@
 import { TableProps } from '@/components/table/types';
-import { NextResponse, NextRequest } from 'next/server';
+import { FindAllAdmins } from '@/lib/controllers/AdminsController';
+import { getServerSession } from '@/lib/controllers/IsAuthenticated';
+import { NextResponse } from 'next/server';
 
-export const runtime = 'edge';
-
-export async function GET(req: NextRequest): Promise<TableProps | undefined> {
+export async function GET() {
   try {
-    const data = {
-      columns: ['image', 'name', 'email', 'acesso'],
-      data: [
-        {
-          image: null,
-          name: 'Melissa Morais',
-          acesso: 'admin super',
-          email: 'Melissa@gmail.com'
-        },
-        {
-          image: null,
-          name: 'Pedro Augusto',
-          acesso: 'admin super',
-          email: 'vitormeneses87@gmail.com'
-        },
-        {
-          image: null,
-          name: 'Vitor Meneses',
-          acesso: 'admin super',
-          email: 'vitormeneses87@gmail.com'
-        },
-        {
-          image: null,
-          name: 'Gilmara Meneses',
-          acesso: 'admin super',
-          email: 'vitormeneses87@gmail.com'
-        }
-      ]
-    };
-    return NextResponse.json(data) as unknown as TableProps;
+    const IsAuthenticate = await getServerSession();
+
+    if (!IsAuthenticate.authenticated) {
+      return NextResponse.json({ message: 'acesse denied', status: 401 });
+    }
+
+    if (IsAuthenticate.access !== 'admin super') {
+      if (IsAuthenticate.access !== 'admin simple') {
+        return NextResponse.json({ message: 'acesse denied', status: 401 });
+      }
+    }
+
+    const admins = await FindAllAdmins();
+
+    console.log(admins);
+
+    return NextResponse.json({
+      columns: ['image', 'name', 'email', 'levelAccess'],
+      data: admins
+    });
   } catch (error) {
     console.log(error);
   }
