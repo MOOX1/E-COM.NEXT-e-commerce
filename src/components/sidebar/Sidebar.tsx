@@ -16,25 +16,25 @@ interface SidebarProps {
 const menuItems: MenuItemProps[] = [
   {
     label: 'Dashboard',
-    Icon: <LayoutPanelLeft className="text-white w-6 h-auto" />,
+    Icon: <LayoutPanelLeft className="h-auto w-6 text-white" />,
     pathname: '/',
     isActive: true
   },
   {
     label: 'Overview',
-    Icon: <BarChart4 className="text-white w-6 h-auto" />,
+    Icon: <BarChart4 className="h-auto w-6 text-white" />,
     pathname: '/overview',
     isActive: false
   },
   {
     label: 'Produtos',
-    Icon: <ShoppingBag className="text-white w-6 h-auto" />,
+    Icon: <ShoppingBag className="h-auto w-6 text-white" />,
     pathname: '/produtos',
     isActive: false
   },
   {
     label: 'Colaboradores',
-    Icon: <Users className="text-white w-6 h-auto" />,
+    Icon: <Users className="h-auto w-6 text-white" />,
     pathname: '/colaboradores',
     isActive: false
   }
@@ -42,7 +42,7 @@ const menuItems: MenuItemProps[] = [
 
 function Sidebar({ buttonOpen, colapssed }: SidebarProps) {
   return (
-    <nav className="bg-strongBlue w-full h-screen py-14 overflow-hidden">
+    <nav className="h-screen w-full overflow-hidden bg-strongBlue py-14">
       <Profile colapssed={colapssed} />
       <MenuItem colapssed={colapssed} menuItems={menuItems} />
       <div className="flex justify-center">{buttonOpen}</div>
@@ -50,7 +50,7 @@ function Sidebar({ buttonOpen, colapssed }: SidebarProps) {
       <div
         className={
           (colapssed && 'bottom-10') +
-          ' absolute bottom-0 flex duration-1000 flex-col items-center justify-center w-full '
+          ' absolute bottom-0 flex w-full flex-col items-center justify-center duration-1000 '
         }
       >
         <ButtonSignOut />

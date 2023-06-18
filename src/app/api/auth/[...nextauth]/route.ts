@@ -4,7 +4,6 @@ import type { NextAuthOptions } from 'next-auth';
 import EmailProvider from 'next-auth/providers/email';
 
 import database from '@/lib/database/mongodb';
-import Admins from '@/lib/Schemas/adminsSchema';
 
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
@@ -19,7 +18,7 @@ interface DataOfDatabase {
 database.connect();
 const redis = Redis.fromEnv();
 
-export const authOption: NextAuthOptions = {
+const authOption: NextAuthOptions = {
   adapter: UpstashRedisAdapter(redis),
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -62,10 +61,6 @@ export const authOption: NextAuthOptions = {
             : profile?.email;
 
         const admin = await FindAdmin(emailUser as string);
-
-        console.log(account);
-        console.log(profile);
-        console.log(user);
 
         if (admin !== null) {
           const data: DataOfDatabase = {

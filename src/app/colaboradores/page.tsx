@@ -22,15 +22,15 @@ export const metadata: Metadata = {
 
 const Colaboradores = async () => {
   return (
-    <div className="flex gap-3 w-full h-full overflow-hidden">
-      <div className="w-2/3 h-full flex flex-col gap-3 overflow-hidden">
+    <div className="flex h-full w-full gap-3 overflow-hidden">
+      <div className="flex h-full w-2/3 flex-col gap-3 overflow-hidden">
         <Div
           initial={TopForBottom.initial}
           animate={TopForBottom.animate}
           transition={TopForBottom.transition}
-          className="w-full rounded-lg h-1/2 flex flex-row-reverse gap-3"
+          className="flex h-1/2 w-full flex-row-reverse gap-3 rounded-lg"
         >
-          <div className="w-2/4 h-full relative bg-strongBlue rounded-lg shadow-main">
+          <div className="relative h-full w-2/4 rounded-lg bg-strongBlue shadow-main">
             <Suspense fallback={<Load />}>
               <LogChanges />
             </Suspense>
@@ -44,7 +44,7 @@ const Colaboradores = async () => {
           animate={BottomForTop.animate}
           initial={BottomForTop.initial}
           transition={BottomForTop.transition}
-          className="w-full bg-strongBlue rounded-lg h-1/6  shadow-main"
+          className="h-1/6 w-full rounded-lg bg-strongBlue  shadow-main"
         >
           <Suspense fallback={<Load />}>
             <AddCollaborators />
@@ -54,7 +54,7 @@ const Colaboradores = async () => {
           animate={BottomForTop.animate}
           initial={BottomForTop.initial}
           transition={{ ...BottomForTop.transition, delay: 0.1 }}
-          className="w-full bg-strongBlue rounded-lg h-2/5  shadow-main"
+          className="h-2/5 w-full rounded-lg bg-strongBlue  shadow-main"
         >
           <LevelAccess />
         </Div>
@@ -63,7 +63,7 @@ const Colaboradores = async () => {
         initial={RightForLeft.initial}
         animate={RightForLeft.animate}
         transition={RightForLeft.transition}
-        className="w-4/12 h-full bg-strongBlue rounded-lg   shadow-main "
+        className="h-full w-4/12 rounded-lg bg-strongBlue   shadow-main "
       >
         <Suspense fallback={<Load />}>
           <Collaborators />

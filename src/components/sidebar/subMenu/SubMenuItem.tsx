@@ -10,22 +10,22 @@ export default function SubmenuItem({ SubMenuItems }: SubMenuProps) {
   return (
     <div
       className={
-        'overflow-hidden first:mt-1 hover:visible hover:!h-auto submenu h-0 peer-hover:duration-1000 invisible peer-hover:h-auto peer-hover:visible'
+        'submenu invisible h-0 overflow-hidden first:mt-1 hover:visible hover:!h-auto peer-hover:visible peer-hover:h-auto peer-hover:duration-1000'
       }
     >
       {SubMenuItems?.map((item) => (
-        <div key={item.label} className="w-full z-10 overflow-hidden">
+        <div key={item.label} className="z-10 w-full overflow-hidden">
           <Link
             key={item.label}
             prefetch={false}
             className={
-              ' peer cursor-pointer transition-colors flex py-3 w-full gap-3 z-10 pl-6 ml-[5rem] border-l border-mainBlue/50'
+              ' peer z-10 ml-[5rem] flex w-full cursor-pointer gap-3 border-l border-mainBlue/50 py-3 pl-6 transition-colors'
             }
             href={item.pathname}
           >
             <p
               className={
-                'text-base font-normal text-mainBlue font-alt flex items-center'
+                'flex items-center font-alt text-base font-normal text-mainBlue'
               }
             >
               {item.label}

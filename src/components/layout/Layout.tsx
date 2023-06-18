@@ -13,7 +13,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <LayoutAntd>
       <Sider
         width={280}
-        className="sticky left-0 h-screen top-0 bottom-0 overflow-hidden duration-500"
+        className="sticky bottom-0 left-0 top-0 h-screen overflow-hidden duration-500"
         trigger={null}
         collapsed={collapsed}
       >
@@ -24,19 +24,19 @@ function Layout({ children }: { children: React.ReactNode }) {
               type="text"
               icon={
                 collapsed ? (
-                  <ChevronRight className="text-white w-6 h-auto" />
+                  <ChevronRight className="h-auto w-6 text-white" />
                 ) : (
-                  <ChevronLeft className="text-white w-6 h-auto" />
+                  <ChevronLeft className="h-auto w-6 text-white" />
                 )
               }
               onClick={() => setCollapsed(!collapsed)}
-              className="hover:bg-mediaBlue/10 h-16 w-16 text-base"
+              className="h-16 w-16 text-base hover:bg-mediaBlue/10"
             />
           }
         />
       </Sider>
       <LayoutAntd>
-        <Content className=" bg-bodyColor text-black font-sans p-5 h-screen overflow-auto">
+        <Content className=" h-screen overflow-auto bg-bodyColor p-5 font-sans text-black">
           {children}
         </Content>
       </LayoutAntd>

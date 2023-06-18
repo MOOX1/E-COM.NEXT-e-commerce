@@ -12,7 +12,7 @@ interface Collaborators {
   onChange?: string;
 }
 
-export default function ListCollaborators({ admins, onChange }: Collaborators) {
+export default function ListCollaborators({ admins }: Collaborators) {
   const [filteredAdmins, setFilteredAdmins] = useState(admins);
 
   const handleFilter = (event: string) => {

@@ -22,7 +22,6 @@ export default function ItemsTable({ columns, data }: TableProps) {
         >
           {columns?.map((item) => {
             if (item == 'image') {
-              console.log(itemData[item]);
               return (
                 <>
                   {itemData[item] && (
@@ -30,6 +29,7 @@ export default function ItemsTable({ columns, data }: TableProps) {
                       src={itemData[item]}
                       width={36}
                       height={36}
+                      className="rounded-full"
                       alt="image user"
                     />
                   )}

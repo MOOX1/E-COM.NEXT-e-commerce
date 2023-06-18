@@ -16,9 +16,9 @@ export default function ButtonSignOut() {
   return (
     <div
       onClick={handleSigninAuth}
-      className="cursor-pointer hover:bg-mediaBlue/10 p-2 rounded-full transition-colors"
+      className="cursor-pointer rounded-full p-2 transition-colors hover:bg-mediaBlue/10"
     >
-      <LogOut className="text-mainBlue w-6 h-auto" />
+      <LogOut className="h-auto w-6 text-mainBlue" />
     </div>
   );
 }

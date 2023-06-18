@@ -16,8 +16,8 @@ export default function Load() {
   }, []);
 
   return (
-    <div className="flex w-full h-full items-center justify-center">
-      <div ref={containerRef} className="h-auto w-20 -mt-10"></div>
+    <div className="flex h-full w-full items-center justify-center">
+      <div ref={containerRef} className="-mt-10 h-auto w-20"></div>
     </div>
   );
 }

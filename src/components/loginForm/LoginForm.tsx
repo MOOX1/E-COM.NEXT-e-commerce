@@ -75,20 +75,20 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="relative group -ml-[300px]">
-      <div className=" absolute w-[450px] transition-colors h-[500px] rounded-3xl group-focus-within:bg-mainBlue group-hover:bg-mainBlue left-[50%] top-[50%] -ml-[225px] -mt-[250px]  blur-sm "></div>
-      <div className="bg-strongBlue items-center justify-center relative w-[450px] h-[500px] duration-100 z-10  rounded-3xl flex flex-col  p-14">
+    <div className="group relative -ml-[300px]">
+      <div className=" absolute left-[50%] top-[50%] -ml-[225px] -mt-[250px] h-[500px] w-[450px] rounded-3xl blur-sm transition-colors group-focus-within:bg-mainBlue  group-hover:bg-mainBlue "></div>
+      <div className="relative z-10 flex h-[500px] w-[450px] flex-col items-center justify-center  rounded-3xl bg-strongBlue p-14  duration-100">
         <div className="mb-11">
-          <p className="font-alt text-mainBlue w-full text-center text-3xl">
+          <p className="w-full text-center font-alt text-3xl text-mainBlue">
             E-COM.NEXT ADMIN
           </p>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="w-full flex flex-col items-center justify-center"
+          className="flex w-full flex-col items-center justify-center"
         >
           {error && (
-            <span className="text-red-600 flex text-center px-2 font-sans text-sm flex-col -mt-6 pb-6 items-center justify-center">
+            <span className="-mt-6 flex flex-col items-center justify-center px-2 pb-6 text-center font-sans text-sm text-red-600">
               {error == 'AccessDenied' ? 'Seu acesso foi negado' : error}
             </span>
           )}
@@ -104,7 +104,7 @@ export default function LoginForm() {
             />
           </div>
           {errors.email && (
-            <p className="text-red-500 w-full -mt-4 text-left text-xs py-1 font-sans">
+            <p className="-mt-4 w-full py-1 text-left font-sans text-xs text-red-500">
               {errors.email.message}
             </p>
           )}
@@ -113,9 +113,9 @@ export default function LoginForm() {
             <Button label="Login" type="submit" ariaLabel="button-submit" />
           </div>
 
-          <div className="flex flex-col items-center justify-center w-full">
-            <div className="h-[1px] w-full border-b-[1px] border-mainBlue mt-6 font-sans"></div>
-            <p className="text-center w-min text-mainBlue font-sans px-4 -mt-[14px] bg-strongBlue">
+          <div className="flex w-full flex-col items-center justify-center">
+            <div className="mt-6 h-[1px] w-full border-b-[1px] border-mainBlue font-sans"></div>
+            <p className="-mt-[14px] w-min bg-strongBlue px-4 text-center font-sans text-mainBlue">
               ou
             </p>
           </div>

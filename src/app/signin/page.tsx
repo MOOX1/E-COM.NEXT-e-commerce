@@ -10,13 +10,13 @@ export const metadata: Metadata = {
 
 export default async function Signin() {
   return (
-    <div className="h-screen w-screen flex">
-      <div className="bg-[url(../assets/backgroundLogin.svg)] m-0 bg-center h-screen  w-[80%] bg-cover">
+    <div className="flex h-screen w-screen">
+      <div className="m-0 h-screen w-[80%] bg-[url(../assets/backgroundLogin.svg)]  bg-cover bg-center">
         <div className="absolute bottom-5">
           <Image src={Logo} alt="logo" />
         </div>
       </div>
-      <div className="bg-bodyColor w-[20%] m-0 flex items-center ">
+      <div className="m-0 flex w-[20%] items-center bg-bodyColor ">
         <LoginForm />
       </div>
     </div>

@@ -20,7 +20,7 @@ const List = (item: Logs) => {
     <Div
       variants={item1}
       key={item.autor.id}
-      className="py-2 flex  gap-2 items-center justify-between px-5 cursor-pointer border-b-[1px] transition-colors border-mainBlue/10 hover:bg-mediaBlue/10"
+      className="flex cursor-pointer  items-center justify-between gap-2 border-b-[1px] border-mainBlue/10 px-5 py-2 transition-colors hover:bg-mediaBlue/10"
     >
       {item.autor.image && (
         <Image src={item.autor.image} width={36} height={36} alt="image user" />
@@ -28,20 +28,20 @@ const List = (item: Logs) => {
       {!item.autor.image && (
         <div
           className={
-            'h-9 w-9 bg-white relative rounded-full border-2 flex justify-center items-center ' +
+            'relative flex h-9 w-9 items-center justify-center rounded-full border-2 bg-white ' +
             colorBorder
           }
         >
-          <User className="w-6 h-6 text-mainBlue" />
+          <User className="h-6 w-6 text-mainBlue" />
         </div>
       )}
       <div className="w-3/5">
         <p className="text-mainBlue/80"> {item.titulo} </p>
-        <p className=" whitespace-nowrap overflow-hidden text-sm text-white text-ellipsis">
+        <p className=" overflow-hidden text-ellipsis whitespace-nowrap text-sm text-white">
           {item.description}
         </p>
       </div>
-      <p className="text-white text-right text-xs">
+      <p className="text-right text-xs text-white">
         {' '}
         {new Date(item.date).toLocaleDateString(undefined, {
           day: '2-digit',

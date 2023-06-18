@@ -1,9 +1,18 @@
 'use client';
 
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { UseControllerProps, useController } from 'react-hook-form';
 
-const CustomSelect = () => {
+type FormValues = {
+  Nome: string;
+};
+interface CustomSelectProps {
+  controlForm: UseControllerProps<FormValues>;
+  error?: string;
+}
+
+const CustomSelect = ({ controlForm, error }: CustomSelectProps) => {
   const options = [
     { value: 'Admin Super', label: 'Admin Super' },
     { value: 'Viewer', label: 'Viewer' },
@@ -12,6 +21,8 @@ const CustomSelect = () => {
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+
+  const { field } = useController(controlForm);
 
   const handleOptionClick = (optionValue: string) => {
     setSelectedOption(optionValue);
@@ -22,25 +33,29 @@ const CustomSelect = () => {
     setIsOptionsOpen(!isOptionsOpen);
   };
 
+  useEffect(() => {
+    field.onChange(selectedOption);
+  }, [field, selectedOption]);
+
   return (
     <div className="w-full">
       <div
         className={
-          'focus-visible:outline-0  bg-transparent border-b-[1px] border-mainBlue w-full placeholder:text-mainBlue py-1 placeholder:font-alt  placeholder:opacity-50 placeholder:text-xs text-white font-sans font-normal text-xs relative cursor-pointer '
+          'relative  w-full cursor-pointer border-b-[1px] border-mainBlue bg-transparent py-1 font-sans  text-xs font-normal text-white placeholder:font-alt placeholder:text-xs placeholder:text-mainBlue placeholder:opacity-50 focus-visible:outline-0 '
         }
         onClick={toggleOptions}
       >
         <div className="absolute right-0 duration-100">
           {!isOptionsOpen ? (
-            <ChevronDown className="text-white w-5 h-auto" />
+            <ChevronDown className="h-auto w-5 text-white" />
           ) : (
-            <ChevronUp className="text-white w-5 h-auto" />
+            <ChevronUp className="h-auto w-5 text-white" />
           )}
         </div>
         <span
           className={
-            'text-mainBlue opacity-50 font-alt text-sm w-full max-w-min whitespace-nowrap overflow-hidden text-ellipsis block pl-1' +
-            (selectedOption && ' !opacity-100 !text-white')
+            'block w-full max-w-min overflow-hidden text-ellipsis whitespace-nowrap pl-1 font-alt text-sm text-mainBlue opacity-50' +
+            (selectedOption && ' !text-white !opacity-100')
           }
         >
           {selectedOption ? selectedOption : 'Nivel de acesso'}
@@ -49,14 +64,14 @@ const CustomSelect = () => {
           className={
             !isOptionsOpen
               ? 'hidden'
-              : 'absolute  bg-strongBlue top-full border border-mainBlue/20 h-auto w-full rounded-b'
+              : 'absolute  top-full h-auto w-full rounded-b border border-mainBlue/20 bg-strongBlue'
           }
         >
           {options.map((option) => (
             <li
               key={option.value}
               className={
-                'px-5 whitespace-nowrap py-2 cursor-pointer hover:bg-mainBlue/10'
+                'cursor-pointer whitespace-nowrap px-5 py-2 hover:bg-mainBlue/10'
               }
               onClick={() => handleOptionClick(option.value)}
             >
@@ -65,6 +80,11 @@ const CustomSelect = () => {
           ))}
         </ul>
       </div>
+      {error && (
+        <p className="w-full py-1 text-left font-sans text-xs text-red-500">
+          {error}
+        </p>
+      )}
     </div>
   );
 };

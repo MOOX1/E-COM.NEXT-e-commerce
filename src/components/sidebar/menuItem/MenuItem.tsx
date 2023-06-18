@@ -30,17 +30,17 @@ function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
   data();
 
   return (
-    <div className="w-full flex flex-col items-center gap-2 relative  ">
+    <div className="relative flex w-full flex-col items-center gap-2  ">
       <div
         style={{ top: `${positionSelected}` }}
         className={
           (colapssed && ' ml-4') +
-          ` h-12 w-full opacity-70 duration-500 absolute ml-20 bg-gradient-to-r from-mainBlue to-[rgba(217, 217, 217, 0) 79.7%)] rounded-l-lg `
+          ` to-[rgba(217, 217, 217, 0) 79.7%)] absolute ml-20 h-12 w-full rounded-l-lg bg-gradient-to-r from-mainBlue opacity-70 duration-500 `
         }
       ></div>
       {menuItems.map((item) => {
         return (
-          <div key={item.label} className="w-full z-10">
+          <div key={item.label} className="z-10 w-full">
             <Tooltip
               overlayClassName={' ' + (!colapssed && 'hidden')}
               title={item.label}
@@ -50,8 +50,8 @@ function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
               <Link
                 prefetch={false}
                 className={
-                  (colapssed && ' !pl-0 justify-center') +
-                  ' peer cursor-pointer transition-colors duration-200 flex py-3 w-full gap-3 z-10 pl-16 ' +
+                  (colapssed && ' justify-center !pl-0') +
+                  ' peer z-10 flex w-full cursor-pointer gap-3 py-3 pl-16 transition-colors duration-200 ' +
                   (!item.isActive && 'hover:bg-mediaBlue/10')
                 }
                 href={item.pathname}
@@ -60,8 +60,8 @@ function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
 
                 <p
                   className={
-                    (colapssed ? ' !duration-100 opacity-0 absolute w-0' : '') +
-                    ' text-base font-normal text-mainBlue font-alt flex items-center ' +
+                    (colapssed ? ' absolute w-0 opacity-0 !duration-100' : '') +
+                    ' flex items-center font-alt text-base font-normal text-mainBlue ' +
                     (item.isActive ? ' !font-semibold ' : '')
                   }
                 >
