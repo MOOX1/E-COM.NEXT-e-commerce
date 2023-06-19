@@ -10,7 +10,8 @@ export default async function Collaborators() {
   try {
     const response = await Fetch(`/api/all-admins`, {
       next: {
-        revalidate: 10
+        revalidate: 60,
+        tags: ['all-admins']
       },
       headers: {
         cookies: Headers().get('cookie') ?? ''

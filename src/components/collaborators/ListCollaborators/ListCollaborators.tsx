@@ -17,7 +17,7 @@ export default function ListCollaborators({ admins }: Collaborators) {
 
   const handleFilter = (event: string) => {
     const filteredData = admins.data.filter((admin) => {
-      return admin.name.toLowerCase().includes(event.toLowerCase());
+      return admin.email.toLowerCase().includes(event.toLowerCase());
     });
     setFilteredAdmins({
       ...admins,

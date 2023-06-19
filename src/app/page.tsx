@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default async function Home() {
   return (
-    <div className=" flex flex-col gap-5 bg-conetnt">
+    <div className=" bg-conetnt flex flex-col gap-5">
       <h1>home</h1>
       <ButtonSignOut />
       <Link href={'/teste'}>teste</Link>

@@ -1,4 +1,4 @@
-import { cookies, headers } from 'next/headers';
+import { headers } from 'next/headers';
 import { Session } from 'next-auth';
 
 interface GetServerSessionResponse {
@@ -23,6 +23,6 @@ export const getServerSession = async (): Promise<GetServerSessionResponse> => {
 
   return {
     authenticated: true,
-    access: session.user.levelAccess
+    access: session.user.levelAccess.toLowerCase()
   };
 };

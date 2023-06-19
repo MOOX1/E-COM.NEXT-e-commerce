@@ -1,5 +1,8 @@
+import { z } from 'zod';
 import Admins from '../Schemas/adminsSchema';
 import database from '../database/mongodb';
+
+database.connect();
 
 export const FindAdmin = async (email: string) => {
   await database.connect();
@@ -8,18 +11,40 @@ export const FindAdmin = async (email: string) => {
 };
 
 export const FindAllAdmins = async () => {
-  await database.connect();
   const admins = await Admins.find({}).lean();
 
   return admins;
 };
 
+export const CreateAdmin = async (res: {
+  email: string;
+  levelAccess: string;
+}) => {
+  const bodySchema = z.object({
+    email: z.string().email('Email inválido'),
+    levelAccess: z.string()
+  });
+
+  const { email, levelAccess } = bodySchema.parse(res);
+
+  const verifiedEmail = await Admins.findOne({ email: email });
+
+  if (verifiedEmail)
+    return { status: 200, message: 'Esse email já foi cadastrado' };
+
+  const newAdmin = await Admins.create({
+    email: email,
+    levelAccess: levelAccess,
+    image: '',
+    name: '--'
+  });
+
+  const admin = await newAdmin.save();
+
+  return admin;
+};
+
 export const updateAdmin = async (id: string, name: string, image: string) => {
-  await database.connect();
-
-  console.log(id);
-  console.log(name);
-
   const newAdmin = await Admins.findByIdAndUpdate(
     { _id: id },
     {
@@ -30,8 +55,6 @@ export const updateAdmin = async (id: string, name: string, image: string) => {
   );
 
   newAdmin.save();
-
-  console.log(newAdmin);
 
   return newAdmin;
 };

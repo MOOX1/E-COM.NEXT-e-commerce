@@ -1,3 +1,18 @@
 {
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "cSpell.words": [
+    "cadastrado",
+    "CADASTRAR",
+    "Colaboradores",
+    "hookform",
+    "Informe",
+    "inválido",
+    "lucide",
+    "NEXTAUTH",
+    "Obrigatorio",
+    "SALVAR",
+    "toastify",
+    "Upstash",
+    "válido"
+  ]
 }

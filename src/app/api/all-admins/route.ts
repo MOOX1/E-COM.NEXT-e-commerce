@@ -2,6 +2,8 @@ import { FindAllAdmins } from '@/lib/controllers/AdminsController';
 import { getServerSession } from '@/lib/controllers/IsAuthenticated';
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const IsAuthenticate = await getServerSession();

@@ -99,6 +99,7 @@ const authOption: NextAuthOptions = {
       if (user?.levelAccess) {
         token.levelAccess = user.levelAccess;
       }
+
       return token;
     }
   }

@@ -14,9 +14,9 @@ interface CustomSelectProps {
 
 const CustomSelect = ({ controlForm, error }: CustomSelectProps) => {
   const options = [
-    { value: 'Admin Super', label: 'Admin Super' },
-    { value: 'Viewer', label: 'Viewer' },
-    { value: 'Admin Simple', label: 'Admin Simple' }
+    { value: 'admin super', label: 'Admin Super' },
+    { value: 'admin viewer', label: 'Admin Viewer' },
+    { value: 'admin simple', label: 'Admin Simple' }
   ];
 
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
