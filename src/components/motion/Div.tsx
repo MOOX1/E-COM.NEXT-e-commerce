@@ -7,6 +7,7 @@ import React from 'react';
 interface DivProps extends AnimationProps {
   className: string;
   children: React.ReactNode;
+  handleClick?: () => void;
 }
 
 export default function Div({
@@ -16,11 +17,13 @@ export default function Div({
   exit,
   initial,
   transition,
-  variants
+  variants,
+  handleClick
 }: Partial<DivProps>) {
   return (
     <AnimatePresence>
       <motion.div
+        onClick={handleClick}
         animate={animate}
         exit={exit}
         initial={initial}

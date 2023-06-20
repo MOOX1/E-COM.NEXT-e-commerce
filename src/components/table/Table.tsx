@@ -23,6 +23,11 @@ const list = {
 };
 
 const Table = ({ columns, data }: TableProps) => {
+  const handleClick = (item: TableProps['columns']) => {
+    console.log('enter');
+    console.log(item);
+  };
+
   return (
     <div className="w-full">
       <div className="w-full">
@@ -48,7 +53,7 @@ const Table = ({ columns, data }: TableProps) => {
         </div>
 
         <Div initial="hidden" animate="visible" variants={list}>
-          <ItemsTable columns={columns} data={data} />
+          <ItemsTable onClickItem={handleClick} columns={columns} data={data} />
         </Div>
       </div>
     </div>
