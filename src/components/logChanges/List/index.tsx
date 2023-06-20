@@ -1,5 +1,5 @@
 import { Logs } from '../types';
-import Div from '@/components/motion/Div';
+import Div from '@/components/Div';
 import { memo } from 'react';
 import Image from 'next/image';
 import { User } from 'lucide-react';

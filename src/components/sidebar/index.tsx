@@ -2,10 +2,10 @@ import { ReactNode } from 'react';
 import { LayoutPanelLeft, BarChart4, ShoppingBag, Users } from 'lucide-react';
 import Image from 'next/image';
 import logoInline from '../../assets/logoInline.svg';
-import ButtonSignOut from '../buttonSignOut/buttonSignOut';
-import Profile from '../profile/Profile';
+import ButtonSignOut from '../ButtonSignOut';
+import Profile from '../Profile';
 import { MenuItemProps } from './types';
-import MenuItem from './menuItem/MenuItem';
+import MenuItem from './MenuItem';
 import { memo } from 'react';
 
 interface SidebarProps {

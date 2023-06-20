@@ -1,4 +1,4 @@
-import ButtonSignOut from '@/components/buttonSignOut/buttonSignOut';
+import ButtonSignOut from '@/components/ButtonSignOut';
 import Link from 'next/link';
 import React from 'react';
 import { Metadata } from 'next';

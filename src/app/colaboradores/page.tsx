@@ -1,19 +1,19 @@
 import { Metadata } from 'next';
 import React, { Suspense } from 'react';
 
-import Profile from '../../components/profileAccount/Profile';
-import LogChanges from '../../components/logChanges/LogChanges';
-import Div from '@/components/motion/Div';
-import Load from '@/components/load/Load';
+import Profile from '../../components/ProfileAccount';
+import LogChanges from '../../components/logChanges';
+import Div from '@/components/Div';
+import Load from '@/components/Load';
 import {
   TopForBottom,
   RightForLeft,
   BottomForTop
-} from '@/components/motion/animations';
+} from '@/components/Div/animations';
 
-import Collaborators from '@/components/collaborators/Collaborators';
-import AddCollaborators from '@/components/collaborators/addCollaborators/AddCollaborators';
-import LevelAccess from '@/components/levelAccess/LevelAccess';
+import Collaborators from '@/components/collaborators';
+import AddCollaborators from '@/components/collaborators/AddCollaborators';
+import LevelAccess from '@/components/collaborators/LevelAccess';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',

@@ -1,6 +1,6 @@
 'use client';
 
-import ButtonGoogle from './buttonGoogle/ButtonGoogle';
+import ButtonGoogle from './ButtonGoogle';
 import { signIn } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
@@ -8,10 +8,10 @@ import { UseFormReturn, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import cookies from 'js-cookie';
-import Load from '../load/Load';
+import Load from '../Load';
 import { useSearchParams } from 'next/navigation';
-import Input from '../input/Input';
-import Button from '../button/Button';
+import Input from '../Input';
+import Button from '../Button';
 
 const schema = z.object({
   email: z.string().email('Informe um email válido')

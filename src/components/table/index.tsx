@@ -1,10 +1,10 @@
 'use client';
 
 import React from 'react';
-import Div from '../motion/Div';
+import Div from '../Div';
 import { TableProps } from './types';
 import { memo } from 'react';
-import ItemsTable from './itemsTable';
+import ItemsTable from './ItemsTable';
 
 const list = {
   visible: {

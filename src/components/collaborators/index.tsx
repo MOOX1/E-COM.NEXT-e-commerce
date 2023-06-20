@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
-import { TableProps } from '../table/types';
-import Load from '../load/Load';
-import ListCollaborators from './ListCollaborators/ListCollaborators';
+import { TableProps } from '../Table/types';
+import Load from '../Load';
+import ListCollaborators from './ListCollaborators';
 import { Fetch } from '@/services/fetch';
 import { headers as Headers } from 'next/headers';
 

@@ -1,5 +1,5 @@
 import { Crown, Eye, Gem } from 'lucide-react';
-import Div from '../motion/Div';
+import Div from '../../Div';
 import { ReactNode } from 'react';
 
 interface LevelAccessProps {

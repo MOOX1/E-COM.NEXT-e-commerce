@@ -1,11 +1,11 @@
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { Logs } from './types';
-import List from './list/List';
-import Div from '../motion/Div';
+import List from './List';
+import Div from '../Div';
 import { Fetch } from '@/services/fetch';
 import { Suspense } from 'react';
-import Load from '../load/Load';
+import Load from '../Load';
 
 const list = {
   visible: {

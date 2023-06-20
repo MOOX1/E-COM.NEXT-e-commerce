@@ -2,10 +2,10 @@
 
 import React, { Suspense, useState } from 'react';
 import { Search } from 'lucide-react';
-import Table from '../../table/Table';
-import { TableProps } from '../../table/types';
-import Input from '../../input/Input';
-import Load from '../../load/Load';
+import Table from '../../Table';
+import { TableProps } from '../../Table/types';
+import Input from '../../Input';
+import Load from '../../Load';
 
 interface Collaborators {
   admins: TableProps;

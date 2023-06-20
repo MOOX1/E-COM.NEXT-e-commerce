@@ -1,16 +1,15 @@
 'use client';
 
-import Input from '@/components/input/Input';
-import Select from '@/components/select/Select';
-import Button from '@/components/button/Button';
-import Div from '@/components/motion/Div';
+import Input from '@/components/Input';
+import Select from '@/components/Select';
+import Button from '@/components/Button';
+import Div from '@/components/Div';
 import * as zod from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Control, UseFormReturn, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import { useState } from 'react';
-import Toast, { ToastType } from '@/components/toast/Toast';
-import Load from '@/components/load/Load';
+import Toast, { ToastType } from '@/components/Toast';
 
 type FormValues = {
   Nome: string;

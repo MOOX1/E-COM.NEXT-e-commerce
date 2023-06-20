@@ -3,7 +3,7 @@
 import React, { useState, memo } from 'react';
 import { Layout as LayoutAntd, Button } from 'antd';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Sidebar from '../sidebar/Sidebar';
+import Sidebar from '../sidebar';
 
 const { Content, Sider } = LayoutAntd;
 

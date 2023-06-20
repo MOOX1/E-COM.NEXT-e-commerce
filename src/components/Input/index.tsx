@@ -1,7 +1,7 @@
 'use client';
 
 import { ReactNode } from 'react';
-import { FieldName, FormState, UseFormReturn } from 'react-hook-form';
+import { UseFormReturn } from 'react-hook-form';
 
 interface InputProps<> {
   useFormRegister?: UseFormReturn['register'];

@@ -1,7 +1,7 @@
 import './globals.css';
 import { Quicksand, Poppins } from 'next/font/google';
 import SessionProvider from '@/context/ContextSession';
-import Layout from '@/components/layout/Layout';
+import Layout from '@/components/Layout';
 import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/react';
 

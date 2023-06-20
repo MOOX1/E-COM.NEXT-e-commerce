@@ -1,8 +1,8 @@
 'use client';
 
-import { TableProps } from './types';
+import { TableProps } from '../types';
 import Image from 'next/image';
-import Div from '../motion/Div';
+import Div from '../../Div';
 import { User } from 'lucide-react';
 
 interface ItemsTableProps extends TableProps {
