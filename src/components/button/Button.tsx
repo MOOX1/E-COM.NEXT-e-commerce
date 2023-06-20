@@ -1,8 +1,10 @@
+import { ReactNode } from 'react';
+
 interface ButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
   ariaLabel?: string;
   className?: string;
-  label: string;
+  label: string | ReactNode;
 }
 
 export default function Button({

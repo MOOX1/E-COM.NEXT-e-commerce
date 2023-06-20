@@ -3,7 +3,11 @@
 import { useEffect, useRef } from 'react';
 import lottie from 'lottie-web';
 
-export default function Load() {
+interface LoadProps {
+  className?: string;
+}
+
+export default function Load({ className }: LoadProps) {
   const containerRef = useRef(null);
   useEffect(() => {
     lottie.loadAnimation({
@@ -17,7 +21,10 @@ export default function Load() {
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div ref={containerRef} className="-mt-10 h-auto w-20"></div>
+      <div
+        ref={containerRef}
+        className={'-mt-10 h-auto w-20 ' + className}
+      ></div>
     </div>
   );
 }

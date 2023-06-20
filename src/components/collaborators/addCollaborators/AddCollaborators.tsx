@@ -7,8 +7,10 @@ import Div from '@/components/motion/Div';
 import * as zod from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Control, UseFormReturn, useForm } from 'react-hook-form';
-import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useState } from 'react';
+import Toast, { ToastType } from '@/components/toast/Toast';
+import Load from '@/components/load/Load';
 
 type FormValues = {
   Nome: string;
@@ -22,11 +24,17 @@ const schema = z.object({
 type FormDataProps = z.infer<typeof schema>;
 
 export default function AddCollaborators() {
+  const [messageToast, setMessageToast] = useState<string | undefined>(
+    undefined
+  );
+  const [typeToast, setTypeToast] = useState<ToastType | undefined>(undefined);
+
   const {
     handleSubmit,
     register,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm<FormDataProps>({
     mode: 'onSubmit',
     criteriaMode: 'firstError',
@@ -45,28 +53,11 @@ export default function AddCollaborators() {
       .then((data) => data.json())
       .then((response) => {
         if (response?.message) {
-          return toast(response.message, {
-            autoClose: false,
-            hideProgressBar: false,
-            closeOnClick: true,
-            type: 'info',
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: 'dark'
-          });
+          setTypeToast('error');
+          return setMessageToast(response.message);
         }
-
-        return toast('Cadastrado com sucesso', {
-          autoClose: false,
-          hideProgressBar: false,
-          closeOnClick: true,
-          type: 'info',
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: 'dark'
-        });
+        setTypeToast('success');
+        return setMessageToast('Cadastrado com sucesso');
       });
   };
 
@@ -75,11 +66,12 @@ export default function AddCollaborators() {
       onSubmit={handleSubmit(onSubmit)}
       className="ml-5 flex h-full w-full p-2"
     >
-      <ToastContainer
-        toastStyle={{
-          background: '#010217',
-          border: 'solid 1px #6E8EDB',
-          color: 'white'
+      <Toast
+        message={messageToast}
+        type={typeToast}
+        onClose={() => {
+          reset();
+          setMessageToast(undefined);
         }}
       />
       <div className="flex h-full w-3/4 flex-col justify-evenly ">
@@ -127,7 +119,7 @@ export default function AddCollaborators() {
         <div className="w-28">
           <Button
             className="w-24 bg-mediaBlue/80 p-3 font-alt font-medium text-white hover:bg-mediaBlue/60"
-            label="SALVAR"
+            label={'SALVAR'}
           />
         </div>
       </Div>
