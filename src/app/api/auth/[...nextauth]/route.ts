@@ -9,11 +9,7 @@ import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
 import { cookies } from 'next/headers';
 import { FindAdmin, UpdateAdmin } from '@/lib/controllers/AdminsController';
-interface DataOfDatabase {
-  _id: string;
-  email: string;
-  levelAccess: string;
-}
+import { AdminInDataBase } from '@/types/admins';
 
 database.connect();
 const redis = Redis.fromEnv();
@@ -60,44 +56,39 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        const admin = await FindAdmin(emailUser as string);
+        const admin: AdminInDataBase | null = await FindAdmin(
+          emailUser as string
+        );
 
         if (admin !== null) {
-          const data: DataOfDatabase = {
-            _id: admin._doc._id.toString(),
-            email: admin._doc.email,
-            levelAccess: admin._doc.levelAccess
-          };
-
-          user.id = data._id;
-          user.levelAccess = data.levelAccess;
-
           if (!admin?.image) {
-            await UpdateAdmin(user.id, user.name ?? '', user.image ?? '');
+            await UpdateAdmin(admin._id, user.name ?? '', user.image ?? '');
           }
 
           if (account?.provider == 'google') return true;
 
-          return data as unknown as boolean;
+          return true;
         }
-        return undefined as unknown as boolean;
+        return false;
       } catch (error) {
         console.log(error);
       }
-      return undefined as unknown as boolean;
+      return false;
     },
-    session({ session, token, user }) {
-      if (user) {
-        session.user.levelAccess = user.levelAccess;
-      } else {
-        session.user.levelAccess = token.levelAccess;
-      }
+    session({ session, token }) {
+      session.user.id = token.id;
+      session.user.levelAccess = token.levelAccess;
 
       return session;
     },
-    async jwt({ token, user }) {
-      if (user?.levelAccess) {
-        token.levelAccess = user.levelAccess;
+    async jwt({ token }) {
+      const admin: AdminInDataBase | null = await FindAdmin(
+        token?.email as string
+      );
+
+      if (admin) {
+        token.id = admin._id;
+        token.levelAccess = admin.levelAccess;
       }
 
       return token;

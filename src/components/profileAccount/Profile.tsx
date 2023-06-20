@@ -8,8 +8,6 @@ import Load from '../load/Load';
 export default function Profile() {
   const { data } = useSession();
 
-  console.log(data);
-
   return (
     <div className="relative flex h-full w-2/4 flex-col items-center justify-center gap-4 rounded-lg bg-strongBlue p-3 text-center shadow-main">
       <div className="absolute right-3 top-3 flex gap-2">
@@ -28,7 +26,7 @@ export default function Profile() {
         </div>
         <div className="flex flex-col items-center justify-center gap-1 text-center font-alt text-white">
           <p className="font-alt text-lg font-semibold uppercase">
-            {/* {data?.user?.levelAccess} */}
+            {data?.user?.levelAccess}
           </p>
           <p className="w-min whitespace-nowrap rounded bg-mainBlue px-2 py-1 text-base font-semibold text-black">
             {data?.user?.name}

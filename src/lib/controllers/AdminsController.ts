@@ -2,17 +2,31 @@ import { z } from 'zod';
 import Admins from '../Schemas/adminsSchema';
 import database from '../database/mongodb';
 import { ObjectId } from 'mongodb';
+import { AdminInDataBase, ResponseDefault } from '@/types/admins';
 
 database.connect();
 
-export const FindAdmin = async (email: string) => {
+export const FindAdmin = async (
+  email: string
+): Promise<AdminInDataBase | null> => {
   await database.connect();
-  const admin = await Admins.findOne({ email: email });
+  const admin = (await Admins.findOne({
+    email: email
+  }).lean()) as AdminInDataBase | null;
   return admin;
 };
 
-export const FindAllAdmins = async () => {
-  const admins = await Admins.find({}).lean();
+export const FindAllAdmins = async (): Promise<
+  AdminInDataBase[] | null | ResponseDefault
+> => {
+  const admins = (await Admins.find({}).lean()) as AdminInDataBase[] | null;
+
+  if (!admins) {
+    return {
+      status: 404,
+      message: 'Usuário não encontrado'
+    };
+  }
 
   return admins;
 };
@@ -45,19 +59,25 @@ export const CreateAdmin = async (res: {
   return admin;
 };
 
-export const DeleteAdmin = async (id: string) => {
+export const DeleteAdmin = async (
+  id: string
+): Promise<AdminInDataBase | null | ResponseDefault> => {
   const adminDeleted = await Admins.findByIdAndDelete({
     _id: new ObjectId(id)
   });
 
   if (!adminDeleted) {
-    return { status: 200, message: 'Usuário não encontrado' };
+    return { status: 404, message: 'Usuário não encontrado' };
   }
 
   return adminDeleted;
 };
 
-export const UpdateAdmin = async (id: string, name: string, image: string) => {
+export const UpdateAdmin = async (
+  id: string,
+  name: string,
+  image: string
+): Promise<AdminInDataBase | null | ResponseDefault> => {
   const newAdmin = await Admins.findByIdAndUpdate(
     { _id: id },
     {
@@ -66,6 +86,13 @@ export const UpdateAdmin = async (id: string, name: string, image: string) => {
     },
     { new: true }
   );
+
+  if (!newAdmin) {
+    return {
+      status: 404,
+      message: 'Usuário não encontrado'
+    };
+  }
 
   newAdmin.save();
 
