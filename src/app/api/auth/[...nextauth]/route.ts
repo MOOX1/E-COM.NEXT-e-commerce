@@ -8,7 +8,7 @@ import database from '@/lib/database/mongodb';
 import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
 import { cookies } from 'next/headers';
-import { FindAdmin, updateAdmin } from '@/lib/controllers/AdminsController';
+import { FindAdmin, UpdateAdmin } from '@/lib/controllers/AdminsController';
 interface DataOfDatabase {
   _id: string;
   email: string;
@@ -73,7 +73,7 @@ const authOption: NextAuthOptions = {
           user.levelAccess = data.levelAccess;
 
           if (!admin?.image) {
-            await updateAdmin(user.id, user.name ?? '', user.image ?? '');
+            await UpdateAdmin(user.id, user.name ?? '', user.image ?? '');
           }
 
           if (account?.provider == 'google') return true;

@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import Admins from '../Schemas/adminsSchema';
 import database from '../database/mongodb';
+import { ObjectId } from 'mongodb';
 
 database.connect();
 
@@ -44,7 +45,19 @@ export const CreateAdmin = async (res: {
   return admin;
 };
 
-export const updateAdmin = async (id: string, name: string, image: string) => {
+export const DeleteAdmin = async (id: string) => {
+  const adminDeleted = await Admins.findByIdAndDelete({
+    _id: new ObjectId(id)
+  });
+
+  if (!adminDeleted) {
+    return { status: 200, message: 'Usuário não encontrado' };
+  }
+
+  return adminDeleted;
+};
+
+export const UpdateAdmin = async (id: string, name: string, image: string) => {
   const newAdmin = await Admins.findByIdAndUpdate(
     { _id: id },
     {
