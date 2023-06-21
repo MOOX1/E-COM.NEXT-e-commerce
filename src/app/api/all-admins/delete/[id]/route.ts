@@ -1,5 +1,6 @@
 import { DeleteAdmin } from '@/lib/controllers/AdminsController';
 import { getToken } from 'next-auth/jwt';
+import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
 interface DeleteProps {
@@ -15,6 +16,8 @@ export async function DELETE(req: NextRequest, { params }: DeleteProps) {
     return NextResponse.json({ error: 'Access denied' });
 
   const adminDeleted = await DeleteAdmin(params.id);
+
+  revalidateTag(`all-admins`);
 
   return NextResponse.json(adminDeleted);
 }

@@ -10,10 +10,6 @@ export default function Profile() {
 
   return (
     <div className="relative flex h-full w-2/4 flex-col items-center justify-center gap-4 rounded-lg bg-strongBlue p-3 text-center shadow-main">
-      <div className="absolute right-3 top-3 flex gap-2">
-        <Edit className="h-auto w-4 cursor-pointer text-mainBlue" />
-        <Trash className="h-auto w-4 cursor-pointer text-mainBlue" />
-      </div>
       <Suspense fallback={<Load />}>
         <div className="h-24 w-24 rounded-full bg-white">
           <Image

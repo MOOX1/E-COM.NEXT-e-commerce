@@ -2,12 +2,13 @@
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationProps } from 'framer-motion';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 interface DivProps extends AnimationProps {
   className: string;
   children: React.ReactNode;
   handleClick?: () => void;
+  style: CSSProperties;
 }
 
 export default function Div({
@@ -18,11 +19,13 @@ export default function Div({
   initial,
   transition,
   variants,
+  style,
   handleClick
 }: Partial<DivProps>) {
   return (
     <AnimatePresence>
       <motion.div
+        style={style}
         onClick={handleClick}
         animate={animate}
         exit={exit}
