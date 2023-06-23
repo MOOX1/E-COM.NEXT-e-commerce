@@ -79,7 +79,6 @@ export default function ListCollaborators() {
         isVisible={isVisible}
         adminSelected={adminSelected}
       />
-
       <div className="flex w-full items-center justify-center border-b border-mainBlue/10 p-2 px-14">
         <Input
           type="text"
