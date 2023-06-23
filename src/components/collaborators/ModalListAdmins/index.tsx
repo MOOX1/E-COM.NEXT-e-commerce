@@ -38,9 +38,10 @@ export default function ModalListAdmins({
             name={adminSelected?.name}
           />
           <ConfirmDelete
-            handleDeleteAdmin={() =>
-              adminSelected?._id && handleDeleteAdmin(adminSelected?._id)
-            }
+            handleDeleteAdmin={() => {
+              setCertain(false);
+              adminSelected?._id && handleDeleteAdmin(adminSelected?._id);
+            }}
             certain={certain}
             onClick={() => setCertain(!certain)}
           />

@@ -48,7 +48,11 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
         </div>
 
         <Div initial="hidden" animate="visible" variants={list}>
-          <ItemsTable onClickItem={onClick} columns={columns} data={data} />
+          <ItemsTable
+            onClickItem={(item) => onClick && onClick(item)}
+            columns={columns}
+            data={data}
+          />
         </Div>
       </div>
     </div>

@@ -92,7 +92,9 @@ export default function ListCollaborators() {
         <Table
           columns={admins.columns}
           data={filteredAdmins.data}
-          onClick={handleIsOpenModal}
+          onClick={(item) =>
+            handleIsOpenModal(item as unknown as IAdminInDataBase)
+          }
         />
       </Suspense>
     </>
