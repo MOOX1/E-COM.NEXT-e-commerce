@@ -55,7 +55,7 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
         </div>
         <span
           className={
-            'block w-full max-w-min overflow-hidden text-ellipsis whitespace-nowrap pl-1 font-alt text-sm text-mainBlue opacity-50' +
+            'block w-full max-w-min overflow-hidden text-ellipsis whitespace-nowrap pl-1 font-alt text-sm text-mainBlue opacity-50 ' +
             (selectedOption && ' !text-white !opacity-100')
           }
         >
