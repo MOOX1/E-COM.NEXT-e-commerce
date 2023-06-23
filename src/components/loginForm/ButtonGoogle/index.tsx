@@ -5,7 +5,7 @@ interface IButtonGoogleProps {
   onClick: () => void;
 }
 
-export default function ButtonGoogle({ onClick }: IButtonGoogleProps) {
+function ButtonGoogle({ onClick }: IButtonGoogleProps) {
   return (
     <div
       onClick={onClick}
@@ -19,3 +19,4 @@ export default function ButtonGoogle({ onClick }: IButtonGoogleProps) {
     </div>
   );
 }
+export default ButtonGoogle;

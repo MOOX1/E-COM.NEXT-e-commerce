@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
 
 type TFormValues = {
@@ -19,7 +19,8 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
     { value: 'admin simple', label: 'Admin Simple' }
   ];
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedOption, setSelectedOption] = useState<any>(undefined);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const { field } = useController(controlForm);
@@ -54,7 +55,7 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
         </div>
         <span
           className={
-            'block w-full max-w-min overflow-hidden text-ellipsis whitespace-nowrap pl-1 font-alt text-sm text-mainBlue opacity-50' +
+            'block w-full max-w-min overflow-hidden text-ellipsis whitespace-nowrap pl-1 font-alt text-sm text-mainBlue opacity-50 ' +
             (selectedOption && ' !text-white !opacity-100')
           }
         >

@@ -41,6 +41,7 @@ export default function AddCollaborators() {
   });
 
   const onSubmit = (data: TFormDataProps) => {
+    reset({ email: '' });
     fetch('/api/all-admins/create-admin', {
       method: 'POST',
       body: JSON.stringify(data)
@@ -62,8 +63,7 @@ export default function AddCollaborators() {
 
         return Toast({
           message: 'Usuário criado com sucesso',
-          type: 'success',
-          onClose: () => reset({ email: '' })
+          type: 'success'
         });
       });
   };

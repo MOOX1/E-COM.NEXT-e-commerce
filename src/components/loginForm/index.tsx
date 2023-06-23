@@ -1,6 +1,6 @@
 'use client';
 
-import ButtonGoogle from './ButtonGoogle';
+import ButtonGoogle from '@/components/loginForm/ButtonGoogle/index';
 import { signIn } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
