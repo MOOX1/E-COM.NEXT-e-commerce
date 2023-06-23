@@ -19,9 +19,8 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
     { value: 'admin simple', label: 'Admin Simple' }
   ];
 
-  const [selectedOption, setSelectedOption] = useState<
-    string | null | undefined
-  >(undefined);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [selectedOption, setSelectedOption] = useState<any>(undefined);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const { field } = useController(controlForm);
