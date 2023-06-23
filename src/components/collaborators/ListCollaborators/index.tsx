@@ -2,7 +2,7 @@
 
 import React, { Suspense, useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
-import Table from '../../Table';
+import Table from '@/components/Table';
 import Input from '../../Input';
 import Load from '../../Load';
 import ModalListAdmins from '../ModalListAdmins';
