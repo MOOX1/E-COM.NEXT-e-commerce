@@ -8,10 +8,10 @@ import { UseFormReturn, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import cookies from 'js-cookie';
-import Load from '../Load';
+import Load from '../atoms/Load';
 import { useSearchParams } from 'next/navigation';
-import Input from '../Input';
-import Button from '../Button';
+import Input from '../atoms/Input';
+import Button from '../atoms/Button';
 
 const schema = z.object({
   email: z.string().email('Informe um email válido')

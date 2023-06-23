@@ -1,4 +1,4 @@
-import Modal from '@/components/Modal';
+import Modal from '@/components/atoms/Modal';
 import { IAdminInDataBase } from '@/types/admins';
 import { useState } from 'react';
 import ConfirmDelete from './ConfirmDelete';

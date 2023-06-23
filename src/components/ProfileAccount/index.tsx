@@ -3,7 +3,7 @@ import { Edit, Trash } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Suspense } from 'react';
-import Load from '../Load';
+import Load from '../atoms/Load';
 
 export default function Profile() {
   const { data } = useSession();

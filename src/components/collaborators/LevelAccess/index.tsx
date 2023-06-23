@@ -1,5 +1,5 @@
 import { Crown, Eye, Gem } from 'lucide-react';
-import Div from '../../Div';
+import Div from '../../atoms/Div';
 import { ReactNode } from 'react';
 
 interface ILevelAccessProps {

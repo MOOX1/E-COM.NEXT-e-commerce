@@ -4,7 +4,7 @@ import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/Layout';
 import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/react';
-import { ContainerToast } from '@/components/Toast';
+import { ContainerToast } from '@/components/atoms/Toast';
 
 const poppins = Poppins({
   subsets: ['latin'],

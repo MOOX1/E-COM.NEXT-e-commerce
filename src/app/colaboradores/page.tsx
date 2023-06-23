@@ -3,13 +3,13 @@ import React, { Suspense } from 'react';
 
 import Profile from '../../components/ProfileAccount';
 import LogChanges from '../../components/logChanges';
-import Div from '@/components/Div';
-import Load from '@/components/Load';
+import Div from '@/components/atoms/Div';
+import Load from '@/components/atoms/Load';
 import {
   TopForBottom,
   RightForLeft,
   BottomForTop
-} from '@/components/Div/animations';
+} from '@/components/atoms/Div/animations';
 
 import Collaborators from '@/components/collaborators';
 import AddCollaborators from '@/components/collaborators/AddCollaborators';

@@ -1,15 +1,15 @@
 'use client';
 
-import Input from '@/components/Input';
-import Select from '@/components/Select';
-import Button from '@/components/Button';
-import Div from '@/components/Div';
+import Input from '@/components/atoms/Input';
+import Select from '@/components/atoms/Select';
+import Button from '@/components/atoms/Button';
+import Div from '@/components/atoms/Div';
 import * as zod from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Control, UseFormReturn, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 
-import { Toast } from '@/components/Toast';
+import { Toast } from '@/components/atoms/Toast';
 import { useAdmins } from '@/hooks/admins';
 
 type TFormValues = {

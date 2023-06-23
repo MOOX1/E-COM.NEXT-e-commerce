@@ -2,7 +2,7 @@
 
 import { ITableProps } from '../types';
 import Image from 'next/image';
-import Div from '../../Div';
+import Div from '../../atoms/Div';
 import { User } from 'lucide-react';
 
 interface IItemsTableProps extends ITableProps {

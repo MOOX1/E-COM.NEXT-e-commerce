@@ -3,12 +3,12 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import Table from '@/components/Table';
-import Input from '../../Input';
-import Load from '../../Load';
+import Input from '../../atoms/Input';
+import Load from '../../atoms/Load';
 import ModalListAdmins from '../ModalListAdmins';
 
 import { IAdminInDataBase } from '@/types/admins';
-import { Toast } from '@/components/Toast';
+import { Toast } from '@/components/atoms/Toast';
 import { useAdmins } from '@/hooks/admins';
 
 export default function ListCollaborators() {

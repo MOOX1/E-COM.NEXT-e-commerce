@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import { ITableProps } from '../Table/types';
-import Load from '../Load';
+import Load from '../atoms/Load';
 import ListCollaborators from './ListCollaborators';
 import { Fetch } from '@/services/fetch';
 import { headers as Headers } from 'next/headers';

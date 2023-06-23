@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import Div from '../Div';
+import Div from '../atoms/Div';
 import { ITableProps } from './types';
 import { memo } from 'react';
 import ItemsTable from './ItemsTable';

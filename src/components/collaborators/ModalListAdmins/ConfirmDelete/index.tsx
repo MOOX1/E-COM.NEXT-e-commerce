@@ -1,5 +1,5 @@
 import { Check, Trash, X } from 'lucide-react';
-import Div from '@/components/Div';
+import Div from '@/components/atoms/Div';
 
 interface IConfirmDeleteProps {
   certain: boolean;
