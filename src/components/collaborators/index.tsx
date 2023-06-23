@@ -3,7 +3,7 @@ import { ITableProps } from '../Table/types';
 import Load from '../Load';
 import ListCollaborators from './ListCollaborators';
 import { Fetch } from '@/services/fetch';
-import { cookies } from 'next/headers';
+import { headers as Headers } from 'next/headers';
 import { useAdmins } from '@/hooks/admins';
 import InitializerAdmins from './InitializerAdmin';
 
@@ -16,7 +16,7 @@ export default async function Collaborators() {
         tags: ['all-admins']
       },
       headers: {
-        cookies: JSON.stringify(cookies().getAll()) ?? ''
+        cookies: Headers().get('cookie') ?? ''
       }
     });
     admins = await response.json();
