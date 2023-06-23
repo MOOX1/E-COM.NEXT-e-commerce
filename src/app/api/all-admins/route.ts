@@ -20,10 +20,12 @@ export async function GET() {
 
     const admins = await FindAllAdmins();
 
-    return NextResponse.json({
-      columns: ['image', 'name', 'email', 'levelAccess'],
-      data: admins
-    });
+    return NextResponse(
+      JSON.stringify({
+        columns: ['image', 'name', 'email', 'levelAccess'],
+        data: admins
+      })
+    );
   } catch (error) {
     console.log(error);
   }
