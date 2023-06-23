@@ -43,7 +43,8 @@ const authOption: NextAuthOptions = {
   },
   pages: {
     signIn: '/signin',
-    error: '/signin'
+    error: '/signin',
+    verifyRequest: '/verifyRequest'
   },
   callbacks: {
     async signIn({ user, account, profile }) {
