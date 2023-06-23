@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { Session } from 'next-auth';
+import { Fetch } from '@/services/fetch';
 
 interface IGetServerSessionResponse {
   authenticated: boolean;
@@ -8,7 +9,7 @@ interface IGetServerSessionResponse {
 
 export const getServerSession =
   async (): Promise<IGetServerSessionResponse> => {
-    const response = await fetch('http://localhost:3000/api/auth/session', {
+    const response = await Fetch('/api/auth/session', {
       headers: {
         cookie: headers().get('cookies') ?? ''
       }
