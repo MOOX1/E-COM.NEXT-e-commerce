@@ -1,7 +1,7 @@
 'use client';
 
 import { ChevronDown, ChevronUp } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
 
 type TFormValues = {
@@ -19,7 +19,9 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
     { value: 'admin simple', label: 'Admin Simple' }
   ];
 
-  const [selectedOption, setSelectedOption] = useState<string | null>(null);
+  const [selectedOption, setSelectedOption] = useState<
+    string | null | undefined
+  >(undefined);
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const { field } = useController(controlForm);
