@@ -4,15 +4,15 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
 
-type FormValues = {
+type TFormValues = {
   Nome: string;
 };
-interface CustomSelectProps {
-  controlForm: UseControllerProps<FormValues>;
+interface ICustomSelectProps {
+  controlForm: UseControllerProps<TFormValues>;
   error?: string;
 }
 
-const CustomSelect = ({ controlForm, error }: CustomSelectProps) => {
+const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
   const options = [
     { value: 'admin super', label: 'Admin Super' },
     { value: 'admin viewer', label: 'Admin Viewer' },

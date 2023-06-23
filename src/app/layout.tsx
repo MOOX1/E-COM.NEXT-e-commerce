@@ -4,6 +4,7 @@ import SessionProvider from '@/context/ContextSession';
 import Layout from '@/components/Layout';
 import { cookies } from 'next/headers';
 import { Analytics } from '@vercel/analytics/react';
+import { ContainerToast } from '@/components/Toast';
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -36,6 +37,7 @@ export default async function RootLayout({
         <SessionProvider>
           {session || sessionProd ? <Layout>{children}</Layout> : children}
           <Analytics />
+          <ContainerToast />
         </SessionProvider>
       </body>
     </html>

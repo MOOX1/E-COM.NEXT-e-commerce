@@ -3,13 +3,13 @@ import { getToken } from 'next-auth/jwt';
 import { revalidateTag } from 'next/cache';
 import { NextRequest, NextResponse } from 'next/server';
 
-interface DeleteProps {
+interface IDeleteProps {
   params: {
     id: string;
   };
 }
 
-export async function DELETE(req: NextRequest, { params }: DeleteProps) {
+export async function DELETE(req: NextRequest, { params }: IDeleteProps) {
   const session = await getToken({ req });
 
   if (!session || session.levelAccess !== 'admin super')

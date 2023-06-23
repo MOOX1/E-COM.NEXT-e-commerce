@@ -1,21 +1,21 @@
 import { Tooltip } from 'antd';
 import { usePathname } from 'next/navigation';
-import { MenuItemProps } from '../types';
+import { IMenuItemProps } from '../types';
 import Link from 'next/link';
 import { memo } from 'react';
 
-interface MenuItemsProps {
+interface IMenuItemsProps {
   colapssed: boolean;
-  menuItems: MenuItemProps[];
+  menuItems: IMenuItemProps[];
 }
 
-function MenuItem({ colapssed, menuItems }: MenuItemsProps) {
+function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
   const router = usePathname();
   let positionSelected = '0.1rem';
 
   const data = () => {
     let newItemActive = 0;
-    const newMenuItems: MenuItemProps[] = menuItems.map((item, index) => {
+    const newMenuItems: IMenuItemProps[] = menuItems.map((item, index) => {
       if (item.pathname == router) newItemActive = index;
       return {
         ...item,

@@ -1,10 +1,10 @@
-import { Logs } from '../types';
+import { ILogs } from '../types';
 import Div from '@/components/Div';
 import { memo } from 'react';
 import Image from 'next/image';
 import { User } from 'lucide-react';
 
-const List = (item: Logs) => {
+const List = (item: ILogs) => {
   const colorBorder = {
     add: 'border-green-400',
     edit: 'border-yellow-400',

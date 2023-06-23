@@ -2,11 +2,11 @@ import { User2 } from 'lucide-react';
 import Image from 'next/image';
 import Icon from '@/app/icon.svg';
 
-interface ProfileProps {
+interface IProfileProps {
   colapssed: boolean;
 }
 
-export default function Profile({ colapssed }: ProfileProps) {
+export default function Profile({ colapssed }: IProfileProps) {
   return (
     <div className=" flex items-center justify-center gap-2 pb-5">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mediaBlue p-[1px]">

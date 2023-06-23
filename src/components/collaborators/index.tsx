@@ -1,12 +1,14 @@
 import React, { Suspense } from 'react';
-import { TableProps } from '../Table/types';
+import { ITableProps } from '../Table/types';
 import Load from '../Load';
 import ListCollaborators from './ListCollaborators';
 import { Fetch } from '@/services/fetch';
 import { headers as Headers } from 'next/headers';
+import { useAdmins } from '@/hooks/admins';
+import InitializerAdmins from './InitializerAdmin';
 
 export default async function Collaborators() {
-  let admins: TableProps = { columns: [], data: [] };
+  let admins: ITableProps = { columns: [], data: [] };
   try {
     const response = await Fetch(`/api/all-admins`, {
       next: {
@@ -18,14 +20,23 @@ export default async function Collaborators() {
       }
     });
     admins = await response.json();
+    useAdmins.setState({
+      state: {
+        admins: {
+          columns: admins.columns,
+          data: admins.data
+        }
+      }
+    });
   } catch (error) {
     console.log(error);
   }
 
   return (
     <>
+      <InitializerAdmins admins={admins} />
       <Suspense fallback={<Load />}>
-        <ListCollaborators admins={admins} />
+        <ListCollaborators />
       </Suspense>
     </>
   );

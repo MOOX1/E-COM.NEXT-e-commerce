@@ -1,15 +1,15 @@
 import { ReactNode } from 'react';
 
-export interface SubMenuItemProps {
+export interface ISubMenuItemProps {
   label: string;
   pathname: string;
   isActive: boolean;
 }
 
-export interface MenuItemProps {
+export interface IMenuItemProps {
   label: string;
   Icon: ReactNode;
   pathname: string;
   isActive: boolean;
-  subMenu?: SubMenuItemProps[];
+  subMenu?: ISubMenuItemProps[];
 }

@@ -3,11 +3,11 @@
 import { useEffect, useRef } from 'react';
 import lottie from 'lottie-web';
 
-interface LoadProps {
+interface ILoadProps {
   className?: string;
 }
 
-export default function Load({ className }: LoadProps) {
+export default function Load({ className }: ILoadProps) {
   const containerRef = useRef(null);
   useEffect(() => {
     lottie.loadAnimation({

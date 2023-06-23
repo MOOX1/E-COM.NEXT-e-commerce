@@ -2,7 +2,7 @@ import { Crown, Eye, Gem } from 'lucide-react';
 import Div from '../../Div';
 import { ReactNode } from 'react';
 
-interface LevelAccessProps {
+interface ILevelAccessProps {
   icon: ReactNode;
   title: string;
   description: string;
@@ -10,7 +10,7 @@ interface LevelAccessProps {
   seeMore?: string;
 }
 
-const LevelAccessItems: LevelAccessProps[] = [
+const LevelAccessItems: ILevelAccessProps[] = [
   {
     icon: <Crown className="h-auto w-8 text-mediaBlue " />,
     title: 'Admin Super',

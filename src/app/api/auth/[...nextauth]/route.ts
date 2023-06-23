@@ -9,7 +9,7 @@ import { UpstashRedisAdapter } from '@next-auth/upstash-redis-adapter';
 import { Redis } from '@upstash/redis';
 import { cookies } from 'next/headers';
 import { FindAdmin, UpdateAdmin } from '@/lib/controllers/AdminsController';
-import { AdminInDataBase } from '@/types/admins';
+import { IAdminInDataBase } from '@/types/admins';
 
 database.connect();
 const redis = Redis.fromEnv();
@@ -56,7 +56,7 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        const admin: AdminInDataBase | null = await FindAdmin(
+        const admin: IAdminInDataBase | null = await FindAdmin(
           emailUser as string
         );
 
@@ -82,7 +82,7 @@ const authOption: NextAuthOptions = {
       return session;
     },
     async jwt({ token }) {
-      const admin: AdminInDataBase | null = await FindAdmin(
+      const admin: IAdminInDataBase | null = await FindAdmin(
         token?.email as string
       );
 

@@ -3,7 +3,7 @@
 import { ReactNode } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
-interface InputProps<> {
+interface IInputProps<> {
   useFormRegister?: UseFormReturn['register'];
   onChange?: (value: string) => void;
   ariaLabel?: string;
@@ -23,7 +23,7 @@ export default function Input({
   styleOffButton,
   icon,
   errors
-}: InputProps) {
+}: IInputProps) {
   if (styleOffButton == 'secund') {
     return (
       <div className="relative w-full">

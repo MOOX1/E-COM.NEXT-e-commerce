@@ -4,16 +4,16 @@ import Image from 'next/image';
 import logoInline from '../../assets/logoInline.svg';
 import ButtonSignOut from '../ButtonSignOut';
 import Profile from '../Profile';
-import { MenuItemProps } from './types';
+import { IMenuItemProps } from './types';
 import MenuItem from './MenuItem';
 import { memo } from 'react';
 
-interface SidebarProps {
+interface ISidebarProps {
   buttonOpen: ReactNode;
   colapssed: boolean;
 }
 
-const menuItems: MenuItemProps[] = [
+const menuItems: IMenuItemProps[] = [
   {
     label: 'Dashboard',
     Icon: <LayoutPanelLeft className="h-auto w-6 text-white" />,
@@ -40,7 +40,7 @@ const menuItems: MenuItemProps[] = [
   }
 ];
 
-function Sidebar({ buttonOpen, colapssed }: SidebarProps) {
+function Sidebar({ buttonOpen, colapssed }: ISidebarProps) {
   return (
     <nav className="h-screen w-full overflow-hidden bg-strongBlue py-14">
       <Profile colapssed={colapssed} />

@@ -1,43 +1,36 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { Search } from 'lucide-react';
 import Table from '../../Table';
-import { TableProps } from '../../Table/types';
 import Input from '../../Input';
 import Load from '../../Load';
 import ModalListAdmins from '../ModalListAdmins';
 
-import { AdminInDataBase } from '@/types/admins';
-import Toast, { ToastType } from '@/components/Toast';
+import { IAdminInDataBase } from '@/types/admins';
+import { Toast } from '@/components/Toast';
+import { useAdmins } from '@/hooks/admins';
 
-interface Collaborators {
-  admins: TableProps;
-  onChange?: string;
-}
-
-export default function ListCollaborators({ admins }: Collaborators) {
-  const [filteredAdmins, setFilteredAdmins] = useState(admins);
+export default function ListCollaborators() {
+  const admins = useAdmins((state) => state.state.admins);
   const [isVisible, setIsVisible] = useState<boolean>(false);
+  const [filteredAdmins, setFilteredAdmins] = useState(admins);
   const [adminSelected, setAdminSelected] = useState<
-    AdminInDataBase | undefined
+    IAdminInDataBase | undefined
   >(undefined);
-  const [messageToast, setMessageToast] = useState<string | undefined>(
-    undefined
-  );
-  const [typeToast, setTypeToast] = useState<ToastType | undefined>(undefined);
 
   const handleFilter = (event: string) => {
     const filteredData = admins.data.filter((admin) => {
       return admin.email.toLowerCase().includes(event.toLowerCase());
     });
+
     setFilteredAdmins({
       ...admins,
       data: filteredData
     });
   };
 
-  const handleIsOpenModal = (data?: AdminInDataBase) => {
+  const handleIsOpenModal = (data?: IAdminInDataBase) => {
     if (!data) return setIsVisible(!isVisible);
     setAdminSelected(data);
     setIsVisible(!isVisible);
@@ -51,14 +44,32 @@ export default function ListCollaborators({ admins }: Collaborators) {
       .then((data) => data.json())
       .then((response) => {
         if (response?.message) {
-          setTypeToast('info');
-          setMessageToast(response.message);
+          return Toast({ message: response.message, type: 'error' });
         }
 
-        setTypeToast('success');
-        setMessageToast('Admin excluido com sucesso');
+        const newAdmins = useAdmins
+          .getState()
+          .state.admins.data.filter((item) => item._id !== response._id);
+
+        useAdmins.setState({
+          state: {
+            admins: {
+              ...admins,
+              data: newAdmins
+            }
+          }
+        });
+
+        return Toast({
+          message: 'Usuário deletado com sucesso',
+          type: 'success'
+        });
       });
   };
+
+  useEffect(() => {
+    setFilteredAdmins(admins);
+  }, [admins]);
 
   return (
     <>
@@ -68,7 +79,7 @@ export default function ListCollaborators({ admins }: Collaborators) {
         isVisible={isVisible}
         adminSelected={adminSelected}
       />
-      <Toast message={messageToast} type={typeToast} />
+
       <div className="flex w-full items-center justify-center border-b border-mainBlue/10 p-2 px-14">
         <Input
           type="text"

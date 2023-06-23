@@ -1,19 +1,19 @@
 'use client';
 
-import { TableProps } from '../types';
+import { ITableProps } from '../types';
 import Image from 'next/image';
 import Div from '../../Div';
 import { User } from 'lucide-react';
 
-interface ItemsTableProps extends TableProps {
-  onClickItem?: (item: TableProps['columns']) => void;
+interface IItemsTableProps extends ITableProps {
+  onClickItem?: (item: ITableProps['columns']) => void;
 }
 
 export default function ItemsTable({
   columns,
   data,
   onClickItem
-}: ItemsTableProps) {
+}: IItemsTableProps) {
   const item1 = {
     visible: { opacity: 1, y: 0 },
     hidden: { opacity: 0, y: -50 }

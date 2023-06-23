@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Div from '../Div';
-import { TableProps } from './types';
+import { ITableProps } from './types';
 import { memo } from 'react';
 import ItemsTable from './ItemsTable';
 
@@ -22,7 +22,7 @@ const list = {
   }
 };
 
-const Table = ({ columns, data, onClick }: TableProps) => {
+const Table = ({ columns, data, onClick }: ITableProps) => {
   return (
     <div className="w-full">
       <div className="w-full">

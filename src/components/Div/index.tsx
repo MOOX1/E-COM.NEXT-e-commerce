@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { AnimationProps } from 'framer-motion';
 import React, { CSSProperties } from 'react';
 
-interface DivProps extends AnimationProps {
+interface IDivProps extends AnimationProps {
   className: string;
   children: React.ReactNode;
   handleClick?: () => void;
@@ -21,7 +21,7 @@ export default function Div({
   variants,
   style,
   handleClick
-}: Partial<DivProps>) {
+}: Partial<IDivProps>) {
   return (
     <AnimatePresence>
       <motion.div

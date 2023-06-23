@@ -1,13 +1,13 @@
 import { Schema, models, model } from 'mongoose';
 
-interface AdminsSchemaProps {
+interface IAdminsSchemaProps {
   email: string;
   levelAccess: string;
   image: string;
   name: string;
 }
 
-const AdminsSchema = new Schema<AdminsSchemaProps>(
+const AdminsSchema = new Schema<IAdminsSchemaProps>(
   {
     email: { type: String, unique: true, required: true, lowercase: true },
     levelAccess: { type: String, required: true },

@@ -2,24 +2,24 @@ import { z } from 'zod';
 import Admins from '../Schemas/adminsSchema';
 import database from '../database/mongodb';
 import { ObjectId } from 'mongodb';
-import { AdminInDataBase, ResponseDefault } from '@/types/admins';
+import { IAdminInDataBase, IResponseDefault } from '@/types/admins';
 
 database.connect();
 
 export const FindAdmin = async (
   email: string
-): Promise<AdminInDataBase | null> => {
+): Promise<IAdminInDataBase | null> => {
   await database.connect();
   const admin = (await Admins.findOne({
     email: email
-  }).lean()) as AdminInDataBase | null;
+  }).lean()) as IAdminInDataBase | null;
   return admin;
 };
 
 export const FindAllAdmins = async (): Promise<
-  AdminInDataBase[] | null | ResponseDefault
+  IAdminInDataBase[] | null | IResponseDefault
 > => {
-  const admins = (await Admins.find({}).lean()) as AdminInDataBase[] | null;
+  const admins = (await Admins.find({}).lean()) as IAdminInDataBase[] | null;
 
   if (!admins) {
     return {
@@ -61,7 +61,7 @@ export const CreateAdmin = async (res: {
 
 export const DeleteAdmin = async (
   id: string
-): Promise<AdminInDataBase | null | ResponseDefault> => {
+): Promise<IAdminInDataBase | null | IResponseDefault> => {
   const adminDeleted = await Admins.findByIdAndDelete({
     _id: new ObjectId(id)
   });
@@ -77,7 +77,7 @@ export const UpdateAdmin = async (
   id: string,
   name: string,
   image: string
-): Promise<AdminInDataBase | null | ResponseDefault> => {
+): Promise<IAdminInDataBase | null | IResponseDefault> => {
   const newAdmin = await Admins.findByIdAndUpdate(
     { _id: id },
     {

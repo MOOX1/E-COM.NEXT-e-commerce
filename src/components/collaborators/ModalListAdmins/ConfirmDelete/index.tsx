@@ -1,7 +1,7 @@
 import { Check, Trash, X } from 'lucide-react';
 import Div from '@/components/Div';
 
-interface ConfirmDeleteProps {
+interface IConfirmDeleteProps {
   certain: boolean;
   onClick: () => void;
   handleDeleteAdmin: () => void;
@@ -11,7 +11,7 @@ export default function ConfirmDelete({
   certain,
   onClick,
   handleDeleteAdmin
-}: ConfirmDeleteProps) {
+}: IConfirmDeleteProps) {
   return (
     <div className="w-1/6">
       {certain && (

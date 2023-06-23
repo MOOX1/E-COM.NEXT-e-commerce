@@ -4,7 +4,7 @@ import { X } from 'lucide-react';
 import { ReactNode } from 'react';
 import Div from '../Div';
 
-interface ModalProps {
+interface IModalProps {
   width: string;
   iconClose: boolean;
   contentModal: ReactNode;
@@ -18,7 +18,7 @@ export default function Modal({
   contentModal,
   handleModal,
   isVisible
-}: ModalProps) {
+}: IModalProps) {
   return (
     <>
       <Div

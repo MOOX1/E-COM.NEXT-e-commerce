@@ -8,10 +8,11 @@ import * as zod from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Control, UseFormReturn, useForm } from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
-import { useState } from 'react';
-import Toast, { ToastType } from '@/components/Toast';
 
-type FormValues = {
+import { Toast } from '@/components/Toast';
+import { useAdmins } from '@/hooks/admins';
+
+type TFormValues = {
   Nome: string;
 };
 
@@ -20,21 +21,16 @@ const schema = z.object({
   levelAccess: z.string().min(1, 'Campo Obrigatorio')
 });
 
-type FormDataProps = z.infer<typeof schema>;
+type TFormDataProps = z.infer<typeof schema>;
 
 export default function AddCollaborators() {
-  const [messageToast, setMessageToast] = useState<string | undefined>(
-    undefined
-  );
-  const [typeToast, setTypeToast] = useState<ToastType | undefined>(undefined);
-
   const {
     handleSubmit,
     register,
     formState: { errors },
     control,
     reset
-  } = useForm<FormDataProps>({
+  } = useForm<TFormDataProps>({
     mode: 'onSubmit',
     criteriaMode: 'firstError',
     resolver: zod.zodResolver(schema),
@@ -44,7 +40,7 @@ export default function AddCollaborators() {
     }
   });
 
-  const onSubmit = (data: FormDataProps) => {
+  const onSubmit = (data: TFormDataProps) => {
     fetch('/api/all-admins/create-admin', {
       method: 'POST',
       body: JSON.stringify(data)
@@ -52,11 +48,23 @@ export default function AddCollaborators() {
       .then((data) => data.json())
       .then((response) => {
         if (response?.message) {
-          setTypeToast('error');
-          return setMessageToast(response.message);
+          return Toast({ message: response.message, type: 'error' });
         }
-        setTypeToast('success');
-        return setMessageToast('Cadastrado com sucesso');
+
+        useAdmins.setState((state) => ({
+          state: {
+            admins: {
+              ...state.state.admins,
+              data: [...state.state.admins.data, response]
+            }
+          }
+        }));
+
+        return Toast({
+          message: 'Usuário criado com sucesso',
+          type: 'success',
+          onClose: () => reset({ email: '' })
+        });
       });
   };
 
@@ -65,14 +73,6 @@ export default function AddCollaborators() {
       onSubmit={handleSubmit(onSubmit)}
       className="ml-5 flex h-full w-full p-2"
     >
-      <Toast
-        message={messageToast}
-        type={typeToast}
-        onClose={() => {
-          reset();
-          setMessageToast(undefined);
-        }}
-      />
       <div className="flex h-full w-3/4 flex-col justify-evenly ">
         <h1 className="text-lg text-mediaBlue">CADASTRAR</h1>
         <div className="ml-2 flex justify-evenly gap-3">
@@ -99,7 +99,7 @@ export default function AddCollaborators() {
           >
             <Select
               controlForm={{
-                control: control as unknown as Control<FormValues>,
+                control: control as unknown as Control<TFormValues>,
                 name: 'levelAccess' as 'Nome',
                 defaultValue: '',
                 rules: { required: true }

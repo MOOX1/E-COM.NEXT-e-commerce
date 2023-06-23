@@ -1,4 +1,4 @@
-interface DataAdminProps {
+interface IDataAdminProps {
   email?: string;
   levelAccess?: string;
   name?: string;
@@ -8,7 +8,7 @@ export default function DataAdmin({
   email,
   levelAccess,
   name
-}: DataAdminProps) {
+}: IDataAdminProps) {
   return (
     <div className="w-3/5 ">
       <div className="flex flex-col items-baseline gap-1 pl-5 text-left font-alt text-white">

@@ -1,12 +1,12 @@
 import Link from 'next/link';
-import { SubMenuItemProps } from '../types';
+import { ISubMenuItemProps } from '../types';
 
-interface SubMenuProps {
-  SubMenuItems?: SubMenuItemProps[];
+interface ISubMenuProps {
+  SubMenuItems?: ISubMenuItemProps[];
   collapsed?: boolean;
 }
 
-export default function SubmenuItem({ SubMenuItems }: SubMenuProps) {
+export default function SubmenuItem({ SubMenuItems }: ISubMenuProps) {
   return (
     <div
       className={

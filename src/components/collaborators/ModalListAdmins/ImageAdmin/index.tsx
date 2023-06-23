@@ -2,11 +2,11 @@ import Image from 'next/image';
 import { User } from 'lucide-react';
 7;
 
-interface ImageAdminProps {
+interface IImageAdminProps {
   image?: string;
 }
 
-export default function ImageAdmin({ image }: ImageAdminProps) {
+export default function ImageAdmin({ image }: IImageAdminProps) {
   return (
     <div className="flex  w-2/5 items-center justify-center border-r border-mainBlue/20 pr-5 ">
       {image ? (

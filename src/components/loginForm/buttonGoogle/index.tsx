@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import googleIcon from '@/assets/googleIcon.svg';
 
-interface ButtonGoogleProps {
+interface IButtonGoogleProps {
   onClick: () => void;
 }
 
-export default function ButtonGoogle({ onClick }: ButtonGoogleProps) {
+export default function ButtonGoogle({ onClick }: IButtonGoogleProps) {
   return (
     <div
       onClick={onClick}

@@ -1,7 +1,7 @@
 import { User } from 'next-auth';
 type LogsType = 'delete' | 'edit' | 'add';
 
-export interface Logs {
+export interface ILogs {
   type: LogsType;
   description: string;
   autor: User;

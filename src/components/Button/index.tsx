@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-interface ButtonProps {
+interface IButtonProps {
   type?: 'button' | 'submit' | 'reset' | undefined;
   ariaLabel?: string;
   className?: string;
@@ -12,7 +12,7 @@ export default function Button({
   className,
   type,
   label
-}: ButtonProps) {
+}: IButtonProps) {
   return (
     <button
       type={type}

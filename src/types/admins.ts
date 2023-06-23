@@ -1,4 +1,4 @@
-export interface AdminInDataBase {
+export interface IAdminInDataBase {
   _id: string;
   email: string;
   levelAccess: string;
@@ -6,9 +6,9 @@ export interface AdminInDataBase {
   name: string;
 }
 
-type ResponseCode = 200 | 201 | 401 | 404 | 500;
+type TResponseCode = 200 | 201 | 401 | 404 | 500;
 
-export interface ResponseDefault {
-  status: ResponseCode;
+export interface IResponseDefault {
+  status: TResponseCode;
   message: string;
 }

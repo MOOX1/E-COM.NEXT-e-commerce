@@ -1,45 +1,30 @@
 'use client';
 
-import { useCallback, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 
-export type ToastType = 'success' | 'info' | 'error' | 'default';
+export type TToastType = 'success' | 'info' | 'error' | 'default';
 
-interface ToastProps {
-  type?: ToastType;
+interface IToastProps {
+  type?: TToastType;
   message?: string;
   onClose?: () => void;
 }
 
-export default function Toast({
-  message,
-  type = 'default',
-  onClose
-}: ToastProps) {
-  const showToast = useCallback(
-    (message: string) => {
-      toast(message, {
-        autoClose: false,
-        hideProgressBar: false,
-        closeOnClick: true,
-        type: type,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: 'dark',
-        onClose: onClose
-      });
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [message, type]
-  );
+export const Toast = ({ message, onClose, type }: IToastProps) => {
+  toast(message, {
+    autoClose: false,
+    hideProgressBar: false,
+    closeOnClick: true,
+    type: type,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: 'dark',
+    onClose: onClose
+  });
+};
 
-  useEffect(() => {
-    if (!message) return;
-
-    showToast(message);
-  }, [message, showToast]);
-
+export function ContainerToast() {
   return (
     <ToastContainer
       toastStyle={{

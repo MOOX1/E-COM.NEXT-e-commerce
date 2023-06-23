@@ -1,6 +1,6 @@
 import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { Logs } from './types';
+import { ILogs } from './types';
 import List from './List';
 import Div from '../Div';
 import { Fetch } from '@/services/fetch';
@@ -24,7 +24,7 @@ const list = {
 };
 
 const LogChanges = async () => {
-  let logs: Logs[] = [];
+  let logs: ILogs[] = [];
   try {
     const response = await Fetch(`/api/logs`, {
       next: {

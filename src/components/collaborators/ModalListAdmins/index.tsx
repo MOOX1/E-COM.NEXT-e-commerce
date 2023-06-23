@@ -1,13 +1,13 @@
 import Modal from '@/components/Modal';
-import { AdminInDataBase } from '@/types/admins';
+import { IAdminInDataBase } from '@/types/admins';
 import { useState } from 'react';
 import ConfirmDelete from './ConfirmDelete';
 import ImageAdmin from './ImageAdmin';
 import DataAdmin from './DataAdmin';
 
-interface ModalListAdmins {
+interface IModalListAdmins {
   isVisible: boolean;
-  adminSelected?: AdminInDataBase;
+  adminSelected?: IAdminInDataBase;
   handleIsOpenModal: () => void;
   handleDeleteAdmin: (id: string) => void;
 }
@@ -17,7 +17,7 @@ export default function ModalListAdmins({
   isVisible,
   adminSelected,
   handleDeleteAdmin
-}: ModalListAdmins) {
+}: IModalListAdmins) {
   const [certain, setCertain] = useState<boolean>(false);
 
   return (
