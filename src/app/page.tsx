@@ -13,10 +13,6 @@ export default async function Home() {
     <div className=" bg-conetnt flex flex-col gap-5">
       <h1>home</h1>
       <ButtonSignOut />
-      <Link href={'/teste'}>teste</Link>
-      <Link href={'/dashboard'}>dash</Link>
-      <Link href={'/settings'}>settings</Link>
-      <Link href={'/overview'}>overview</Link>
     </div>
   );
 }
