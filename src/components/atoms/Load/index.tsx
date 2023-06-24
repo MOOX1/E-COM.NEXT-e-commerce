@@ -15,7 +15,7 @@ export default function Load({ className }: ILoadProps) {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      animationData: require('../../assets/load.json')
+      animationData: require('../../../assets/load.json')
     });
   }, []);
 
