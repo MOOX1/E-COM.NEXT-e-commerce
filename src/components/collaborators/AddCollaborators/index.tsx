@@ -18,7 +18,7 @@ type TFormValues = {
 
 const schema = z.object({
   email: z.string().email('Informe um email válido'),
-  levelAccess: z.string().min(1, 'Campo Obrigatorio')
+  levelAccess: z.string().min(1, 'Campo Obrigatório')
 });
 
 type TFormDataProps = z.infer<typeof schema>;
@@ -90,6 +90,7 @@ export default function AddCollaborators() {
               errors={errors.email?.message}
               type="email"
               placeholder="Email"
+              ariaLabel="Email"
             />
           </Div>
           <Div

@@ -100,8 +100,7 @@ export default {
   // notifyMode: "failure-change",
 
   // A preset that is used as a base for Jest's configuration
-  // preset: undefined,
-
+  preset: 'ts-jest',
   // Run tests from one or more projects
   // projects: undefined,
 
@@ -200,7 +199,9 @@ export default {
     ]
   },
   moduleNameMapper: {
-    '\\.(svg)$': './IconGoogle.mock.svg'
+    '\\.(svg)$': './IconGoogle.mock.svg',
+    '^@/(.*)$': '<rootDir>/src/$1',
+    '\\.(css)$': 'identity-obj-proxy'
   },
 
   // An array of regexp pattern strings that are matched against all source file paths, matched files will skip transformation
