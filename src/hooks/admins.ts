@@ -1,5 +1,4 @@
 import { ITableProps } from '@/components/Table/types';
-import { IAdminInDataBase } from '@/types/admins';
 import { create } from 'zustand';
 
 interface IActionProps {
