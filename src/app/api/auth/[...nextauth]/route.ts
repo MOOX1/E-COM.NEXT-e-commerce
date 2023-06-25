@@ -24,27 +24,27 @@ const authOption: NextAuthOptions = {
         port: process.env.EMAIL_SERVER_PORT,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD
-        }
+          pass: process.env.EMAIL_SERVER_PASSWORD,
+        },
       },
-      from: process.env.EMAIL_FROM
+      from: process.env.EMAIL_FROM,
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRETE as string
-    })
+      clientSecret: process.env.GOOGLE_CLIENT_SECRETE as string,
+    }),
   ],
   jwt: {
-    maxAge: 60 * 60 * 8 // 8 hours
+    maxAge: 60 * 60 * 8, // 8 hours
   },
   session: {
     strategy: 'jwt',
-    maxAge: 60 * 60 * 8 // 8 hours
+    maxAge: 60 * 60 * 8, // 8 hours
   },
   pages: {
     signIn: '/signin',
     error: '/signin',
-    verifyRequest: '/verifyRequest'
+    verifyRequest: '/verifyRequest',
   },
   callbacks: {
     async signIn({ user, account, profile }) {
@@ -57,9 +57,7 @@ const authOption: NextAuthOptions = {
             ? account.providerAccountId
             : profile?.email;
 
-        const admin: IAdminInDataBase | null = await FindAdmin(
-          emailUser as string
-        );
+        const admin: IAdminInDataBase | null = await FindAdmin(emailUser as string);
 
         if (admin !== null) {
           if (!admin?.image) {
@@ -83,9 +81,7 @@ const authOption: NextAuthOptions = {
       return session;
     },
     async jwt({ token }) {
-      const admin: IAdminInDataBase | null = await FindAdmin(
-        token?.email as string
-      );
+      const admin: IAdminInDataBase | null = await FindAdmin(token?.email as string);
 
       if (admin) {
         token.id = admin._id;
@@ -93,8 +89,8 @@ const authOption: NextAuthOptions = {
       }
 
       return token;
-    }
-  }
+    },
+  },
 };
 
 const handler = NextAuth(authOption);

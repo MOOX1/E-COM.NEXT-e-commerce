@@ -18,5 +18,13 @@
     "Usuário",
     "válido",
     "zustand"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "soucer.fixAll.eslint": true
+  },
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "files.autoSave": "off",
+  "prettier.configPath": "./.prettierrc"
 }

@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'E.COM-NEXT',
-  description: '...'
+  description: '...',
 };
 
 export default async function Signin() {

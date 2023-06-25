@@ -8,12 +8,12 @@ const List = (item: ILogs) => {
   const colorBorder = {
     add: 'border-green-400',
     edit: 'border-yellow-400',
-    delete: 'border-red-400'
+    delete: 'border-red-400',
   }[item.type];
 
   const item1 = {
     visible: { opacity: 1, y: 0 },
-    hidden: { opacity: 0, y: -50 }
+    hidden: { opacity: 0, y: -50 },
   };
 
   return (
@@ -46,7 +46,7 @@ const List = (item: ILogs) => {
         {new Date(item.date).toLocaleDateString(undefined, {
           day: '2-digit',
           month: '2-digit',
-          year: '2-digit'
+          year: '2-digit',
         })}
       </p>
     </Div>

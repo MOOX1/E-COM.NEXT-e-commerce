@@ -14,7 +14,7 @@ import Input from '../atoms/Input';
 import Button from '../atoms/Button';
 
 const schema = z.object({
-  email: z.string().email('Informe um email válido')
+  email: z.string().email('Informe um email válido'),
 });
 
 type FormDataProps = z.infer<typeof schema>;
@@ -34,14 +34,14 @@ export default function LoginForm() {
   const {
     handleSubmit,
     register,
-    formState: { errors }
+    formState: { errors },
   } = useForm<FormDataProps>({
     mode: 'onSubmit',
     criteriaMode: 'firstError',
     resolver: zodResolver(schema),
     defaultValues: {
-      email: ''
-    }
+      email: '',
+    },
   });
 
   const onSubmit = (data: FormDataProps) => {
@@ -50,8 +50,8 @@ export default function LoginForm() {
     cookies.remove('error-rate-limit');
     signIn('email', {
       email: data.email,
-      redirect: false
-    }).then((data) => {
+      redirect: false,
+    }).then(data => {
       setIsLoading(false);
       if (!data?.error) {
         router.push(data?.url as string);
@@ -70,7 +70,7 @@ export default function LoginForm() {
     setError(undefined);
     setIsLoading(true);
     signIn('google', { redirect: false, callbackUrl: '/signin' }).finally(() =>
-      setIsLoading(false)
+      setIsLoading(false),
     );
   };
 

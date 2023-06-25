@@ -19,7 +19,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
       if (item.pathname == router) newItemActive = index;
       return {
         ...item,
-        isActive: item.pathname == router
+        isActive: item.pathname == router,
       };
     });
     menuItems = newMenuItems;
@@ -38,7 +38,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
           ` to-[rgba(217, 217, 217, 0) 79.7%)] absolute ml-20 h-12 w-full rounded-l-lg bg-gradient-to-r from-mainBlue opacity-70 duration-500 `
         }
       ></div>
-      {menuItems.map((item) => {
+      {menuItems.map(item => {
         return (
           <div key={item.label} className="z-10 w-full">
             <Tooltip
