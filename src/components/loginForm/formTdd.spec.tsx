@@ -35,9 +35,11 @@ describe('<LoginForm />', () => {
     const buttonSubmit = screen.getByLabelText(/button-submit/i);
     const buttonGoogle = screen.getByLabelText(/buttom-google/i);
 
-    expect(inputEmail).toBeInTheDocument();
-    expect(buttonSubmit).toBeInTheDocument();
-    expect(buttonGoogle).toBeInTheDocument();
+    waitFor(() => {
+      expect(inputEmail).toBeInTheDocument();
+      expect(buttonSubmit).toBeInTheDocument();
+      expect(buttonGoogle).toBeInTheDocument();
+    });
   }),
     it('submit with data not corrected', async () => {
       render(<LoginForm />);
@@ -54,6 +56,7 @@ describe('<LoginForm />', () => {
 
   it('submit with data corrected', async () => {
     render(<LoginForm />);
+    const message = screen.queryByText('Informe um email válido');
     const inputEmail = screen.getByLabelText(/E-mail/i);
 
     act(() => {
@@ -61,7 +64,7 @@ describe('<LoginForm />', () => {
     });
 
     await waitFor(() => {
-      expect(screen.queryByText('Informe um email válido')).not.toBeInTheDocument();
+      expect(message).not.toBeInTheDocument();
     });
   });
 });
