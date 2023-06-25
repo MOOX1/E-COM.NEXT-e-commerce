@@ -13,20 +13,20 @@ export default async function Collaborators() {
     const response = await Fetch(`/api/all-admins`, {
       next: {
         revalidate: 60,
-        tags: ['all-admins']
+        tags: ['all-admins'],
       },
       headers: {
-        cookies: Headers().get('cookie') ?? ''
-      }
+        cookies: Headers().get('cookie') ?? '',
+      },
     });
     admins = await response.json();
     useAdmins.setState({
       state: {
         admins: {
           columns: admins.columns,
-          data: admins.data
-        }
-      }
+          data: admins.data,
+        },
+      },
     });
   } catch (error) {
     console.log(error);

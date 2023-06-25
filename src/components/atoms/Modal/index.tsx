@@ -17,7 +17,7 @@ export default function Modal({
   width,
   contentModal,
   handleModal,
-  isVisible
+  isVisible,
 }: IModalProps) {
   return (
     <>
@@ -40,7 +40,7 @@ export default function Modal({
           animate={{
             y: isVisible ? 0 : -100,
             opacity: isVisible ? 1 : 0,
-            width: width
+            width: width,
           }}
           transition={{ duration: 0.3, delay: 0.1 }}
           className={`relative z-50 h-auto rounded-3xl border border-mediaBlue bg-strongBlue`}

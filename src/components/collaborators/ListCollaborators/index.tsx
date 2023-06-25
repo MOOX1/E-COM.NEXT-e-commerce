@@ -12,21 +12,21 @@ import { Toast } from '@/components/atoms/Toast';
 import { useAdmins } from '@/hooks/admins';
 
 export default function ListCollaborators() {
-  const admins = useAdmins((state) => state.state.admins);
+  const admins = useAdmins(state => state.state.admins);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [filteredAdmins, setFilteredAdmins] = useState(admins);
-  const [adminSelected, setAdminSelected] = useState<
-    IAdminInDataBase | undefined
-  >(undefined);
+  const [adminSelected, setAdminSelected] = useState<IAdminInDataBase | undefined>(
+    undefined,
+  );
 
   const handleFilter = (event: string) => {
-    const filteredData = admins.data.filter((admin) => {
+    const filteredData = admins.data.filter(admin => {
       return admin.email.toLowerCase().includes(event.toLowerCase());
     });
 
     setFilteredAdmins({
       ...admins,
-      data: filteredData
+      data: filteredData,
     });
   };
 
@@ -39,30 +39,30 @@ export default function ListCollaborators() {
   const handleDeleteAdmin = (id: string) => {
     setIsVisible(false);
     fetch(`/api/all-admins/delete/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     })
-      .then((data) => data.json())
-      .then((response) => {
+      .then(data => data.json())
+      .then(response => {
         if (response?.message) {
           return Toast({ message: response.message, type: 'error' });
         }
 
         const newAdmins = useAdmins
           .getState()
-          .state.admins.data.filter((item) => item._id !== response._id);
+          .state.admins.data.filter(item => item._id !== response._id);
 
         useAdmins.setState({
           state: {
             admins: {
               ...admins,
-              data: newAdmins
-            }
-          }
+              data: newAdmins,
+            },
+          },
         });
 
         return Toast({
           message: 'Usuário deletado com sucesso',
-          type: 'success'
+          type: 'success',
         });
       });
   };
@@ -91,9 +91,7 @@ export default function ListCollaborators() {
         <Table
           columns={admins.columns}
           data={filteredAdmins.data}
-          onClick={(item) =>
-            handleIsOpenModal(item as unknown as IAdminInDataBase)
-          }
+          onClick={item => handleIsOpenModal(item as unknown as IAdminInDataBase)}
         />
       </Suspense>
     </>

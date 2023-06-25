@@ -18,26 +18,26 @@ const menuItems: IMenuItemProps[] = [
     label: 'Dashboard',
     Icon: <LayoutPanelLeft className="h-auto w-6 text-white" />,
     pathname: '/',
-    isActive: true
+    isActive: true,
   },
   {
     label: 'Overview',
     Icon: <BarChart4 className="h-auto w-6 text-white" />,
     pathname: '/overview',
-    isActive: false
+    isActive: false,
   },
   {
     label: 'Produtos',
     Icon: <ShoppingBag className="h-auto w-6 text-white" />,
     pathname: '/produtos',
-    isActive: false
+    isActive: false,
   },
   {
     label: 'Colaboradores',
     Icon: <Users className="h-auto w-6 text-white" />,
     pathname: '/colaboradores',
-    isActive: false
-  }
+    isActive: false,
+  },
 ];
 
 function Sidebar({ buttonOpen, colapssed }: ISidebarProps) {

@@ -16,7 +16,7 @@ export default function ModalListAdmins({
   handleIsOpenModal,
   isVisible,
   adminSelected,
-  handleDeleteAdmin
+  handleDeleteAdmin,
 }: IModalListAdmins) {
   const [certain, setCertain] = useState<boolean>(false);
 

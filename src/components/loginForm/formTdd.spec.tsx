@@ -7,8 +7,8 @@ import { userEvent, waitFor } from '@storybook/testing-library';
 jest.mock('next/navigation', () => ({
   useRouter: jest.fn(),
   useSearchParams: jest.fn().mockReturnValue({
-    get: jest.fn().mockReturnValue('Seu erro mockado aqui')
-  })
+    get: jest.fn().mockReturnValue('Seu erro mockado aqui'),
+  }),
 }));
 
 export const loadAnimation = jest.fn();
@@ -16,15 +16,15 @@ export const loadAnimation = jest.fn();
 jest.mock('lottie-web', () => ({
   __esModule: true,
   default: {
-    loadAnimation: jest.fn()
-  }
+    loadAnimation: jest.fn(),
+  },
 }));
 
 jest.mock('next/image', () => ({
   __esModule: true,
   default: jest
     .fn()
-    .mockImplementation(({ src, alt }) => <img src={src} alt={alt} />)
+    .mockImplementation(({ src, alt }) => <img src={src} alt={alt} />),
 }));
 
 describe('<LoginForm />', () => {
@@ -61,9 +61,7 @@ describe('<LoginForm />', () => {
     });
 
     await waitFor(() => {
-      expect(
-        screen.queryByText('Informe um email válido')
-      ).not.toBeInTheDocument();
+      expect(screen.queryByText('Informe um email válido')).not.toBeInTheDocument();
     });
   });
 });

@@ -16,7 +16,7 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
   const options = [
     { value: 'admin super', label: 'Admin Super' },
     { value: 'admin viewer', label: 'Admin Viewer' },
-    { value: 'admin simple', label: 'Admin Simple' }
+    { value: 'admin simple', label: 'Admin Simple' },
   ];
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -68,7 +68,7 @@ const CustomSelect = ({ controlForm, error }: ICustomSelectProps) => {
               : 'absolute  top-full h-auto w-full rounded-b border border-mainBlue/20 bg-strongBlue'
           }
         >
-          {options.map((option) => (
+          {options.map(option => (
             <li
               key={option.value}
               className={

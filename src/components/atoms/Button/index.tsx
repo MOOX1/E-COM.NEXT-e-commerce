@@ -13,7 +13,7 @@ export default function Button({
   className,
   type,
   label,
-  onClick
+  onClick,
 }: IButtonProps) {
   return (
     <button

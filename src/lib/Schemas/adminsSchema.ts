@@ -12,9 +12,9 @@ const AdminsSchema = new Schema<IAdminsSchemaProps>(
     email: { type: String, unique: true, required: true, lowercase: true },
     levelAccess: { type: String, required: true },
     image: { type: String },
-    name: { type: String }
+    name: { type: String },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 const Admins = models.admins || model('admins', AdminsSchema);
