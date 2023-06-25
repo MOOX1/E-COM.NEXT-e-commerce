@@ -7,6 +7,7 @@ interface IButtonGoogleProps {
 
 function ButtonGoogle({ onClick }: IButtonGoogleProps) {
   return (
+    // eslint-disable-next-line jsx-a11y/no-static-element-interactions
     <div
       onClick={onClick}
       aria-label="buttom-google"
@@ -19,4 +20,5 @@ function ButtonGoogle({ onClick }: IButtonGoogleProps) {
     </div>
   );
 }
+
 export default ButtonGoogle;
