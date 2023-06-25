@@ -37,8 +37,8 @@ describe('<Input />', () => {
         type="text"
         ariaLabel="Username"
         placeholder="Enter your username"
-        onChange={(value) => handleChange(value)}
-      />
+        onChange={value => handleChange(value)}
+      />,
     );
 
     const inputElement: HTMLInputElement = screen.getByLabelText('Username');
@@ -62,7 +62,7 @@ describe('<Input />', () => {
         ariaLabel="Username"
         placeholder="Enter your username"
         errors={errorMessage}
-      />
+      />,
     );
 
     waitFor(() => {

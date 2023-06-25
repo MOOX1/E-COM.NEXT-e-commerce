@@ -20,7 +20,7 @@ export const Toast = ({ message, onClose, type }: IToastProps) => {
     draggable: true,
     progress: undefined,
     theme: 'dark',
-    onClose: onClose
+    onClose: onClose,
   });
 };
 
@@ -30,7 +30,7 @@ export function ContainerToast() {
       toastStyle={{
         background: '#010217',
         border: 'solid 1px #6E8EDB',
-        color: 'white'
+        color: 'white',
       }}
     />
   );

@@ -12,11 +12,11 @@ export async function GET(req: NextRequest) {
           levelAccess: 'admin super',
           email: 'vitormeneses87@gmail.com',
           image: '',
-          name: 'Vitor Meneses'
+          name: 'Vitor Meneses',
         },
         titulo: 'Cadastrou produto',
         description: 'Cadastrou o produto pão de forma',
-        date: new Date()
+        date: new Date(),
       },
       {
         type: 'edit',
@@ -25,11 +25,11 @@ export async function GET(req: NextRequest) {
           levelAccess: 'admin super',
           email: 'vitormeneses87@gmail.com',
           image: '',
-          name: 'Vitor Meneses'
+          name: 'Vitor Meneses',
         },
         titulo: 'Editou produto',
         description: 'Editou o produto pão de forma',
-        date: new Date()
+        date: new Date(),
       },
       {
         type: 'delete',
@@ -38,12 +38,12 @@ export async function GET(req: NextRequest) {
           levelAccess: 'admin super',
           email: 'vitormeneses87@gmail.com',
           image: '',
-          name: 'Vitor Meneses'
+          name: 'Vitor Meneses',
         },
         titulo: 'Deletou produto',
         description: 'Deletou o produto pão de forma',
-        date: new Date()
-      }
+        date: new Date(),
+      },
     ];
     return NextResponse.json(data);
   } catch (error) {
