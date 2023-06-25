@@ -12,16 +12,16 @@ interface IItemsTableProps extends ITableProps {
 export default function ItemsTable({
   columns,
   data,
-  onClickItem
+  onClickItem,
 }: IItemsTableProps) {
   const item1 = {
     visible: { opacity: 1, y: 0 },
-    hidden: { opacity: 0, y: -50 }
+    hidden: { opacity: 0, y: -50 },
   };
 
   return (
     <>
-      {data?.map((itemData) => (
+      {data?.map(itemData => (
         <Div
           handleClick={() => {
             if (onClickItem) return onClickItem(itemData);
@@ -33,7 +33,7 @@ export default function ItemsTable({
             'flex w-full cursor-pointer  items-center justify-between gap-2 border-b-[1px] border-mainBlue/10 px-5 py-2 transition-colors hover:bg-mediaBlue/10'
           }
         >
-          {columns?.map((item) => {
+          {columns?.map(item => {
             if (item == 'image') {
               return (
                 <div key={item}>
@@ -60,10 +60,7 @@ export default function ItemsTable({
               );
             }
             return (
-              <div
-                style={{ width: `${100 / columns.length}%` }}
-                key={itemData[0]}
-              >
+              <div style={{ width: `${100 / columns.length}%` }} key={itemData[0]}>
                 <p
                   className={`w-full overflow-hidden text-ellipsis whitespace-nowrap text-center text-white`}
                 >

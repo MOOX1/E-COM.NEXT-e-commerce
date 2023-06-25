@@ -20,7 +20,7 @@ export default function Div({
   transition,
   variants,
   style,
-  handleClick
+  handleClick,
 }: Partial<IDivProps>) {
   return (
     <AnimatePresence>

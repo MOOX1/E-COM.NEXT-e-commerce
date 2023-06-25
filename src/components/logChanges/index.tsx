@@ -12,15 +12,15 @@ const list = {
     opacity: 1,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.3
-    }
+      staggerChildren: 0.3,
+    },
   },
   hidden: {
     opacity: 0,
     transition: {
-      when: 'afterChildren'
-    }
-  }
+      when: 'afterChildren',
+    },
+  },
 };
 
 const LogChanges = async () => {
@@ -28,8 +28,8 @@ const LogChanges = async () => {
   try {
     const response = await Fetch(`/api/logs`, {
       next: {
-        revalidate: 60
-      }
+        revalidate: 60,
+      },
     });
     logs = await response.json();
   } catch (error) {

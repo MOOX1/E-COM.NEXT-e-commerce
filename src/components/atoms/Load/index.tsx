@@ -15,16 +15,13 @@ export default function Load({ className }: ILoadProps) {
       renderer: 'svg',
       loop: true,
       autoplay: true,
-      animationData: require('../../../assets/load.json')
+      animationData: require('../../../assets/load.json'),
     });
   }, []);
 
   return (
     <div className="flex h-full w-full items-center justify-center">
-      <div
-        ref={containerRef}
-        className={'-mt-10 h-auto w-20 ' + className}
-      ></div>
+      <div ref={containerRef} className={'-mt-10 h-auto w-20 ' + className}></div>
     </div>
   );
 }

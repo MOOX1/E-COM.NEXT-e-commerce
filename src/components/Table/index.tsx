@@ -11,15 +11,15 @@ const list = {
     opacity: 1,
     transition: {
       when: 'beforeChildren',
-      staggerChildren: 0.3
-    }
+      staggerChildren: 0.3,
+    },
   },
   hidden: {
     opacity: 0,
     transition: {
-      when: 'beforeChildren'
-    }
-  }
+      when: 'beforeChildren',
+    },
+  },
 };
 
 const Table = ({ columns, data, onClick }: ITableProps) => {
@@ -27,7 +27,7 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
     <div className="w-full">
       <div className="w-full">
         <div className="flex w-full justify-between border-b-[1px] border-mainBlue/10 px-5 font-alt text-white">
-          {columns?.map((item) => {
+          {columns?.map(item => {
             if (item == 'image') {
               return (
                 <div key={item}>
@@ -49,7 +49,7 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
 
         <Div initial="hidden" animate="visible" variants={list}>
           <ItemsTable
-            onClickItem={(item) => onClick && onClick(item)}
+            onClickItem={item => onClick && onClick(item)}
             columns={columns}
             data={data}
           />

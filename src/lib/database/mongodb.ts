@@ -15,7 +15,7 @@ async function disconnect() {
 
 const database = {
   connect,
-  disconnect
+  disconnect,
 };
 
 export default database;

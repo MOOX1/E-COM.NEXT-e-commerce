@@ -18,7 +18,7 @@ type TFormValues = {
 
 const schema = z.object({
   email: z.string().email('Informe um email válido'),
-  levelAccess: z.string().min(1, 'Campo Obrigatório')
+  levelAccess: z.string().min(1, 'Campo Obrigatório'),
 });
 
 type TFormDataProps = z.infer<typeof schema>;
@@ -29,50 +29,47 @@ export default function AddCollaborators() {
     register,
     formState: { errors },
     control,
-    reset
+    reset,
   } = useForm<TFormDataProps>({
     mode: 'onSubmit',
     criteriaMode: 'firstError',
     resolver: zod.zodResolver(schema),
     defaultValues: {
       email: '',
-      levelAccess: ''
-    }
+      levelAccess: '',
+    },
   });
 
   const onSubmit = (data: TFormDataProps) => {
     reset({ email: '' });
     fetch('/api/all-admins/create-admin', {
       method: 'POST',
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
-      .then((data) => data.json())
-      .then((response) => {
+      .then(data => data.json())
+      .then(response => {
         if (response?.message) {
           return Toast({ message: response.message, type: 'error' });
         }
 
-        useAdmins.setState((state) => ({
+        useAdmins.setState(state => ({
           state: {
             admins: {
               ...state.state.admins,
-              data: [...state.state.admins.data, response]
-            }
-          }
+              data: [...state.state.admins.data, response],
+            },
+          },
         }));
 
         return Toast({
           message: 'Usuário criado com sucesso',
-          type: 'success'
+          type: 'success',
         });
       });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="ml-5 flex h-full w-full p-2"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="ml-5 flex h-full w-full p-2">
       <div className="flex h-full w-3/4 flex-col justify-evenly ">
         <h1 className="text-lg text-mediaBlue">CADASTRAR</h1>
         <div className="ml-2 flex justify-evenly gap-3">
@@ -84,7 +81,7 @@ export default function AddCollaborators() {
             <Input
               useFormRegister={
                 register('email', {
-                  required: true
+                  required: true,
                 }) as unknown as UseFormReturn['register']
               }
               errors={errors.email?.message}
@@ -103,7 +100,7 @@ export default function AddCollaborators() {
                 control: control as unknown as Control<TFormValues>,
                 name: 'levelAccess' as 'Nome',
                 defaultValue: '',
-                rules: { required: true }
+                rules: { required: true },
               }}
               error={errors.levelAccess?.message}
             />
