@@ -14,7 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "typeRoots": ["./types/next-auth.d.ts"],
     "plugins": [
       {
         "name": "next"
