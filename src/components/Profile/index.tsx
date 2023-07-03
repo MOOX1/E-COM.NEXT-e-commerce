@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Icon from '@/app/icon.svg';
 
 interface IProfileProps {
-  colapssed: boolean;
+  collapsed: boolean;
 }
 
-export default function Profile({ colapssed }: IProfileProps) {
+export default function Profile({ collapsed }: IProfileProps) {
   return (
     <div className=" flex items-center justify-center gap-2 pb-5">
       <div className="flex h-12 w-12 items-center justify-center rounded-full bg-mediaBlue p-[1px]">
@@ -15,7 +15,7 @@ export default function Profile({ colapssed }: IProfileProps) {
       </div>
       <div
         className={
-          (colapssed && ' absolute w-0 opacity-0 !duration-100') +
+          (collapsed && ' absolute w-0 opacity-0 !duration-100') +
           ' transition-opacity duration-1000'
         }
       >

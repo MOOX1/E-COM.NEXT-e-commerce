@@ -55,6 +55,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.redirect(new URL('/signin', req.url));
   }
 
+  if (req.nextUrl.pathname == '/') {
+    return NextResponse.redirect(new URL('/produtos', req.url));
+  }
+
   return NextResponse.next();
 }
 

@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { LayoutPanelLeft, BarChart4, ShoppingBag, Users } from 'lucide-react';
+import { Users, Box } from 'lucide-react';
 import Image from 'next/image';
 import logoInline from '../../assets/logoInline.svg';
 import ButtonSignOut from '../ButtonSignOut';
@@ -10,27 +10,15 @@ import { memo } from 'react';
 
 interface ISidebarProps {
   buttonOpen: ReactNode;
-  colapssed: boolean;
+  collapsed: boolean;
 }
 
 const menuItems: IMenuItemProps[] = [
   {
-    label: 'Dashboard',
-    Icon: <LayoutPanelLeft className="h-auto w-6 text-white" />,
-    pathname: '/',
-    isActive: true,
-  },
-  {
-    label: 'Overview',
-    Icon: <BarChart4 className="h-auto w-6 text-white" />,
-    pathname: '/overview',
-    isActive: false,
-  },
-  {
     label: 'Produtos',
-    Icon: <ShoppingBag className="h-auto w-6 text-white" />,
+    Icon: <Box className="h-auto w-6 text-white" />,
     pathname: '/produtos',
-    isActive: false,
+    isActive: true,
   },
   {
     label: 'Colaboradores',
@@ -40,22 +28,22 @@ const menuItems: IMenuItemProps[] = [
   },
 ];
 
-function Sidebar({ buttonOpen, colapssed }: ISidebarProps) {
+function Sidebar({ buttonOpen, collapsed }: ISidebarProps) {
   return (
     <nav className="h-screen w-full overflow-hidden bg-strongBlue py-14">
-      <Profile colapssed={colapssed} />
-      <MenuItem colapssed={colapssed} menuItems={menuItems} />
+      <Profile collapsed={collapsed} />
+      <MenuItem collapsed={collapsed} menuItems={menuItems} />
       <div className="flex justify-center">{buttonOpen}</div>
 
       <div
         className={
-          (colapssed && 'bottom-10') +
+          (collapsed && 'bottom-10') +
           ' absolute bottom-0 flex w-full flex-col items-center justify-center duration-1000 '
         }
       >
         <ButtonSignOut />
 
-        {!colapssed && (
+        {!collapsed && (
           <Image
             src={logoInline}
             height={60}

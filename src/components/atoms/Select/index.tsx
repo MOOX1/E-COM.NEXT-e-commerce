@@ -4,10 +4,10 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import { UseControllerProps, useController } from 'react-hook-form';
 
-type TFormValues = {
+export type TFormValues = {
   Nome: string;
 };
-interface ICustomSelectProps {
+export interface ICustomSelectProps {
   controlForm: UseControllerProps<TFormValues>;
   error?: string;
 }

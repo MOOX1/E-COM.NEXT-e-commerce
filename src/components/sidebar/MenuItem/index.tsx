@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 interface IMenuItemsProps {
-  colapssed: boolean;
+  collapsed: boolean;
   menuItems: IMenuItemProps[];
 }
 
-function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
+function MenuItem({ collapsed, menuItems }: IMenuItemsProps) {
   const router = usePathname();
   let positionSelected = '0.1rem';
 
@@ -34,7 +34,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
       <div
         style={{ top: `${positionSelected}` }}
         className={
-          (colapssed && ' ml-4') +
+          (collapsed && ' ml-4') +
           ` to-[rgba(217, 217, 217, 0) 79.7%)] absolute ml-20 h-12 w-full rounded-l-lg bg-gradient-to-r from-mainBlue opacity-70 duration-500 `
         }
       ></div>
@@ -42,7 +42,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
         return (
           <div key={item.label} className="z-10 w-full">
             <Tooltip
-              overlayClassName={' ' + (!colapssed && 'hidden')}
+              overlayClassName={' ' + (!collapsed && 'hidden')}
               title={item.label}
               color="#010217"
               placement="left"
@@ -50,7 +50,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
               <Link
                 prefetch={false}
                 className={
-                  (colapssed && ' justify-center !pl-0') +
+                  (collapsed && ' justify-center !pl-0') +
                   ' peer z-10 flex w-full cursor-pointer gap-3 py-3 pl-16 transition-colors duration-200 ' +
                   (!item.isActive && 'hover:bg-mediaBlue/10')
                 }
@@ -60,7 +60,7 @@ function MenuItem({ colapssed, menuItems }: IMenuItemsProps) {
 
                 <p
                   className={
-                    (colapssed ? ' absolute w-0 opacity-0 !duration-100' : '') +
+                    (collapsed ? ' absolute w-0 opacity-0 !duration-100' : '') +
                     ' flex items-center font-alt text-base font-normal text-mainBlue ' +
                     (item.isActive ? ' !font-semibold ' : '')
                   }
