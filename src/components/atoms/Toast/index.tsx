@@ -27,6 +27,7 @@ export const Toast = ({ message, onClose, type }: IToastProps) => {
 export function ContainerToast() {
   return (
     <ToastContainer
+      className={'containerToast'}
       toastStyle={{
         background: '#010217',
         border: 'solid 1px #6E8EDB',

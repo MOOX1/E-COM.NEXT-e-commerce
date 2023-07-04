@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import Modal from './';
 import { act } from 'react-dom/test-utils';
 import { userEvent } from '@storybook/testing-library';
