@@ -15,7 +15,7 @@ const LevelAccessItems: ILevelAccessProps[] = [
     icon: <Crown className="h-auto w-8 text-mediaBlue " />,
     title: 'Admin Super',
     description: 'O admin super tem direito de fazer qualquer mundaça no site',
-    subDescription: 'não recomendamos dar esse acesso para muitas pessoas'
+    subDescription: 'não recomendamos dar esse acesso para muitas pessoas',
   },
   {
     icon: <Gem className="h-auto w-8 text-mediaBlue " />,
@@ -23,21 +23,21 @@ const LevelAccessItems: ILevelAccessProps[] = [
     description:
       'O admin Simple tem direito de editar e cadastrar produtos e tudo relacionado a eles',
     subDescription: 'Recomendado para a maioria dos admins',
-    seeMore: 'Saiba mais...'
+    seeMore: 'Saiba mais...',
   },
   {
     icon: <Eye className="h-auto w-8 text-mediaBlue " />,
     title: 'Admin Viewer',
     description:
       'O admin Simple serve para observação de dados e emissão de relatórios',
-    subDescription: 'Recomendado para pessoas que manipulam apenas dados'
-  }
+    subDescription: 'Recomendado para pessoas que manipulam apenas dados',
+  },
 ];
 
 export default function LevelAccess() {
   return (
     <div className="flex h-full w-full p-3 text-base text-mainBlue ">
-      {LevelAccessItems.map((item) => (
+      {LevelAccessItems.map(item => (
         <Div
           key={item.description}
           initial={{ x: -50, opacity: 0, scale: 0 }}

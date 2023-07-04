@@ -11,7 +11,7 @@ const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
   limiter: Ratelimit.cachedFixedWindow(10, '10s'),
   ephemeralCache: chache,
-  analytics: true
+  analytics: true,
 });
 
 // This function can be marked `async` if using `await` inside
@@ -31,7 +31,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
       const response = NextResponse.next();
       response.cookies.set(
         'error-rate-limit',
-        'Excedeu a quantidade de tentativas, tente em 1 minuto'
+        'Excedeu a quantidade de tentativas, tente em 1 minuto',
       );
       return response;
     }
@@ -55,6 +55,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
     return NextResponse.redirect(new URL('/signin', req.url));
   }
 
+  if (req.nextUrl.pathname == '/') {
+    return NextResponse.redirect(new URL('/produtos', req.url));
+  }
+
   return NextResponse.next();
 }
 
@@ -64,6 +68,6 @@ export const config = {
     '/',
     '/signin',
     '/api/auth/signin/google',
-    '/colaboradores'
-  ]
+    '/colaboradores',
+  ],
 };

@@ -15,6 +15,7 @@ export default function ButtonSignOut() {
 
   return (
     <div
+      aria-label="logout-icon"
       onClick={handleSigningAuth}
       className="cursor-pointer rounded-full p-2 transition-colors hover:bg-mediaBlue/10"
     >

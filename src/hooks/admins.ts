@@ -13,19 +13,19 @@ interface IAdminProps {
   actions: IActionProps;
 }
 
-export const useAdmins = create<IAdminProps>((set) => ({
+export const useAdmins = create<IAdminProps>(set => ({
   state: {
-    admins: { columns: [], data: [] }
+    admins: { columns: [], data: [] },
   },
   actions: {
-    addAdmin: (admin) =>
-      set((state) => ({
+    addAdmin: admin =>
+      set(state => ({
         state: {
           admins: {
             columns: [...state.state.admins.columns, admin.columns] as string[],
-            data: [...state.state.admins.data, admin.data]
-          }
-        }
-      }))
-  }
+            data: [...state.state.admins.data, admin.data],
+          },
+        },
+      })),
+  },
 }));

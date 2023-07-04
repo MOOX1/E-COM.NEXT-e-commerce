@@ -8,7 +8,7 @@ import Load from '@/components/atoms/Load';
 import {
   TopForBottom,
   RightForLeft,
-  BottomForTop
+  BottomForTop,
 } from '@/components/atoms/Div/animations';
 
 import Collaborators from '@/components/collaborators';
@@ -17,7 +17,7 @@ import LevelAccess from '@/components/collaborators/LevelAccess';
 
 export const metadata: Metadata = {
   title: 'Colaboradores',
-  description: '...'
+  description: '...',
 };
 
 const Colaboradores = async () => {

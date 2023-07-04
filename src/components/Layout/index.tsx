@@ -19,7 +19,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         collapsed={collapsed}
       >
         <Sidebar
-          colapssed={collapsed}
+          collapsed={collapsed}
           buttonOpen={
             <Button
               type="text"
@@ -37,7 +37,7 @@ function Layout({ children }: { children: React.ReactNode }) {
         />
       </Sider>
       <LayoutAntd>
-        <Content className=" h-screen overflow-auto bg-bodyColor p-5 font-sans text-black">
+        <Content className=" h-screen overflow-auto bg-bodyColor p-5 font-sans text-black text-white">
           {children}
         </Content>
       </LayoutAntd>

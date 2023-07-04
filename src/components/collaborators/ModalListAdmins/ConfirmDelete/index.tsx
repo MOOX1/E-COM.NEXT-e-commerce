@@ -10,7 +10,7 @@ interface IConfirmDeleteProps {
 export default function ConfirmDelete({
   certain,
   onClick,
-  handleDeleteAdmin
+  handleDeleteAdmin,
 }: IConfirmDeleteProps) {
   return (
     <div className="w-1/6">

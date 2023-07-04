@@ -14,7 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "typeRoots": ["./types/next-auth.d.ts"],
     "plugins": [
       {
         "name": "next"
@@ -32,11 +31,5 @@
     ".next/types/**/*.ts",
     "src/lib/mongodb.js"
   ],
-  "exclude": [
-    "node_modules",
-    "**/*.spec.ts",
-    "**/*.spec.tsx",
-    "**/*.test.ts",
-    "**/*.test.tsx"
-  ]
+  "exclude": ["node_modules"]
 }

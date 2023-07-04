@@ -22,7 +22,7 @@ export async function GET() {
 
     return NextResponse.json({
       columns: ['image', 'name', 'email', 'levelAccess'],
-      data: admins
+      data: admins,
     });
   } catch (error) {
     console.log(error);
