@@ -9,7 +9,7 @@ export default function Profile() {
   const { data } = useSession();
 
   return (
-    <div className="relative flex h-full w-2/4 flex-col items-center justify-center gap-4 rounded-lg bg-strongBlue p-3 text-center shadow-main">
+    <div className="relative flex h-full w-2/4  items-center justify-center gap-4 rounded-lg bg-strongBlue p-3 text-center shadow-main">
       <Suspense fallback={<Load />}>
         <div className="h-24 w-24 rounded-full bg-white">
           <Image
@@ -20,7 +20,7 @@ export default function Profile() {
             className="rounded-full"
           />
         </div>
-        <div className="flex flex-col items-center justify-center gap-1 text-center font-alt text-white">
+        <div className="flex flex-col items-start justify-center gap-1 text-left font-alt text-white">
           <p className="font-alt text-lg font-semibold uppercase">
             {data?.user?.levelAccess}
           </p>

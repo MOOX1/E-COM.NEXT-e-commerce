@@ -24,8 +24,6 @@ export default function Div({
   handleClick,
   key,
 }: Partial<IDivProps>) {
-  console.log(key);
-
   return (
     <AnimatePresence key={key}>
       <motion.div

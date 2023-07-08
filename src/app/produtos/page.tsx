@@ -8,7 +8,7 @@ export default function Produtos() {
         <div className="flex min-h-[100px] w-full flex-1 flex-col items-center justify-center bg-strongBlue py-3 duration-300 hover:flex-[1.5]">
           cadastrar produto
           <h1 className="text-red-500"> Caracteristicas de produtos: </h1>
-          <ul className="list-decimal">
+          <ul className=" list-decimal p-5">
             <li> Nome </li>
             <li> Preço </li>
             <li> Preço promocional </li>
