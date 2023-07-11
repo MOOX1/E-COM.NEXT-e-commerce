@@ -1,10 +1,14 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.words": [
+    "Ativo",
+    "Bicicleta",
     "cadastrado",
     "CADASTRAR",
+    "Categoria",
     "Colaboradores",
     "encontrado",
+    "Estoque",
     "hookform",
     "Informe",
     "inválido",
@@ -12,6 +16,8 @@
     "NEXTAUTH",
     "Obrigatorio",
     "Obrigatório",
+    "Ordenar",
+    "Preço",
     "produtos",
     "SALVAR",
     "signin",

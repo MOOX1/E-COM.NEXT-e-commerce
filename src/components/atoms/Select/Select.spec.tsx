@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
 import CustomSelect, { ICustomSelectProps, TFormValues } from './';
-import { useController, UseControllerProps } from 'react-hook-form';
-import { ChevronDown, ChevronUp } from 'lucide-react';
+import { UseControllerProps } from 'react-hook-form';
 import { userEvent } from '@storybook/testing-library';
 import { act } from 'react-dom/test-utils';
 
@@ -68,6 +67,7 @@ describe('CustomSelect', () => {
     const props: ICustomSelectProps = {
       controlForm,
       error: 'Sample error',
+      placeholder: 'Nivel de acesso',
     };
     render(<CustomSelect {...props} />);
 
@@ -85,6 +85,12 @@ describe('CustomSelect', () => {
     const props: ICustomSelectProps = {
       controlForm,
       error: 'Sample error',
+      placeholder: 'Nivel de acesso',
+      options: [
+        { value: 'admin super', label: 'Admin Super' },
+        { value: 'admin viewer', label: 'Admin Viewer' },
+        { value: 'admin simple', label: 'Admin Simple' },
+      ],
     };
 
     render(<CustomSelect {...props} />);
@@ -113,6 +119,12 @@ describe('CustomSelect', () => {
     const props: ICustomSelectProps = {
       controlForm,
       error: 'Sample error',
+      placeholder: 'Nivel de acesso',
+      options: [
+        { value: 'admin super', label: 'Admin Super' },
+        { value: 'admin viewer', label: 'Admin Viewer' },
+        { value: 'admin simple', label: 'Admin Simple' },
+      ],
     };
 
     render(<CustomSelect {...props} />);

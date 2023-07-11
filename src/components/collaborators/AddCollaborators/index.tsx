@@ -24,6 +24,12 @@ const schema = z.object({
 type TFormDataProps = z.infer<typeof schema>;
 
 export default function AddCollaborators() {
+  const options = [
+    { value: 'admin super', label: 'Admin Super' },
+    { value: 'admin viewer', label: 'Admin Viewer' },
+    { value: 'admin simple', label: 'Admin Simple' },
+  ];
+
   const {
     handleSubmit,
     register,
@@ -96,6 +102,8 @@ export default function AddCollaborators() {
             transition={{ delay: 0.5, ease: 'linear', duration: 0.3 }}
           >
             <Select
+              options={options}
+              placeholder="Nivel de acesso"
               controlForm={{
                 control: control as unknown as Control<TFormValues>,
                 name: 'levelAccess' as 'Nome',

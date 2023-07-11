@@ -33,7 +33,7 @@ describe('<AddCollaborators />', () => {
     });
 
     const errorMessageEmail = screen.getByText('Informe um email válido');
-    const errorMessageLevelAccess = screen.getByText('Required');
+    const errorMessageLevelAccess = screen.getByText('Campo Obrigatório');
     expect(errorMessageEmail).toBeInTheDocument();
     expect(errorMessageLevelAccess).toBeInTheDocument();
   });

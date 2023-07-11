@@ -1,9 +1,10 @@
 'use client';
 
 import { ITableProps } from '../types';
-import Image from 'next/image';
+
 import Div from '../../atoms/Div';
-import { User } from 'lucide-react';
+import ImageUser from './ImageUser';
+import ImageProducts from './ImageProducts';
 
 interface IItemsTableProps extends ITableProps {
   onClickItem?: (item: ITableProps['columns']) => void;
@@ -34,29 +35,18 @@ export default function ItemsTable({
       {columns?.map(item => {
         if (item == 'image') {
           return (
-            <div key={index}>
-              {itemData[item] && (
-                <Image
-                  src={itemData[item]}
-                  width={36}
-                  height={36}
-                  className="rounded-full"
-                  alt="image user"
-                />
-              )}
-              {!itemData[item] && (
-                <div
-                  key={item}
-                  className={
-                    'relative flex h-9 w-9 items-center justify-center rounded-full border-2 bg-white '
-                  }
-                >
-                  <User className="h-6 w-6 text-mainBlue" />
-                </div>
-              )}
-            </div>
+            <ImageUser
+              key={index}
+              index={index}
+              item={item}
+              image={itemData[item]}
+            />
           );
         }
+
+        if (item == 'imageProducts')
+          return <ImageProducts index={index} item={item} image={itemData[item]} />;
+
         return (
           <div style={{ width: `${100 / columns.length}%` }} key={index}>
             <p

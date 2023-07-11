@@ -20,6 +20,7 @@ interface IProductsProps {
   stockQuantity: number;
   unitDiscount: number;
   orderProduct: boolean;
+  productActive: boolean;
 }
 
 interface IProductsSchemaProps extends IProductsProps {
@@ -32,7 +33,7 @@ const imagesSchemas = new Schema<TImages>({
 });
 
 const productsSchema = new Schema<IProductsSchemaProps>({
-  name: { type: String, required: true, unique: true },
+  name: { type: String, required: true },
   price: { type: Number, required: true },
   promotionalPrice: { type: Number },
   description: { type: String, required: true },
@@ -40,13 +41,14 @@ const productsSchema = new Schema<IProductsSchemaProps>({
   subCategory: { type: [String], required: true },
   manufacturer: { type: String },
   brand: { type: String },
-  sku: { type: String },
+  sku: { type: String, unique: true },
   images: { type: imagesSchemas },
   characteristics: { type: [Object] },
   productsSimilar: { type: [Object] },
   stockQuantity: { type: Number, required: true },
   unitDiscount: { type: Number },
   orderProduct: { typpe: Boolean, default: false },
+  productActive: { typpe: Boolean, default: false },
 });
 
 const Products = models.products || model('products', productsSchema);

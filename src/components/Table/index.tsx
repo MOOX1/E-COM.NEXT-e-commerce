@@ -37,6 +37,16 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
                 </div>
               );
             }
+
+            if (item == 'imageProducts') {
+              return (
+                <div key={item}>
+                  <p className={` w-full py-2 text-center text-mainBlue/80 `}>
+                    Image
+                  </p>
+                </div>
+              );
+            }
             return (
               <div style={{ width: `${100 / columns.length}%` }} key={item}>
                 <p className={` w-full py-2 text-center text-mainBlue/80 `}>
