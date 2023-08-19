@@ -23,7 +23,7 @@ export const metadata: Metadata = {
 const Colaboradores = async () => {
   return (
     <div className="flex h-full w-full gap-3 overflow-hidden">
-      <div className="flex h-full w-2/3 flex-col gap-3 overflow-hidden">
+      <div className="flex h-full w-2/3 flex-col gap-3 ">
         <Div
           initial={TopForBottom.initial}
           animate={TopForBottom.animate}

@@ -16,7 +16,7 @@ export default function Options({
       className={
         !isOptionsOpen
           ? 'hidden'
-          : 'absolute  top-full h-auto w-full rounded-b border border-mainBlue/20 bg-strongBlue'
+          : 'absolute  top-full z-50 h-auto w-full rounded-b border border-mainBlue/20 bg-strongBlue'
       }
     >
       {options?.map(option => (

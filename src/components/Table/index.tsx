@@ -26,12 +26,12 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="flex w-full justify-between border-b-[1px] border-mainBlue/10 px-5 font-alt text-white">
+        <div className="sticky top-0 z-10 flex w-full justify-between  border-b-[1px] border-mainBlue/10 bg-strongBlue px-5 font-alt text-white">
           {columns?.map(item => {
             if (item == 'image') {
               return (
                 <div key={item}>
-                  <p className={` w-full py-2 text-center text-mainBlue/80 `}>
+                  <p className={` flex w-full py-2 text-center text-mainBlue/80 `}>
                     Usuário
                   </p>
                 </div>
@@ -48,7 +48,7 @@ const Table = ({ columns, data, onClick }: ITableProps) => {
               );
             }
             return (
-              <div style={{ width: `${100 / columns.length}%` }} key={item}>
+              <div className="flex-1" key={item}>
                 <p className={` w-full py-2 text-center text-mainBlue/80 `}>
                   {item}
                 </p>

@@ -9,7 +9,7 @@ interface IImageUserProps {
 
 export default function ImageUser({ index, image, item }: IImageUserProps) {
   return (
-    <div key={index}>
+    <div className="pr-4" key={index}>
       {image && (
         <Image
           src={image}

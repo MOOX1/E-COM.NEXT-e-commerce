@@ -39,7 +39,7 @@ const LogChanges = async () => {
   return (
     <>
       <h1 className="border-b-[1px]  border-mainBlue/10 px-5 py-2 font-alt text-lg text-mainBlue">
-        Ultimas Colaborações:
+        Ultimas Colaborações
       </h1>
       <div className="flex w-full justify-between border-b-[1px] border-mainBlue/10 px-5 font-alt text-white">
         <p className=" py-2 text-center  text-mainBlue/80">Usuário</p>
