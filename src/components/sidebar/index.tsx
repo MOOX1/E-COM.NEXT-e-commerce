@@ -30,10 +30,10 @@ const menuItems: IMenuItemProps[] = [
 
 function Sidebar({ buttonOpen, collapsed }: ISidebarProps) {
   return (
-    <nav className="h-screen w-full overflow-hidden bg-strongBlue py-14">
+    <nav className="h-screen w-full overflow-hidden bg-strongBlue  py-14">
       <Profile collapsed={collapsed} />
       <MenuItem collapsed={collapsed} menuItems={menuItems} />
-      <div className="flex justify-center">{buttonOpen}</div>
+      {buttonOpen}
 
       <div
         className={

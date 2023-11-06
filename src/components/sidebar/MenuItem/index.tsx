@@ -1,4 +1,3 @@
-import { Tooltip } from 'antd';
 import { usePathname } from 'next/navigation';
 import { IMenuItemProps } from '../types';
 import Link from 'next/link';
@@ -41,34 +40,27 @@ function MenuItem({ collapsed, menuItems }: IMenuItemsProps) {
       {menuItems.map(item => {
         return (
           <div key={item.label} className="z-10 w-full">
-            <Tooltip
-              overlayClassName={' ' + (!collapsed && 'hidden')}
-              title={item.label}
-              color="#010217"
-              placement="left"
+            <Link
+              prefetch={false}
+              className={
+                (collapsed && ' justify-center !pl-0') +
+                ' peer z-10 flex w-full cursor-pointer gap-3 py-3 pl-16 transition-colors duration-200 ' +
+                (!item.isActive && 'hover:bg-mediaBlue/10')
+              }
+              href={item.pathname}
             >
-              <Link
-                prefetch={false}
-                className={
-                  (collapsed && ' justify-center !pl-0') +
-                  ' peer z-10 flex w-full cursor-pointer gap-3 py-3 pl-16 transition-colors duration-200 ' +
-                  (!item.isActive && 'hover:bg-mediaBlue/10')
-                }
-                href={item.pathname}
-              >
-                <div>{item.Icon}</div>
+              <div>{item.Icon}</div>
 
-                <p
-                  className={
-                    (collapsed ? ' absolute w-0 opacity-0 !duration-100' : '') +
-                    ' flex items-center font-alt text-base font-normal text-mainBlue ' +
-                    (item.isActive ? ' !font-semibold ' : '')
-                  }
-                >
-                  {item.label}
-                </p>
-              </Link>
-            </Tooltip>
+              <p
+                className={
+                  (collapsed ? ' absolute w-0 opacity-0 !duration-100' : '') +
+                  ' flex items-center font-alt text-base font-normal text-mainBlue ' +
+                  (item.isActive ? ' !font-semibold ' : '')
+                }
+              >
+                {item.label}
+              </p>
+            </Link>
           </div>
         );
       })}

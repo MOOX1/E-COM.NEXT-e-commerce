@@ -41,7 +41,8 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 
   if (
     req.nextUrl.pathname.startsWith('/api/auth/session') ||
-    req.nextUrl.pathname.startsWith('/api/auth')
+    req.nextUrl.pathname.startsWith('/api/auth') ||
+    req.nextUrl.pathname.startsWith('/_next')
   ) {
     return NextResponse.next();
   }
@@ -65,7 +66,7 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 export const config = {
   matcher: [
     '/api/auth/signin/email',
-    '/',
+    '/:path*',
     '/signin',
     '/api/auth/signin/google',
     '/colaboradores',

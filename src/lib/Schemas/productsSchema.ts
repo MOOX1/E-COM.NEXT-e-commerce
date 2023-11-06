@@ -47,8 +47,8 @@ const productsSchema = new Schema<IProductsSchemaProps>({
   productsSimilar: { type: [Object] },
   stockQuantity: { type: Number, required: true },
   unitDiscount: { type: Number },
-  orderProduct: { typpe: Boolean, default: false },
-  productActive: { typpe: Boolean, default: false },
+  orderProduct: { type: Boolean, default: false },
+  productActive: { type: Boolean, default: true },
 });
 
 const Products = models.products || model('products', productsSchema);
