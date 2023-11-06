@@ -10,7 +10,7 @@ export default function SubmenuItem({ SubMenuItems }: ISubMenuProps) {
   return (
     <div
       className={
-        'submenu invisible h-0 overflow-hidden first:mt-1 peer-hover:visible peer-hover:h-auto peer-hover:duration-1000 hover:visible hover:!h-auto'
+        'submenu invisible h-0 overflow-hidden first:mt-1 hover:visible hover:!h-auto peer-hover:visible peer-hover:h-auto peer-hover:duration-1000'
       }
     >
       {SubMenuItems?.map(item => (
