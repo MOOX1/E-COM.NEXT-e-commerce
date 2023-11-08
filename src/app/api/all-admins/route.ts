@@ -12,12 +12,6 @@ export async function GET() {
       return NextResponse.json({ message: 'access denied', status: 401 });
     }
 
-    if (IsAuthenticate.access !== 'admin super') {
-      if (IsAuthenticate.access !== 'admin simple') {
-        return NextResponse.json({ message: 'access denied', status: 401 });
-      }
-    }
-
     const admins = await FindAllAdmins();
 
     return NextResponse.json({

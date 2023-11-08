@@ -5,18 +5,19 @@ import { getToken } from 'next-auth/jwt';
 import { Ratelimit } from '@upstash/ratelimit';
 import { Redis } from '@upstash/redis';
 
-const chache = new Map();
+const cache = new Map();
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
   limiter: Ratelimit.cachedFixedWindow(10, '10s'),
-  ephemeralCache: chache,
+  ephemeralCache: cache,
   analytics: true,
 });
 
-// This function can be marked `async` if using `await` inside
+// this middleware is for pages, not apis
 export async function middleware(req: NextRequest, event: NextFetchEvent) {
   const token = await getToken({ req });
+
   // Rete limit
   if (
     req.nextUrl.pathname.startsWith('/api/auth/signin/email') ||
@@ -40,11 +41,10 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
   }
 
   if (
-    req.nextUrl.pathname.startsWith('/api/auth/session') ||
-    req.nextUrl.pathname.startsWith('/api/auth') ||
-    req.nextUrl.pathname.startsWith('/_next')
+    req.nextUrl.pathname.startsWith('/_next') ||
+    req.nextUrl.pathname.startsWith('/api')
   ) {
-    return NextResponse.next();
+    return NextResponse.next({});
   }
 
   if (req.nextUrl.pathname.startsWith('/signin')) {
@@ -64,11 +64,5 @@ export async function middleware(req: NextRequest, event: NextFetchEvent) {
 }
 
 export const config = {
-  matcher: [
-    '/api/auth/signin/email',
-    '/:path*',
-    '/signin',
-    '/api/auth/signin/google',
-    '/colaboradores',
-  ],
+  matcher: ['/:path*'],
 };

@@ -19,6 +19,7 @@ export default async function Collaborators() {
         cookies: Headers().get('cookie') ?? '',
       },
     });
+
     admins = await response.json();
     useAdmins.setState({
       state: {

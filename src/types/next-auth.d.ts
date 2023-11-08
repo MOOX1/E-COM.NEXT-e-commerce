@@ -4,7 +4,7 @@ declare module 'next-auth' {
   interface Session {
     user: {
       id: string;
-      levelAccess: string;
+      levelAccess: 'admin super' | 'admin simple' | 'admin viewer';
     } & DefaultSession['user'];
   }
 

@@ -12,7 +12,7 @@ function Layout({ children }: { children: React.ReactNode }) {
     <div className="flex">
       <div
         className={
-          (!collapsed && 'w-72') + ' animate-all relative w-20 duration-300'
+          (!collapsed && 'w-72') + ' animate-all relative w-20 duration-500'
         }
       >
         <Sidebar
