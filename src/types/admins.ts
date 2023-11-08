@@ -1,7 +1,9 @@
+import { TLevelAccess } from './next-auth';
+
 export interface IAdminInDataBase {
   _id: string;
   email: string;
-  levelAccess: string;
+  levelAccess: TLevelAccess;
   image: string;
   name: string;
 }

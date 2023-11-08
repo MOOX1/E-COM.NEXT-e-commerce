@@ -1,10 +1,12 @@
 import { DefaultSession } from 'next-auth';
 
+export type TLevelAccess = 'admin super' | 'admin simple' | 'admin viewer';
+
 declare module 'next-auth' {
   interface Session {
     user: {
       id: string;
-      levelAccess: 'admin super' | 'admin simple' | 'admin viewer';
+      levelAccess: TLevelAccess;
     } & DefaultSession['user'];
   }
 
@@ -15,7 +17,7 @@ declare module 'next-auth' {
 
 declare module 'next-auth/jwt' {
   interface JWT {
-    levelAccess: string;
+    levelAccess: TLevelAccess;
     id: string;
   }
 }
