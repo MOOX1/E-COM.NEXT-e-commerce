@@ -1,4 +1,4 @@
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { Session } from 'next-auth';
 import { Fetch } from '@/services/fetch';
 
@@ -8,13 +8,20 @@ interface IGetServerSessionResponse {
 }
 
 export const getServerSession = async (): Promise<IGetServerSessionResponse> => {
+  const cookiesStore = cookies();
+
+  const cookieString = cookiesStore
+    .getAll()
+    .map(cookie => `${cookie.name}=${cookie.value}`)
+    .join('; ');
+
   const response = await Fetch('/api/auth/session', {
     headers: {
-      cookie: headers().get('cookies') ?? '',
+      cookie: cookieString ?? '',
     },
   });
 
-  const session: Session = await response.json();
+  const session: Session = response;
 
   if (!session.user) {
     return {

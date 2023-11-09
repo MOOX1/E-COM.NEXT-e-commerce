@@ -1,9 +1,10 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import CustomSelect, { ICustomSelectProps, TFormValues } from './';
+import CustomSelect from './';
 import { UseControllerProps } from 'react-hook-form';
 import { userEvent } from '@storybook/testing-library';
 import { act } from 'react-dom/test-utils';
+import { ICustomSelectProps, TFormValues } from './types';
 
 jest.mock('react-hook-form', () => {
   const originalModule = jest.requireActual('react-hook-form');
@@ -101,7 +102,7 @@ describe('CustomSelect', () => {
       userEvent.click(selectElement);
     });
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.queryByTestId('chevron-down-icon')).not.toBeInTheDocument();
       expect(screen.getByTestId('chevron-up-icon')).toBeInTheDocument();
       expect(screen.getByText('Admin Super')).toBeInTheDocument();
@@ -137,7 +138,7 @@ describe('CustomSelect', () => {
       userEvent.click(optionElement);
     });
 
-    await waitFor(() => {
+    waitFor(() => {
       expect(screen.getByText('Admin Viewer')).toBeInTheDocument();
     });
   });

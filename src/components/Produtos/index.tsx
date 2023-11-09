@@ -1,10 +1,8 @@
 'use client';
 
-import Select from '@/components/atoms/Select';
 import * as zod from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Control, useForm } from 'react-hook-form';
-import { LayoutGrid, LayoutList } from 'lucide-react';
 import Table from '@/components/Table';
 import Header from './Header';
 

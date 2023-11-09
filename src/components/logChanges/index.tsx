@@ -31,7 +31,7 @@ const LogChanges = async () => {
         revalidate: 60,
       },
     });
-    logs = await response.json();
+    logs = response;
   } catch (error) {
     console.log(error);
   }

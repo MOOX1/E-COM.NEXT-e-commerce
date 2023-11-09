@@ -51,7 +51,7 @@ describe('<AddCollaborators />', () => {
       userEvent.click(selectElementItem);
     });
 
-    expect(selectElement.textContent).toBe('admin super');
+    expect(selectElement.textContent).toBe('Admin Super');
     expect(emailInput.value).toBe('test@example.com');
   });
 });
