@@ -2,14 +2,13 @@ import Image from 'next/image';
 import { User } from 'lucide-react';
 
 interface IImageUserProps {
-  index: string | number;
   image?: string;
-  item: string;
+  keyValue: string;
 }
 
-export default function ImageUser({ index, image, item }: IImageUserProps) {
+export default function ImageUser({ keyValue, image }: IImageUserProps) {
   return (
-    <div className="pr-4" key={index}>
+    <div className="pr-4" key={keyValue}>
       {image && (
         <Image
           src={image}
@@ -21,7 +20,6 @@ export default function ImageUser({ index, image, item }: IImageUserProps) {
       )}
       {!image && (
         <div
-          key={item}
           className={
             'relative flex h-9 w-9 items-center justify-center rounded-full border-2 bg-white '
           }

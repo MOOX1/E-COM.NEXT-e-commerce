@@ -3,10 +3,10 @@
 import React from 'react';
 import Div from '../atoms/Div';
 import { ITableProps } from './types';
-import { memo } from 'react';
+
 import ItemsTable from './ItemsTable';
 
-const list = {
+const listAnimation = {
   visible: {
     opacity: 1,
     transition: {
@@ -22,51 +22,31 @@ const list = {
   },
 };
 
-const Table = ({ columns, data, onClick }: ITableProps) => {
+const Table = <T extends object>({ columns, data, onClick }: ITableProps<T>) => {
   return (
     <div className="w-full">
       <div className="w-full">
-        <div className="sticky top-0 z-10 flex w-full justify-between  border-b-[1px] border-mainBlue/10 bg-strongBlue px-5 font-alt text-white">
+        <div className="sticky top-0 z-10 flex w-full   border-b-[1px] border-mainBlue/10 bg-strongBlue px-5 font-alt text-white">
           {columns?.map(item => {
-            if (item == 'image') {
-              return (
-                <div key={item}>
-                  <p className={` flex w-full py-2 text-center text-mainBlue/80 `}>
-                    Usuário
-                  </p>
-                </div>
-              );
-            }
-
-            if (item == 'imageProducts') {
-              return (
-                <div key={item}>
-                  <p className={` w-full py-2 text-center text-mainBlue/80 `}>
-                    Image
-                  </p>
-                </div>
-              );
-            }
             return (
-              <div className="flex-1" key={item}>
+              <div
+                className={item.width ? `w-[${item.width}] ` : 'flex-1'}
+                key={item.index + item.label}
+              >
                 <p className={` w-full py-2 text-center text-mainBlue/80 `}>
-                  {item}
+                  {item.label}
                 </p>
               </div>
             );
           })}
         </div>
 
-        <Div initial="hidden" animate="visible" variants={list}>
-          <ItemsTable
-            onClickItem={item => onClick && onClick(item)}
-            columns={columns}
-            data={data}
-          />
+        <Div initial="hidden" animate="visible" variants={listAnimation}>
+          <ItemsTable<T> onClickItem={onClick} columns={columns} data={data} />
         </Div>
       </div>
     </div>
   );
 };
 
-export default memo(Table);
+export default Table;

@@ -3,29 +3,27 @@ import { IAdminInDataBase } from '@/types/admins';
 import { create } from 'zustand';
 
 interface IActionProps {
-  addAdmin: (admin: ITableProps) => void;
+  addAdmin: (admin: IAdminInDataBase) => void;
 }
 
 interface IAdminProps {
   state: {
-    admins: ITableProps;
+    admins: IAdminInDataBase[];
   };
   actions: IActionProps;
 }
 
 export const useAdmins = create<IAdminProps>(set => ({
   state: {
-    admins: { columns: [], data: [] },
+    admins: [],
   },
   actions: {
-    addAdmin: admin =>
+    addAdmin: admin => {
       set(state => ({
         state: {
-          admins: {
-            columns: [...state.state.admins.columns, admin.columns] as string[],
-            data: [...state.state.admins.data, admin.data],
-          },
+          admins: [...state.state.admins, admin],
         },
-      })),
+      }));
+    },
   },
 }));

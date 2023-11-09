@@ -1,7 +1,14 @@
-import { IAdminInDataBase } from '@/types/admins';
+import { ReactNode } from 'react';
 
-export interface ITableProps {
-  columns: string[];
-  data: any[];
-  onClick?: (data: any[]) => void;
+interface IColumn<T> {
+  label: string;
+  index: string;
+  render?: (value: T) => ReactNode;
+  width?: string;
+}
+
+export interface ITableProps<TData> {
+  columns: IColumn<TData>[];
+  data: TData[];
+  onClick?: (data: TData) => void;
 }

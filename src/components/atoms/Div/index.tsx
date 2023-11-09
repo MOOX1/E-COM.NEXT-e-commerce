@@ -9,7 +9,7 @@ interface IDivProps extends AnimationProps {
   children: React.ReactNode;
   handleClick?: () => void;
   style: CSSProperties;
-  key?: React.Key;
+  keyValue: string | number;
 }
 
 export default function Div({
@@ -22,12 +22,12 @@ export default function Div({
   variants,
   style,
   handleClick,
-  key,
+  keyValue,
 }: Partial<IDivProps>) {
   return (
-    <AnimatePresence key={key}>
+    <AnimatePresence key={keyValue}>
       <motion.div
-        key={key}
+        key={keyValue}
         style={style}
         onClick={handleClick}
         animate={animate}

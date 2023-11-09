@@ -1,5 +1,5 @@
 'use client';
-import { Edit, Trash } from 'lucide-react';
+import { Edit, Trash, User } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import { Suspense } from 'react';
@@ -12,13 +12,15 @@ export default function Profile() {
     <div className="relative flex h-full w-2/4  items-center justify-center gap-4 rounded-lg bg-strongBlue p-3 text-center shadow-main">
       <Suspense fallback={<Load />}>
         <div className="h-24 w-24 rounded-full bg-white">
-          <Image
-            src={data?.user?.image as string}
-            width={96}
-            height={96}
-            alt=""
-            className="rounded-full"
-          />
+          {data?.user.image && (
+            <Image
+              src={data?.user?.image}
+              width={96}
+              height={96}
+              alt=""
+              className="rounded-full"
+            />
+          )}
         </div>
         <div className="flex flex-col items-start justify-center gap-1 text-left font-alt text-white">
           <p className="font-alt text-lg font-semibold uppercase">

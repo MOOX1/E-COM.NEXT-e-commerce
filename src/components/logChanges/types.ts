@@ -7,4 +7,5 @@ export interface ILogs {
   autor: User;
   titulo: string;
   date: Date;
+  keyValue?: string;
 }

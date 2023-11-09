@@ -2,7 +2,7 @@ import { IOption } from '../types';
 
 interface IOptionsProps {
   options?: IOption[];
-  handleOptionClick: (optionValue: string) => void;
+  handleOptionClick: (optionValue: IOption) => void;
   isOptionsOpen: boolean;
 }
 
@@ -25,7 +25,7 @@ export default function Options({
           className={
             'cursor-pointer whitespace-nowrap px-5 py-2 hover:bg-mainBlue/10'
           }
-          onClick={() => handleOptionClick(option.value.toString())}
+          onClick={() => handleOptionClick(option)}
         >
           {option.label}
         </li>

@@ -3,10 +3,10 @@
 import { useRef } from 'react';
 
 import { useAdmins } from '@/hooks/admins';
-import { ITableProps } from '@/components/Table/types';
+import { IAdminInDataBase } from '@/types/admins';
 
 interface IInitializerAdminsProps {
-  admins: ITableProps;
+  admins: IAdminInDataBase[];
 }
 
 const InitializerAdmins = ({ admins }: IInitializerAdminsProps) => {

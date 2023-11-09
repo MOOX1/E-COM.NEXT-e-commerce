@@ -1,11 +1,11 @@
-import { Schema, models, model } from 'mongoose';
+import { Schema, models, model, Model } from 'mongoose';
 
 type TImages = {
   imageMain: string;
   images: string[];
 };
 
-interface IProductsProps {
+export interface IProductsProps {
   name: string;
   price: number;
   promotionalPrice: number;
@@ -28,7 +28,7 @@ interface IProductsSchemaProps extends IProductsProps {
 }
 
 const imagesSchemas = new Schema<TImages>({
-  imageMain: { type: String, required: true },
+  imageMain: { type: String, required: true, default: null },
   images: { type: [String] },
 });
 
@@ -51,6 +51,7 @@ const productsSchema = new Schema<IProductsSchemaProps>({
   productActive: { type: Boolean, default: true },
 });
 
-const Products = models.products || model('products', productsSchema);
+const Products: Model<IProductsProps> =
+  models.products || model('products', productsSchema);
 
 export default Products;

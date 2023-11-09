@@ -18,6 +18,7 @@ const List = (item: ILogs) => {
 
   return (
     <Div
+      keyValue={item.keyValue}
       variants={item1}
       key={item.autor.id}
       className="flex cursor-pointer  items-center justify-between gap-2 border-b-[1px] border-mainBlue/10 px-5 py-2 transition-colors hover:bg-mediaBlue/10"

@@ -51,7 +51,7 @@ const LogChanges = async () => {
           {logs?.map((item, index) => {
             if (index > 2) return;
 
-            return <List key={item.autor.id} {...item} />;
+            return <List keyValue="item.autor.id" key={item.autor.id} {...item} />;
           })}
         </Div>
       </Suspense>

@@ -6,7 +6,7 @@ import Options from './Options';
 import Error from './Error';
 import Icon from './Icon';
 import MainText from './MainTitle';
-import { ICustomSelectProps, TFormValues } from './types';
+import { ICustomSelectProps, IOption, TFormValues } from './types';
 
 const CustomSelect = ({
   controlForm,
@@ -16,15 +16,15 @@ const CustomSelect = ({
   SelectedLayout2,
   textCenter,
 }: ICustomSelectProps) => {
-  const [selectedOption, setSelectedOption] = useState<string | undefined>(
+  const [selectedOption, setSelectedOption] = useState<IOption | undefined>(
     undefined,
   );
   const [isOptionsOpen, setIsOptionsOpen] = useState(false);
 
   const { field } = useController(controlForm as UseControllerProps<TFormValues>);
 
-  const handleOptionClick = (optionValue: string) => {
-    setSelectedOption(optionValue);
+  const handleOptionClick = (option: IOption) => {
+    setSelectedOption(option);
     setIsOptionsOpen(false);
   };
 
@@ -33,7 +33,7 @@ const CustomSelect = ({
   };
 
   useEffect(() => {
-    if (selectedOption) field.onChange(selectedOption);
+    if (selectedOption) field.onChange(selectedOption.value as string);
   }, [field, selectedOption]);
 
   return (
@@ -49,7 +49,7 @@ const CustomSelect = ({
         <MainText
           placeholder={placeholder}
           textCenter={textCenter}
-          selectedOption={selectedOption}
+          selectedOption={selectedOption?.label}
         />
 
         <Options

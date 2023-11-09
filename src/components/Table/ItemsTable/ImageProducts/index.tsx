@@ -4,10 +4,9 @@ import { FileImage } from 'lucide-react';
 interface IImageProductsProps {
   index: string | number;
   image?: string;
-  item: string;
 }
 
-export default function ImageProducts({ index, image, item }: IImageProductsProps) {
+export default function ImageProducts({ index, image }: IImageProductsProps) {
   return (
     <div key={index}>
       {image && (
@@ -21,7 +20,6 @@ export default function ImageProducts({ index, image, item }: IImageProductsProp
       )}
       {!image && (
         <div
-          key={item}
           className={
             'relative flex h-9 w-9 items-center justify-center rounded-full border-2 bg-white '
           }

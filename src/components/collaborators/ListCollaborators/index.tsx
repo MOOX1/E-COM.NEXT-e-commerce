@@ -10,9 +10,34 @@ import ModalListAdmins from '../ModalListAdmins';
 import { IAdminInDataBase } from '@/types/admins';
 import { Toast } from '@/components/atoms/Toast';
 import { useAdmins } from '@/hooks/admins';
+import { ITableProps } from '@/components/Table/types';
+import ImageUser from '@/components/Table/ItemsTable/ImageUser';
+
+const columns: ITableProps<IAdminInDataBase>['columns'] = [
+  {
+    index: 'image',
+    label: ' Usuário',
+    width: '6',
+    render: values => {
+      return <ImageUser keyValue={values._id} image={values.image} />;
+    },
+  },
+  {
+    index: 'name',
+    label: 'Name',
+  },
+  {
+    index: 'email',
+    label: 'Email',
+  },
+  {
+    index: 'levelAccess',
+    label: 'Role',
+  },
+];
 
 export default function ListCollaborators() {
-  const admins = useAdmins(state => state.state.admins);
+  const admins = useAdmins<IAdminInDataBase[]>(state => state.state.admins);
   const [isVisible, setIsVisible] = useState<boolean>(false);
   const [filteredAdmins, setFilteredAdmins] = useState(admins);
   const [adminSelected, setAdminSelected] = useState<IAdminInDataBase | undefined>(
@@ -20,13 +45,13 @@ export default function ListCollaborators() {
   );
 
   const handleFilter = (event: string) => {
-    const filteredData = admins.data.filter(admin => {
+    const filteredData = admins.filter(admin => {
       return admin.email.toLowerCase().includes(event.toLowerCase());
     });
 
     setFilteredAdmins({
       ...admins,
-      data: filteredData,
+      ...filteredData,
     });
   };
 
@@ -49,14 +74,11 @@ export default function ListCollaborators() {
 
         const newAdmins = useAdmins
           .getState()
-          .state.admins.data.filter(item => item._id !== response._id);
+          .state.admins.filter(item => item._id !== response._id);
 
         useAdmins.setState({
           state: {
-            admins: {
-              ...admins,
-              data: newAdmins,
-            },
+            admins: newAdmins,
           },
         });
 
@@ -75,7 +97,7 @@ export default function ListCollaborators() {
     <>
       <ModalListAdmins
         handleDeleteAdmin={handleDeleteAdmin}
-        handleIsOpenModal={() => handleIsOpenModal()}
+        handleIsOpenModal={handleIsOpenModal}
         isVisible={isVisible}
         adminSelected={adminSelected}
       />
@@ -88,10 +110,10 @@ export default function ListCollaborators() {
         />
       </div>
       <Suspense fallback={<Load />}>
-        <Table
-          columns={admins.columns}
-          data={filteredAdmins.data}
-          onClick={item => handleIsOpenModal(item as unknown as IAdminInDataBase)}
+        <Table<IAdminInDataBase>
+          columns={columns}
+          data={filteredAdmins}
+          onClick={handleIsOpenModal}
         />
       </Suspense>
     </>

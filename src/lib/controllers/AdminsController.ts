@@ -22,7 +22,7 @@ export const FindAllAdmins = async (): Promise<
   if (!admins) {
     return {
       status: 404,
-      message: 'Usuário não encontrado',
+      message: 'Usuários não encontrado',
     };
   }
 

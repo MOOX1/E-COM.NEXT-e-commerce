@@ -20,6 +20,8 @@ export const metadata: Metadata = {
   description: '...',
 };
 
+export const dynamic = 'force-dynamic';
+
 const Colaboradores = async () => {
   return (
     <div className="flex h-full w-full gap-3 overflow-hidden">

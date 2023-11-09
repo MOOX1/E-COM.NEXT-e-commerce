@@ -60,10 +60,7 @@ export default function AddCollaborators() {
 
         useAdmins.setState(state => ({
           state: {
-            admins: {
-              ...state.state.admins,
-              data: [...state.state.admins.data, response],
-            },
+            admins: [...state.state.admins, response],
           },
         }));
 

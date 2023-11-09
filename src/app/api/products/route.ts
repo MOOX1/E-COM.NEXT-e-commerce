@@ -1,5 +1,5 @@
-import { FindAllAdmins } from '@/lib/controllers/AdminsController';
 import { getServerSession } from '@/lib/controllers/IsAuthenticated';
+import { FindAllProducts } from '@/lib/controllers/ProductsController';
 import { NextResponse } from 'next/server';
 
 export const dynamic = 'force-dynamic';
@@ -12,11 +12,9 @@ export async function GET() {
       return NextResponse.json({ message: 'access denied', status: 401 });
     }
 
-    const admins = await FindAllAdmins();
+    const products = await FindAllProducts();
 
-    return NextResponse.json({
-      data: admins,
-    });
+    return NextResponse.json({ status: 200, products });
   } catch (error) {
     console.log(error);
   }

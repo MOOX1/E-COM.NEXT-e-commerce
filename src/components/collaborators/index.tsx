@@ -6,11 +6,12 @@ import { Fetch } from '@/services/fetch';
 import { headers as Headers } from 'next/headers';
 import { useAdmins } from '@/hooks/admins';
 import InitializerAdmins from './InitializerAdmin';
+import { IAdminInDataBase } from '@/types/admins';
 
 export default async function Collaborators() {
-  let admins: ITableProps = { columns: [], data: [] };
+  let admins: IAdminInDataBase[] = [];
   try {
-    const response = await Fetch(`/api/all-admins`, {
+    const responseJson = await Fetch(`/api/all-admins`, {
       next: {
         revalidate: 60,
         tags: ['all-admins'],
@@ -20,13 +21,13 @@ export default async function Collaborators() {
       },
     });
 
-    admins = await response.json();
+    const response: { data: IAdminInDataBase[] } = await responseJson.json();
+
+    admins = response.data;
+
     useAdmins.setState({
       state: {
-        admins: {
-          columns: admins.columns,
-          data: admins.data,
-        },
+        admins: admins,
       },
     });
   } catch (error) {

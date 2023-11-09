@@ -7,9 +7,13 @@ import { Control, useForm } from 'react-hook-form';
 import { LayoutGrid, LayoutList } from 'lucide-react';
 import Table from '@/components/Table';
 import Header from './Header';
-import { IProductsProps } from '@/app/produtos/page';
+
 import InputSearch from './InputSearch';
 import Filter from './Filters';
+import { ITableProps } from '../Table/types';
+import { IProductsProps } from '@/lib/Schemas/productsSchema';
+import ImageProducts from '../Table/ItemsTable/ImageProducts';
+import Ativo from '../Table/ItemsTable/Ativo';
 
 type TFormValues = {
   Nome: string;
@@ -24,13 +28,46 @@ type TFormDataProps = z.infer<typeof schema>;
 
 interface IProductsComponentProps {
   data: IProductsProps[];
-  columns: string[];
 }
 
-export default function ProdutosComponent({
-  columns,
-  data,
-}: IProductsComponentProps) {
+const Columns: ITableProps<IProductsProps>['columns'] = [
+  {
+    index: 'imageMain',
+    label: 'Image',
+    width: '9',
+    render: value => (
+      <ImageProducts
+        image={
+          value.images.imageMain !== 'null' ? value.images.imageMain : undefined
+        }
+        index={value.sku}
+      />
+    ),
+  },
+  {
+    index: 'sku',
+    label: 'Sku',
+  },
+  {
+    index: 'productActive',
+    label: 'Ativo',
+    render: value => <Ativo active={value.productActive} />,
+  },
+  {
+    index: 'stockQuantity',
+    label: 'Estoque',
+  },
+  {
+    index: 'category',
+    label: 'Categoria',
+  },
+  {
+    index: 'price',
+    label: 'Preço',
+  },
+];
+
+export default function ProdutosComponent({ data }: IProductsComponentProps) {
   const {
     handleSubmit,
     register,
@@ -57,7 +94,7 @@ export default function ProdutosComponent({
         </div>
       </div>
       <div className="flex h-full  w-full flex-[2] gap-4 overflow-auto rounded-md bg-strongBlue scrollbar-thin scrollbar-track-transparent scrollbar-thumb-mediaBlue/20 scrollbar-thumb-rounded  ">
-        <Table columns={columns} data={data} />
+        <Table<IProductsProps> columns={Columns} data={data} />
       </div>
     </div>
   );
