@@ -1,6 +1,5 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
-import Load from '../atoms/Load';
 import ListCollaborators from './ListCollaborators';
 import { Fetch } from '@/services/fetch';
 import { useAdmins } from '@/hooks/admins';
@@ -31,9 +30,8 @@ export default async function Collaborators() {
   return (
     <>
       <InitializerAdmins admins={admins} />
-      <Suspense fallback={<Load />}>
-        <ListCollaborators />
-      </Suspense>
+
+      <ListCollaborators />
     </>
   );
 }

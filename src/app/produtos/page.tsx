@@ -1,4 +1,5 @@
 import ProdutosComponent from '@/components/Produtos';
+
 import { IProductsProps } from '@/lib/Schemas/productsSchema';
 import { Fetch } from '@/services/fetch';
 
@@ -17,10 +18,5 @@ export default async function Produtos() {
   } catch (error) {
     console.log(error);
   }
-
-  return (
-    <>
-      <ProdutosComponent data={data} />
-    </>
-  );
+  return <ProdutosComponent data={data} />;
 }

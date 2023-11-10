@@ -15,8 +15,12 @@ import Collaborators from '@/components/collaborators';
 import AddCollaborators from '@/components/collaborators/AddCollaborators';
 import LevelAccess from '@/components/collaborators/LevelAccess';
 
+import TableLoad from '@/components/Loads/TableLoad';
+import Input from '@/components/atoms/Input';
+import { Search } from 'lucide-react';
+
 export const metadata: Metadata = {
-  title: 'Colaboradores',
+  title: 'E-COM - Colaboradores',
   description: '...',
 };
 
@@ -33,7 +37,21 @@ const Colaboradores = async () => {
           className="flex h-1/2 w-full flex-row-reverse gap-3 rounded-lg"
         >
           <div className="relative h-full w-2/4 rounded-lg bg-strongBlue shadow-main">
-            <Suspense fallback={<Load />}>
+            <Suspense
+              fallback={
+                <TableLoad
+                  quantityColumns={3}
+                  quantityRow={3}
+                  indexCircle={0}
+                  circle
+                  header={
+                    <h1 className="border-b-[1px]  border-mainBlue/10 px-5 py-2 font-alt text-lg text-mainBlue">
+                      Ultimas Colaborações
+                    </h1>
+                  }
+                />
+              }
+            >
               <LogChanges />
             </Suspense>
           </div>
@@ -67,7 +85,25 @@ const Colaboradores = async () => {
         transition={RightForLeft.transition}
         className="h-full w-4/12 rounded-lg bg-strongBlue   shadow-main "
       >
-        <Suspense fallback={<Load />}>
+        <Suspense
+          fallback={
+            <TableLoad
+              quantityColumns={4}
+              quantityRow={5}
+              circle
+              indexCircle={0}
+              header={
+                <div className="flex w-full items-center justify-center border-b border-mainBlue/10 p-2 px-14">
+                  <Input
+                    type="text"
+                    styleOffButton="secund"
+                    icon={<Search className="text-mainBlue/80" />}
+                  />
+                </div>
+              }
+            />
+          }
+        >
           <Collaborators />
         </Suspense>
       </Div>

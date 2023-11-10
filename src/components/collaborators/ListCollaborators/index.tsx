@@ -109,13 +109,12 @@ export default function ListCollaborators() {
           icon={<Search className="text-mainBlue/80" />}
         />
       </div>
-      <Suspense fallback={<Load />}>
-        <Table<IAdminInDataBase>
-          columns={columns}
-          data={filteredAdmins}
-          onClick={handleIsOpenModal}
-        />
-      </Suspense>
+
+      <Table<IAdminInDataBase>
+        columns={columns}
+        data={filteredAdmins}
+        onClick={handleIsOpenModal}
+      />
     </>
   );
 }

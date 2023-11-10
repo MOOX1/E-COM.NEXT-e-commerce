@@ -6,6 +6,16 @@ export const dynamic = 'force-dynamic';
 export const Fetch = async (url: string, body?: RequestInit) => {
   const Headers = headers();
 
+  // const set = async () => {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(async () => {
+  //       resolve({});
+  //     }, 1000);
+  //   });
+  // };
+
+  // await set();
+
   return await fetch(`${process.env.NEXTAUTH_URL}${url}`, {
     ...body,
     headers: {

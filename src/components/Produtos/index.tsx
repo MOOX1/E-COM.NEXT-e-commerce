@@ -6,12 +6,15 @@ import { Control, useForm } from 'react-hook-form';
 import Table from '@/components/Table';
 import Header from './Header';
 
-import InputSearch from './InputSearch';
 import Filter from './Filters';
 import { ITableProps } from '../Table/types';
 import { IProductsProps } from '@/lib/Schemas/productsSchema';
 import ImageProducts from '../Table/ItemsTable/ImageProducts';
 import Ativo from '../Table/ItemsTable/Ativo';
+import { useMemo, useState } from 'react';
+import Input from '../atoms/Input';
+import { SearchIcon } from 'lucide-react';
+import TableLoad from '../Loads/TableLoad';
 
 type TFormValues = {
   Nome: string;
@@ -43,6 +46,10 @@ const Columns: ITableProps<IProductsProps>['columns'] = [
     ),
   },
   {
+    index: 'name',
+    label: 'Nome',
+  },
+  {
     index: 'sku',
     label: 'Sku',
   },
@@ -66,6 +73,8 @@ const Columns: ITableProps<IProductsProps>['columns'] = [
 ];
 
 export default function ProdutosComponent({ data }: IProductsComponentProps) {
+  const [inputSearchValue, setInputSearchValue] = useState<string>();
+
   const {
     handleSubmit,
     register,
@@ -82,17 +91,36 @@ export default function ProdutosComponent({ data }: IProductsComponentProps) {
     },
   });
 
+  const handleChangeValueInputSearch = (newValue: string) => {
+    return setInputSearchValue(newValue);
+  };
+
+  const valueFiltered = useMemo(() => {
+    if (!inputSearchValue) return data;
+    return data.filter(products => {
+      return products.name.toLowerCase().includes(inputSearchValue?.toLowerCase());
+    });
+  }, [data, inputSearchValue]);
+
   return (
     <div className="flex h-full w-full flex-col ">
       <div className="flex flex-col gap-10">
         <Header />
         <div className="flex h-full flex-1 items-baseline justify-between pb-3">
-          <InputSearch />
+          <div className="w-80">
+            <Input
+              type="text"
+              styleOffButton="secund"
+              ariaLabel="input-search"
+              onChange={handleChangeValueInputSearch}
+              icon={<SearchIcon className="text-mainBlue opacity-80" />}
+            />
+          </div>
           <Filter control={control as unknown as Control<TFormValues>} />
         </div>
       </div>
       <div className="flex h-full  w-full flex-[2] gap-4 overflow-auto rounded-md bg-strongBlue scrollbar-thin scrollbar-track-transparent scrollbar-thumb-mediaBlue/20 scrollbar-thumb-rounded  ">
-        <Table<IProductsProps> columns={Columns} data={data} />
+        <Table<IProductsProps> columns={Columns} data={valueFiltered} />
       </div>
     </div>
   );
