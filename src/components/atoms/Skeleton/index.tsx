@@ -28,7 +28,7 @@ export default function Skeleton({
           className={`flex flex-col  p-2 ` + border}
         >
           <div className="flex w-full justify-between">
-            {[...Array(quantityColumn)].map((item, index) => (
+            {[...Array(quantityColumn)].map((_, index) => (
               <div key={index} className="flex w-full justify-between">
                 {circle && index === indexCircle && (
                   <div className="flex w-full justify-center">

@@ -1,5 +1,5 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import Modal from './';
+import { Modal } from './';
 import { act } from 'react-dom/test-utils';
 import { userEvent } from '@storybook/testing-library';
 
@@ -17,13 +17,14 @@ describe('Modal', () => {
     const handleModal = jest.fn();
 
     render(
-      <Modal
-        width="400px"
-        iconClose={true}
-        contentModal={<div>Modal Content</div>}
-        isVisible={true}
-        handleModal={handleModal}
-      />,
+      <Modal.ModalRoot isVisible={true}>
+        <Modal.Content isVisible={true} width="400px">
+          <>
+            <div>Modal Content</div>
+            <Modal.IconClose handleModal={handleModal} />
+          </>
+        </Modal.Content>
+      </Modal.ModalRoot>,
     );
 
     const modalContent = screen.getByText('Modal Content');

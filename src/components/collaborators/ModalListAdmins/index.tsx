@@ -1,4 +1,4 @@
-import Modal from '@/components/atoms/Modal';
+import { Modal } from '@/components/atoms/Modal';
 import { IAdminInDataBase } from '@/types/admins';
 import { useState } from 'react';
 import ConfirmDelete from './ConfirmDelete';
@@ -21,32 +21,29 @@ export default function ModalListAdmins({
   const [certain, setCertain] = useState<boolean>(false);
 
   return (
-    <Modal
-      width="480px"
-      handleModal={() => {
-        setCertain(false);
-        handleIsOpenModal();
-      }}
-      isVisible={isVisible}
-      iconClose={true}
-      contentModal={
-        <div className="relative flex h-48 items-center justify-center p-4 ">
-          <ImageAdmin image={adminSelected?.image} />
-          <DataAdmin
-            email={adminSelected?.email}
-            levelAccess={adminSelected?.levelAccess}
-            name={adminSelected?.name}
-          />
-          <ConfirmDelete
-            handleDeleteAdmin={() => {
-              setCertain(false);
-              adminSelected?._id && handleDeleteAdmin(adminSelected?._id);
-            }}
-            certain={certain}
-            onClick={() => setCertain(!certain)}
-          />
-        </div>
-      }
-    />
+    <Modal.ModalRoot isVisible={isVisible}>
+      <Modal.BlurModal handleModal={handleIsOpenModal} isVisible={isVisible} />
+      <Modal.Content width="480px" isVisible={isVisible}>
+        <>
+          <div className="relative flex h-48 items-center justify-center p-4 ">
+            <ImageAdmin image={adminSelected?.image} />
+            <DataAdmin
+              email={adminSelected?.email}
+              levelAccess={adminSelected?.levelAccess}
+              name={adminSelected?.name}
+            />
+            <ConfirmDelete
+              handleDeleteAdmin={() => {
+                setCertain(false);
+                adminSelected?._id && handleDeleteAdmin(adminSelected?._id);
+              }}
+              certain={certain}
+              onClick={() => setCertain(!certain)}
+            />
+          </div>
+          <Modal.IconClose handleModal={handleIsOpenModal} />
+        </>
+      </Modal.Content>
+    </Modal.ModalRoot>
   );
 }
